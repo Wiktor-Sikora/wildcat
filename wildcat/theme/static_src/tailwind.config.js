@@ -45,7 +45,30 @@ module.exports = {
         // '../../**/*.py'
     ],
     theme: {
-        extend: {},
+        colors: {
+            'bgcol-l': '#f9f9f9',
+            'bgcol-d': '#1a1a1a',
+            'navhov-l': '#487528',
+            'navhov-d': '#5f9933',
+            'con-l': '#ececec',
+            'con-d': '#272727',
+            'green-l': '#6aa93b',
+            'green-d': '#649d39',
+            'green-hov': '#5b9033',
+            'white': '#ffffff',
+            'black': '#000000',
+            'slate': {
+                300: '#cbd5e1',
+                500: '#64748b',
+                900: '#0f172a',
+            },
+        },
+        extend: {
+            backgroundImage: {
+                'Light': "url('/static/img/topography-light.svg')",
+                'Dark': "url('/static/img/topography-dark.svg')",
+            }
+        },
     },
     plugins: [
         /**
