@@ -1,3 +1,4 @@
 django
 django-tailwind
 # djlint
+django-widget-tweaks

@@ -92,6 +92,7 @@
             </nav>
         {% endblock %}
         <!-- content -->
+        {% block content %}
         <div class="flex justify-center h-full mb-10">
             <div class="w-11/12 lg:w-4/5 bg-con-l dark:bg-con-d rounded-lg">
                 <div class="grid grid-rows-10 lg:grid-cols-2 mx-3 mt-5 mb-14 ">
@@ -250,6 +251,7 @@
                 </div>
             </div>
         </div>
+        {% endblock %}
         {% block footer %}
             <footer class="bg-green-l dark:bg-green-d text-white bottom-0 left-0 w-full">
                 <div class="w-4/5 mx-auto my-auto">

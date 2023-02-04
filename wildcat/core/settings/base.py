@@ -31,7 +31,8 @@ INSTALLED_APPS = [
     # non django default packages
     'tailwind',
     'django_browser_reload',
-
+    'widget_tweaks',
+    
     # local apps
     'accounts',
     'theme',

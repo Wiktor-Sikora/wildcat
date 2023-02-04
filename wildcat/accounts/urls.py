@@ -5,6 +5,7 @@ from . import views
 app_name = 'accounts'
 
 urlpatterns = [
+    path('login', views.LoginPageView.as_view(), name='login'),
     # copied from docs
     # path('articles/2003/', views.special_case_2003),
     # path('articles/<int:year>/', views.year_archive),
