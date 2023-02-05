@@ -8,3 +8,9 @@ class LoginPageView(View):
 
     def get(self, request):
         return render(request, self.template_name)
+
+class RegisterPageView(View):
+    template_name = 'authentication/register.html'
+
+    def get(self, request):
+        return render(request, self.template_name)

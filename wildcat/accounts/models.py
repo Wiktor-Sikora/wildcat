@@ -11,6 +11,4 @@ class User(AbstractUser):
     first_name = None
     last_name = None
 
-    USERNAME_FIELD = 'email'
-
     objects = BaseUserManager()
