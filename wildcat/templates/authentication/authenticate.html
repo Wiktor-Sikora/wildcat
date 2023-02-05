@@ -4,20 +4,20 @@
 {% block navbar %}{% endblock %}
 {% block content %}
     <div class="flex items-center justify-center h-screen">
-        <div class="w-4/5 lg:w-1/2 h-auto lg:h-1/2 bg-[#ececec] dark:bg-[#272727] rounded-lg">
+        <div class="w-4/5 lg:w-1/2 h-auto lg:h-1/2 bg-con-l dark:bg-con-d rounded-lg">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-0 h-full">
                 <div class="hidden lg:md:block">
                     <div class="h-[90%] grid grid-rows-6 my-4 border-r border-slate-900/10 dark:border-slate-300/10 invisible lg:md:visible">
                         <div class="grid row-span-1 ml-3 text-2xl">
-                            <a href="index.html">LOGO</a>
+                            <a class="flex justify-start" href="index.html"><p class="text-green-l dark:text-green-d">WILD</p>CAT</a>
                         </div>
                         <div class="grid row-span-4 place-content-center text-4xl">
                             <h1 class="text-center">Welcome</h1>
                             <img src="{% static 'img/zbik-login-lm.svg' %}" class="visible dark:hidden">
                             <img src="{% static 'img/zbik-login-dm.svg' %}" class="hidden dark:block">
                         </div>
-                        <div class="grid row-span-1 ml-3 mt-auto hover:text-[#262626] dark:hover:text-[#cccccc]">
-                            <button class="w-5 h-5 transition-all duration-200 ease-in-out focus:outline-none"
+                        <div class="grid row-span-1 ml-3 mt-auto">
+                            <button class="hover:text-green-hov dark:hover:text-green-hov w-5 h-5 transition-all duration-200 ease-in-out focus:outline-none"
                                     id="theme-toggle"></button>
                         </div>
                     </div>
@@ -34,7 +34,7 @@
                     </div>
                     <div class="grid gap-3">
                         <div class="grid grid-cols-12 ml-8 lg:ml-4 w-full">
-                            <div class="col-span-3 lg:col-span-1 bg-[#dddddd] dark:bg-[#414141] rounded-l-full absolute">
+                            <div class="col-span-3 lg:col-span-1 bg-form-l dark:bg-form-d rounded-l-full absolute">
                                 <svg xmlns="http://www.w3.org/2000/svg"
                                      fill="none"
                                      viewBox="0 0 24 24"
@@ -46,13 +46,13 @@
                             </div>
                             <div class="col-span-9 lg:col-span-11">
                                 <input type="email"
-                                       class="w-full pl-9 py-2 bg-[#dddddd] dark:bg-[#414141] rounded-full focus:outline-none"
+                                       class="w-full pl-9 py-2 bg-form-l dark:bg-form-d rounded-full focus:outline-none border-none"
                                        placeholder="E-mail"
                                        required>
                             </div>
                         </div>
                         <div class="grid grid-cols-12 gap-0 ml-8 lg:ml-4 w-full">
-                            <div class="col-span-3 lg:col-span-1 bg-[#dddddd] dark:bg-[#414141] rounded-l-full absolute">
+                            <div class="col-span-3 lg:col-span-1 bg-form-l dark:bg-form-d rounded-l-full absolute">
                                 <svg xmlns="http://www.w3.org/2000/svg"
                                      fill="none"
                                      viewBox="0 0 24 24"
@@ -64,34 +64,37 @@
                             </div>
                             <div class="col-span-9 lg:col-span-11">
                                 <input type="password"
-                                       class="w-full pl-9 py-2 bg-[#dddddd] dark:bg-[#414141] rounded-full focus:outline-none"
+                                       class="w-full pl-9 py-2 bg-form-l dark:bg-form-d rounded-full focus:outline-none border-none"
                                        placeholder="Password"
                                        required>
                             </div>
                         </div>
                         <div class="grid grid-cols-2">
                             <div class="flex justify-start lg:ml-7">
-                                <input type="checkbox" checked="checked">
+                                <input class="my-auto focus:checked:bg-green-l dark:focus:checked:bg-green-l checked:bg-green-l dark:checked:bg-green-d checked:hover:bg-green-hov cursor-pointer 
+                                focus:checked:ring-0 focus:ring-0 focus:outline-none rounded-sm" type="checkbox" checked="checked">
                                 <p class="ml-1">Remember me</p>
                             </div>
                             <div class="flex justify-end lg:mr-7">
-                                <a class="text-[#4b394b] hover:text-[#412e3c] dark:text-[#5d3b75] dark:hover:text-[#3f284f]"
+                                <a class="text-green-l hover:text-green-hov dark:text-green-d dark:hover:text-green-hov"
                                    href="#">Forgot password?</a>
                             </div>
                         </div>
                         <div class="mx-3 flex justify-center">
-                            <button class="w-1/2 lg:w-full py-2 text-white font-medium bg-[#4b394b] rounded-full  hover:bg-[#412e3c] focus:ring-3  focus:ring-[#412e3c] dark:bg-[#5d3b75] dark:hover:bg-[#3f284f] dark:focus:ring-[#3f284f]">
+                            <button class="w-1/2 lg:w-full py-2 text-white font-medium bg-green-l rounded-full  hover:bg-green-hov focus:ring-3  focus:ring-green-hov dark:bg-green-d dark:hover:bg-green-hov dark:focus:ring-[#3f284f]">
                                 Login
                             </button>
                         </div>
                     </div>
                     <div class="flex justify-center my-5">
                         <p class="mr-2">Need an account?</p>
-                        <a class="text-[#4b394b] hover:text-[#412e3c] dark:text-[#5d3b75] dark:hover:text-[#3f284f]"
-                           href="#">Sign Up</a>
+                        <a class="text-green-l hover:text-green-hov dark:text-green-d dark:hover:text-green-hov"
+                           href="{% url 'accounts:register' %}">Sign Up</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+{% endblock %}
+{% block footer %}
 {% endblock %}

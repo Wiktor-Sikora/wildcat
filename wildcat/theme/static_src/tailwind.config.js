@@ -52,6 +52,8 @@ module.exports = {
             'navhov-d': '#5f9933',
             'con-l': '#ececec',
             'con-d': '#272727',
+            'form-l': '#dddddd',
+            'form-d': '#414141',
             'green-l': '#6aa93b',
             'green-d': '#649d39',
             'green-hov': '#5b9033',
