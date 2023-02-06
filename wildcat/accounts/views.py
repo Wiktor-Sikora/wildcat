@@ -23,13 +23,15 @@ def loginUser(request):
         password = request.POST["password"]
         if username and password:
             user = authenticate(request, username=username, password=password)
-            if user is not None:
-                try:
-                    user = User.objects.get(email=username)
-                    username = user.username
-                    user = authenticate(request, username=username, password=password)
-                except User.DoesNotExist:
-                    return render(request, 'authentication/authenticate.html')
-            login(request, user)
-            return render(request, 'base.html')
+            if user is not None:  
+                login(request, user)
+                return render(request, 'base.html')
+            try:
+                user = User.objects.get(email=username)
+                username = user.username
+                user = authenticate(request, username=username, password=password)
+                login(request, user)
+                return render(request, 'base.html')
+            except User.DoesNotExist:
+                return render(request, 'authentication/authenticate.html')
     return render(request, 'authentication/authenticate.html')
