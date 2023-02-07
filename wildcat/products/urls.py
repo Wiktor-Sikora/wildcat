@@ -5,7 +5,7 @@ from . import views
 app_name = 'products'
 
 urlpatterns = [
-    path('', views.mega_test),
+    path('', views.mega_test, name='index'),
     # copied from docs
     # path('articles/2003/', views.special_case_2003),
     # path('articles/<int:year>/', views.year_archive),
