@@ -1,0 +1,26 @@
+{% load i18n %}
+{% load infinite_scroll %}
+<html>
+    <head>
+        <title>Home page</title>
+        <style>
+            .item-box {
+                font-size: 10em;
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        Test</br>
+        <div class="item-box">
+            {% for item in feed %}
+                {{ item }}<br>
+            {% endfor %}
+        </div>
+        <p> End </p>
+        <div class="item-box">
+            {% infinite_scroll_box %}
+        </div>
+            {% set_infinite_scroll %}
+    </body>
+</html>

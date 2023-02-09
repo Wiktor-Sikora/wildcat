@@ -32,11 +32,13 @@ INSTALLED_APPS = [
     'tailwind',
     'django_browser_reload',
     'widget_tweaks',
+    'infscroll',
     
     # local apps
     'accounts',
     'theme',
     'products',
+    'infinite_scroll',
 ]
 
 MIDDLEWARE = [
