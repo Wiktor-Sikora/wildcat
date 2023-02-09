@@ -1,5 +1,6 @@
 # Project Wildcat
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+
 Wildcat is project created for [Platynowy indeks contest 2023](https://tu.kielce.pl/platynowy-indeks-2023/)
 
 ## To lounch dev server
