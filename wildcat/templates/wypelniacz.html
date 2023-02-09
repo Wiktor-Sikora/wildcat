@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        
+    </head>
+    <body>
+       
+        <form action="create" method="post">
+            {% csrf_token %}
+            <input type="number" name="number">
+            <button type="submit">Create objects</button>
+
+        </form>
+
+        <form action="delete" method="post">
+            {% csrf_token %}
+            <button type="submit">Clear database</button>
+
+        </form>
+        
+        
+    </body>
+</html>
