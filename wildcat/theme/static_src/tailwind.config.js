@@ -68,7 +68,7 @@ module.exports = {
             },
         },
         screens: {
-            'sm': {'min': '375px', 'max': '767px'},
+            'sm': {'min': '200px', 'max': '767px'},
             // => @media (min-width: 640px and max-width: 767px) { ... }
       
             'md': {'min': '768px', 'max': '1023px'},
@@ -96,7 +96,7 @@ module.exports = {
          * for forms. If you don't like it or have own styling for forms,
          * comment the line below to disable '@tailwindcss/forms'.
          */
-        require('tailwind-scrollbar'),
+        require('tailwind-scrollbar')({ nocompatible: true }),
         require('@tailwindcss/forms'),
         require('@tailwindcss/typography'),
         require('@tailwindcss/line-clamp'),
