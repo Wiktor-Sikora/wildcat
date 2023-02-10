@@ -50,6 +50,8 @@ module.exports = {
             'bgcol-d': '#1a1a1a',
             'navhov-l': '#487528',
             'navhov-d': '#5f9933',
+            'scroll-l': '#292929',
+            'scroll-d': '#5d5d5d',
             'con-l': '#ececec',
             'con-d': '#272727',
             'form-l': '#dddddd',
@@ -65,6 +67,22 @@ module.exports = {
                 900: '#0f172a',
             },
         },
+        screens: {
+            'sm': {'min': '375px', 'max': '767px'},
+            // => @media (min-width: 640px and max-width: 767px) { ... }
+      
+            'md': {'min': '768px', 'max': '1023px'},
+            // => @media (min-width: 768px and max-width: 1023px) { ... }
+      
+            'lg': {'min': '1024px', 'max': '1279px'},
+            // => @media (min-width: 1024px and max-width: 1279px) { ... }
+      
+            'xl': {'min': '1280px', 'max': '1535px'},
+            // => @media (min-width: 1280px and max-width: 1535px) { ... }
+      
+            '2xl': {'min': '1536px'},
+            // => @media (min-width: 1536px) { ... }
+          },
         extend: {
             backgroundImage: {
                 'Light': "url('/static/img/topography-light.svg')",
@@ -78,9 +96,13 @@ module.exports = {
          * for forms. If you don't like it or have own styling for forms,
          * comment the line below to disable '@tailwindcss/forms'.
          */
+        require('tailwind-scrollbar'),
         require('@tailwindcss/forms'),
         require('@tailwindcss/typography'),
         require('@tailwindcss/line-clamp'),
         require('@tailwindcss/aspect-ratio'),
     ],
+    variants: {
+        scrollbar: ['rounded']
+    }
 }
