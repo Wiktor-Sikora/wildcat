@@ -1,0 +1,221 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% load static tailwind_tags %}
+{% block navbar %}
+    <nav class="py-1 sticky top-0 w-full bg-[#f9f9f9] dark:bg-[#1a1a1a] max-w-8xl mx-auto mb-10 border-b border-x-slate-900/10 dark:border-slate-300/10">
+        <div class="px-10 grid grid-cols-2">
+            <div class="flex justify-start">
+                <a class="flex justify-center" href="#">
+                    <img src="{% static 'img/wildcat-logo-light.svg' %}" class="visible dark:hidden">
+                    <img src="{% static 'img/wildcat-logo-dark.svg' %}" class="hidden dark:block">
+                    <h1 class="text-4xl font-semibold my-auto ml-2">WILDCAT</h1>
+                </a>
+            </div>
+            <div class="flex space-x-4 items-center justify-self-end sm:hidden md:hidden">
+                <div class="flex justify-end mr-2 hover:text-navhov-l dark:hover:text-navhov-d">
+                    <button class="w-7 h-7 transition-all duration-200 ease-in-out"
+                            id="theme-toggle"></button>
+                </div>
+                {% if user.is_authenticated %}
+                        <a href="#"
+                           class="flex justify-end hover:text-navhov-l dark:hover:text-navhov-d">
+                            <svg class="w-7 h-7 mr-1"
+                                 xmlns="http://www.w3.org/2000/svg"
+                                 fill="none"
+                                 viewBox="0 0 24 24"
+                                 stroke-width="1.5"
+                                 stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 20.25c4.97 0 9-3.694 9-8.25s-4.03-8.25-9-8.25S3 7.444 3 12c0 2.104.859 4.023 2.273 5.48.432.447.74 1.04.586 1.641a4.483 4.483 0 01-.923 1.785A5.969 5.969 0 006 21c1.282 0 2.47-.402 3.445-1.087.81.22 1.668.337 2.555.337z" />
+                            </svg>
+                            <p class="text-xl">Messages</p>
+                        </a>
+                        <a href="#"
+                           class="flex justify-end hover:text-navhov-l dark:hover:text-navhov-d">
+                            <svg class="w-7 h-7 mr-1"
+                                 xmlns="http://www.w3.org/2000/svg"
+                                 fill="none"
+                                 viewBox="0 0 24 24"
+                                 stroke-width="1.5"
+                                 stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                            </svg>
+                            <p class="text-xl">Account</p>
+                        </a>
+                    <div class="flex justify-center">
+                    <div class="flex items-center text-white bg-green-l p-3 dark:bg-green-d rounded h-7 hover:bg-green-hov dark:hover:bg-green-hov font-bold text-lg text-center">
+                        <a class="font-bold text-lg text-center block px-3" href="#">Sell</a>
+                    </div>
+                {% else %}
+                    <div class="grid justify-self-auto">
+                        <a class="flex items-center text-white bg-green-l p-3 dark:bg-green-d rounded h-7 hover:bg-green-hov dark:hover:bg-green-hov font-bold text-lg text-center"
+                           href="{% url 'accounts:login' %}">Sign in</a>
+                    </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+{% endblock %}
+{% block content %}
+    <!-- search bar -->
+    <div class="w-full mb-16 flex justify-center">
+        <div class="w-1/2 grid grid-cols-12 gap-0">
+            <div class="col-span-9 lg:col-span-11">
+                <input type="text" class="w-full h-14 px-3 bg-[#dddddd] dark:bg-[#414141] rounded-l-full placeholder:text-lg focus:outline-none" placeholder="Search..." required>
+            </div>
+            <div class="col-span-3 lg:col-span-1">
+                <button class="w-full flex justify-center pt-3 pr-2 h-14 text-sm font-medium text-white bg-[#4b394b] rounded-r-full  hover:bg-[#412e3c] focus:ring-3 focus:outline-none focus:ring-[#412e3c] dark:bg-[#3f284f] dark:hover:bg-[#5d3b75] dark:focus:ring-[#5d3b75]"> 
+                    <svg class="w-7 h-7 ml-1 " xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                      </svg>                      
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- content -->
+    <div class="flex justify-center mb-8">
+    <h2 class="text-4xl">Promoted</h2>
+    </div>
+    <div class="flex justify-center mb-8">
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-5 w-4/5 place-content-center">
+            <div class="h-80 border border-slate-900/10 dark:border-slate-300/10 bg-[#ececec] dark:bg-[#272727] rounded-2xl">
+                <a href="#"><img src="{% static 'img/test-image.png' %}" alt="test-image" class="h-3/4 w-full p-2 rounded-2xl"></a>
+                <a href="#"><h3 class="px-2 text-lg font-semibold hover:underline truncate">Business Angel</h3></a>
+                <p class="text-center px-2 text-[#262626] dark:text-[#cccccc] truncate">This is random photo for testing purposes</p>
+                <p class="pr-2 text-right">$$$</p>
+            </div>
+            <div class="h-80 border border-slate-900/10 dark:border-slate-300/10 bg-[#ececec] dark:bg-[#272727] rounded-2xl">
+                <a href="#"><img src="https://source.unsplash.com/user/c_v_r/100x100" alt="test-image" class="h-3/4 w-full p-2 rounded-2xl"></a>
+                <a href="#"><h3 class="px-2 text-lg font-semibold hover:underline truncate">Lorem Ipsum</h3></a>
+                <p class="text-center px-2 text-[#262626] dark:text-[#cccccc] truncate">is simply dummy text of the printing and typesetting industry.</p>
+                <p class="pr-2 text-right">$$$</p>
+            </div>
+            <div class="h-80 border border-slate-900/10 dark:border-slate-300/10 bg-[#ececec] dark:bg-[#272727] rounded-2xl">
+                <a href="#"><img src="https://source.unsplash.com/user/c_v_r/1900x800" alt="test-image" class="h-3/4 w-full p-2 rounded-2xl"></a>
+                <a href="#"><h3 class="px-2 text-lg font-semibold hover:underline truncate">Lorem Ipsum</h3></a>
+                <p class="text-center px-2 text-[#262626] dark:text-[#cccccc] truncate">is simply dummy text of the printing and typesetting industry.</p>
+                <p class="pr-2 text-right">$$$</p>
+            </div>
+            <div class="h-80 border border-slate-900/10 dark:border-slate-300/10 bg-[#ececec] dark:bg-[#272727] rounded-2xl">
+                <a href="#"><img src="https://picsum.photos/200/300" alt="test-image" class="h-3/4 w-full p-2 rounded-2xl"></a>
+                <a href="#"><h3 class="px-2 text-lg font-semibold hover:underline truncate">Lorem Ipsum</h3></a>
+                <p class="text-center px-2 text-[#262626] dark:text-[#cccccc] truncate">is simply dummy text of the printing and typesetting industry.</p>
+                <p class="pr-2 text-right">$$$</p>
+            </div>
+            <div class="h-80 border border-slate-900/10 dark:border-slate-300/10 bg-[#ececec] dark:bg-[#272727] rounded-2xl">
+                <a href="#"><img src="https://source.unsplash.com/user/c_v_r/640x320" alt="test-image" class="h-3/4 w-full p-2 rounded-2xl"></a>
+                <a href="#"><h3 class="px-2 text-lg font-semibold hover:underline truncate">Lorem Ipsum</h3></a>
+                <p class="text-center px-2 text-[#262626] dark:text-[#cccccc] truncate">is simply dummy text of the printing and typesetting industry.</p>
+                <p class="pr-2 text-right">$$$</p>
+            </div>
+            <div class="h-80 border border-slate-900/10 dark:border-slate-300/10 bg-[#ececec] dark:bg-[#272727] rounded-2xl">
+                <a href="#"><img src="https://source.unsplash.com/user/c_v_r/320x640" alt="test-image" class="h-3/4 w-full p-2 rounded-2xl"></a>
+                <a href="#"><h3 class="px-2 text-lg font-semibold hover:underline truncate">Lorem Ipsum</h3></a>
+                <p class="text-center px-2 text-[#262626] dark:text-[#cccccc] truncate">is simply dummy text of the printing and typesetting industry.</p>
+                <p class="pr-2 text-right">$$$</p>
+            </div>
+            <div class="h-80 border border-slate-900/10 dark:border-slate-300/10 bg-[#ececec] dark:bg-[#272727] rounded-2xl">
+                <a href="#"><img src="https://source.unsplash.com/user/c_v_r/120x120" alt="test-image" class="h-3/4 w-full p-2 rounded-2xl"></a>
+                <a href="#"><h3 class="px-2 text-lg font-semibold hover:underline truncate">Lorem Ipsum</h3></a>
+                <p class="text-center px-2 text-[#262626] dark:text-[#cccccc] truncate">is simply dummy text of the printing and typesetting industry.</p>
+                <p class="pr-2 text-right">$$$</p>
+            </div>
+            <div class="h-80 border border-slate-900/10 dark:border-slate-300/10 bg-[#ececec] dark:bg-[#272727] rounded-2xl">
+                <a href="#"><img src="img/empty.png" alt="test-image" class="h-3/4 w-full p-2 rounded-2xl"></a>
+                <a href="#"><h3 class="px-2 text-lg font-semibold hover:underline truncate">Lorem Ipsum</h3></a>
+                <p class="text-center px-2 text-[#262626] dark:text-[#cccccc] truncate">is simply dummy text of the printing and typesetting industry.</p>
+                <p class="pr-2 text-right">$$$</p>
+            </div>
+            <div class="h-80 border border-slate-900/10 dark:border-slate-300/10 bg-[#ececec] dark:bg-[#272727] rounded-2xl">
+                <a href="#"><img src="img/empty.png" alt="test-image" class="h-3/4 w-full p-2 rounded-2xl"></a>
+                <a href="#"><h3 class="px-2 text-lg font-semibold hover:underline truncate">Lorem Ipsum</h3></a>
+                <p class="text-center px-2 text-[#262626] dark:text-[#cccccc] truncate">is simply dummy text of the printing and typesetting industry.</p>
+                <p class="pr-2 text-right">$$$</p>
+            </div>
+            <div class="h-80 border border-slate-900/10 dark:border-slate-300/10 bg-[#ececec] dark:bg-[#272727] rounded-2xl">
+                <a href="#"><img src="img/empty.png" alt="test-image" class="h-3/4 w-full p-2 rounded-2xl"></a>
+                <a href="#"><h3 class="px-2 text-lg font-semibold hover:underline truncate">Lorem Ipsum</h3></a>
+                <p class="text-center px-2 text-[#262626] dark:text-[#cccccc] truncate">is simply dummy text of the printing and typesetting industry.</p>
+                <p class="pr-2 text-right">$$$</p>
+            </div>
+            <div class="h-80 border border-slate-900/10 dark:border-slate-300/10 bg-[#ececec] dark:bg-[#272727] rounded-2xl">
+                <a href="#"><img src="img/empty.png" alt="test-image" class="h-3/4 w-full p-2 rounded-2xl"></a>
+                <a href="#"><h3 class="px-2 text-lg font-semibold hover:underline truncate">Lorem Ipsum</h3></a>
+                <p class="text-center px-2 text-[#262626] dark:text-[#cccccc] truncate">is simply dummy text of the printing and typesetting industry.</p>
+                <p class="pr-2 text-right">$$$</p>
+            </div>
+            <div class="h-80 border border-slate-900/10 dark:border-slate-300/10 bg-[#ececec] dark:bg-[#272727] rounded-2xl">
+                <a href="#"><img src="img/empty.png" alt="test-image" class="h-3/4 w-full p-2 rounded-2xl"></a>
+                <a href="#"><h3 class="px-2 text-lg font-semibold hover:underline truncate">Lorem Ipsum</h3></a>
+                <p class="text-center px-2 text-[#262626] dark:text-[#cccccc] truncate">is simply dummy text of the printing and typesetting industry.</p>
+                <p class="pr-2 text-right">$$$</p>
+            </div>
+            <div class="h-80 border border-slate-900/10 dark:border-slate-300/10 bg-[#ececec] dark:bg-[#272727] rounded-2xl">
+                <div class="animate-pulse flex space-x-4 mt-2">
+                    <div class="flex-1 space-y-6 p-2">
+                      <div class="h-52 bg-[#dddddd] dark:bg-[#414141] rounded-2xl"></div>
+                      <div class="space-y-3">
+                        <div class="grid grid-cols-3 gap-4">
+                          <div class="h-2 bg-[#dddddd] dark:bg-[#414141] rounded col-span-2 mb-2"></div>
+                        </div>
+                        <div class="h-2 bg-[#dddddd] dark:bg-[#414141] rounded"></div>
+                        <div class="flex justify-end">
+                            <div class="h-2 w-7 bg-[#dddddd] dark:bg-[#414141] rounded"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+            <div class="h-80 border border-slate-900/10 dark:border-slate-300/10 bg-[#ececec] dark:bg-[#272727] rounded-2xl">
+                <div class="animate-pulse flex space-x-4 mt-2">
+                    <div class="flex-1 space-y-6 p-2">
+                      <div class="h-52 bg-[#dddddd] dark:bg-[#414141] rounded-2xl"></div>
+                      <div class="space-y-3">
+                        <div class="grid grid-cols-3 gap-4">
+                          <div class="h-2 bg-[#dddddd] dark:bg-[#414141] rounded col-span-2 mb-2"></div>
+                        </div>
+                        <div class="h-2 bg-[#dddddd] dark:bg-[#414141] rounded"></div>
+                        <div class="flex justify-end">
+                            <div class="h-2 w-7 bg-[#dddddd] dark:bg-[#414141] rounded"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+              <div class="h-80 border border-slate-900/10 dark:border-slate-300/10 bg-[#ececec] dark:bg-[#272727] rounded-2xl">
+                <div class="animate-pulse flex space-x-4 mt-2">
+                    <div class="flex-1 space-y-6 p-2">
+                      <div class="h-52 bg-[#dddddd] dark:bg-[#414141] rounded-2xl"></div>
+                      <div class="space-y-3">
+                        <div class="grid grid-cols-3 gap-4">
+                          <div class="h-2 bg-[#dddddd] dark:bg-[#414141] rounded col-span-2 mb-2"></div>
+                        </div>
+                        <div class="h-2 bg-[#dddddd] dark:bg-[#414141] rounded"></div>
+                        <div class="flex justify-end">
+                            <div class="h-2 w-7 bg-[#dddddd] dark:bg-[#414141] rounded"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+            <div class="h-80 border border-slate-900/10 dark:border-slate-300/10 bg-[#ececec] dark:bg-[#272727] rounded-2xl">
+                <div class="animate-pulse flex space-x-4 mt-2">
+                    <div class="flex-1 space-y-6 p-2">
+                      <div class="h-52 bg-[#dddddd] dark:bg-[#414141] rounded-2xl"></div>
+                      <div class="space-y-3">
+                        <div class="grid grid-cols-3 gap-4">
+                          <div class="h-2 bg-[#dddddd] dark:bg-[#414141] rounded col-span-2 mb-2"></div>
+                        </div>
+                        <div class="h-2 bg-[#dddddd] dark:bg-[#414141] rounded"></div>
+                        <div class="flex justify-end">
+                            <div class="h-2 w-7 bg-[#dddddd] dark:bg-[#414141] rounded"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              </div>      
+        </div>
+    </div>
+{% endblock content %}
+{% block footer %}{% endblock %}
