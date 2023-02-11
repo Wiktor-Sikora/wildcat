@@ -9,15 +9,20 @@ from .forms import LoginForm
 
 class LoginPageView(View):
     template_name = 'authentication/authenticate.html'
-    login_form = LoginForm
-    # register_form = 
 
-    def get(self, request):
-        return render(request, self.template_name, {'login_form': self.login_form})
+    def get(self, request, *args, **kwargs):
+        return render(request, self.template_name, {'login_form': LoginForm()})
     
-    def post(self, request):
-        form = form(request)
-        
+    def post(self, request, *args, **kwargs):
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password'])
+            if user:
+                login(request, user)
+                if not form.cleaned_data['remember_me']:
+                    request.session.set_expiry(0)
+                return redirect('products:index')                
+        return render(request, self.template_name, {'login_form': form})
 
 class RegisterPageView(View):
     template_name = 'authentication/register.html'
@@ -32,22 +37,3 @@ class LogOutPageView(View):
     def get(self, request):
         logout(request)
         return redirect('products:index', permanent=True)
-
-def loginUser(request):
-    if request.method == 'POST':
-        username = request.POST["username"]
-        password = request.POST["password"]
-        if username and password:
-            user = authenticate(request, username=username, password=password)
-            if user is not None:
-                login(request, user)
-                return render(request, 'base.html')
-            try:
-                user = User.objects.get(email=username)
-                username = user.username
-                user = authenticate(request, username=username, password=password)
-                login(request, user)
-                return render(request, 'base.html')
-            except User.DoesNotExist:
-                return render(request, 'authentication/authenticate.html')
-    return render(request, 'authentication/authenticate.html')
