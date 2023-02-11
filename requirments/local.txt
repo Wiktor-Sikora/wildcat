@@ -3,5 +3,4 @@ django-tailwind
 # djlint
 django-widget-tweaks
 Pillow
-
-pip install django-infinite-scroll
+django-infinite-scroll
