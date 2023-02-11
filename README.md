@@ -25,6 +25,7 @@ Wildcat is project created for [Platynowy indeks contest 2023](https://tu.kielce
    ```python
    NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd"
    ```
+   then
    ```bash
    python manage.py tailwind install
    python manage.py tailwind build
