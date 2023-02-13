@@ -7,7 +7,7 @@ from .models import User
 # Register your models here.
 class UserAdmin(UserAdmin):
     fieldsets = (
-        (None, {'fields': ('username', 'password')}),
+        (None, {'fields': ('username', 'password', 'slug')}),
         (_('Personal info'), {'fields': ('email',)}),
         (
             _('Permissions'),

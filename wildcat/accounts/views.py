@@ -10,7 +10,7 @@ from .forms import LoginForm, RegisterForm
 
 User = get_user_model()
 
-class LoginPageView(View):
+class LoginPage(View):
     template_name = 'authentication/authenticate.html'
 
     def get(self, request):
@@ -24,10 +24,10 @@ class LoginPageView(View):
                 login(request, user)
                 if not form.cleaned_data['remember_me']:
                     request.session.set_expiry(0)
-                return redirect('products:index')                
+                return redirect('products:index', permanent=True)
         return render(request, self.template_name, {'login_form': form})
 
-class RegisterPageView(View):
+class RegisterPage(View):
     template_name = 'authentication/register.html'
 
     def get(self, request):
@@ -39,11 +39,16 @@ class RegisterPageView(View):
             user = form.save()
             login(request, user)
             messages.success(request, 'Registration successful!')
-            return redirect('products:index')
+            return redirect('products:index', permanent=True)
         print(form.errors)
         return render(request, self.template_name, {'register_form': form})
 
-class LogOutPageView(View):
+class LogOutPage(View):
     def get(self, request):
         logout(request)
         return redirect('products:index', permanent=True)
+    
+class UserPage(View):
+    def get(self, request, slug):
+        user = User.objects.filter(slug=slug)
+        pass
