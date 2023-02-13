@@ -1,19 +1,22 @@
 from django.shortcuts import render, redirect
 from django.views.generic import View
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import get_user_model
+from django.contrib import messages
 
-from .models import User
-from .forms import LoginForm
+from .forms import LoginForm, RegisterForm
 
 # Create your views here.
+
+User = get_user_model()
 
 class LoginPageView(View):
     template_name = 'authentication/authenticate.html'
 
-    def get(self, request, *args, **kwargs):
+    def get(self, request):
         return render(request, self.template_name, {'login_form': LoginForm()})
     
-    def post(self, request, *args, **kwargs):
+    def post(self, request):
         form = LoginForm(request.POST)
         if form.is_valid():
             user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password'])
@@ -28,10 +31,17 @@ class RegisterPageView(View):
     template_name = 'authentication/register.html'
 
     def get(self, request):
-        return render(request, self.template_name)
+        return render(request, self.template_name, {'register_form': RegisterForm()})
 
     def post(self, request):
-        return render(request, self.template_name)
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            messages.success(request, 'Registration successful!')
+            return redirect('products:index')
+        print(form.errors)
+        return render(request, self.template_name, {'register_form': form})
 
 class LogOutPageView(View):
     def get(self, request):
