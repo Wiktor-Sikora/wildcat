@@ -34,3 +34,7 @@ Wildcat is project created for [Platynowy indeks contest 2023](https://tu.kielce
    ```bash
    python manage.py tailwind start
    ```
+5. lunch dev server
+   ```bash
+   python manage.py runserver
+   ```
