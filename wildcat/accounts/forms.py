@@ -1,9 +1,14 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.utils.translation import gettext_lazy as _
+from django.core.exceptions import ValidationError
 from django.contrib.auth import get_user_model
+from django.utils.text import slugify
+
 from django import forms
 
 User = get_user_model()
+
+disallowed_usernames = ['login', 'register', 'logout', 'admin']
 
 class LoginForm(forms.Form):
     username = forms.CharField(widget=forms.TextInput(attrs={"autofocus": True}))
@@ -26,3 +31,9 @@ class RegisterForm(UserCreationForm):
     class Meta:
         model = User
         fields = ['username', 'email'] # + fields from password1, password2, username
+
+    def clean(self):
+        super().clean()
+        username = self.cleaned_data.get('username')
+        if username in disallowed_usernames:
+            raise ValidationError("Don't use forbidden usernames")
