@@ -8,7 +8,7 @@ from django import forms
 
 User = get_user_model()
 
-disallowed_usernames = ['login', 'register', 'logout', 'admin']
+disallowed_usernames = ['login', 'register', 'logout', 'admin', 'add-product']
 
 class LoginForm(forms.Form):
     username = forms.CharField(widget=forms.TextInput(attrs={"autofocus": True}))

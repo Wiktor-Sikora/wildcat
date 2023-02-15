@@ -4,3 +4,6 @@ from django.shortcuts import render
 
 def mega_test(request):
     return render(request, 'products/index.html')
+
+def giga_test(request):
+    return render(request, 'products/products_addition.html')
