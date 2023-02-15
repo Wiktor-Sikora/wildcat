@@ -1,0 +1,152 @@
+{% load static tailwind_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        {% tailwind_css %}
+        <title>
+            {% block title %}Wildcat{% endblock %}
+        </title>
+        <link rel="icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}">
+    </head>
+    <body class="bg-Light bg-fixed bg-auto bg-bgcol-l dark:bg-bgcol-d dark:bg-Dark text-black dark:text-white scrollbar-thin scrollbar-track-bgcol-l dark:scrollbar-track-bgcol-d scrollbar-thumb-scroll-l dark:scrollbar-thumb-scroll-d scrollbar-thumb-rounded-full scrollbar-track-rounded-full">
+        {% block navbar %}
+            <nav class="sticky top-0 w-full bg-bgcol-l dark:bg-bgcol-d max-w-8xl mx-auto mb-10">
+                <div class="py-1 border-b border-slate-900/10 dark:border-slate-300/10 px-10 grid grid-cols-3 md:grid-cols-2 sm:grid-cols-2">
+                    <div class="flex justify-start md:col-span-1">
+                        <a class="flex justify-center ml-3" href="{% url 'products:index' %}">
+                            <img src="{% static 'img/wildcat-logo-light.svg' %}"
+                                 class="sm:scale-75 visible dark:hidden">
+                            <img src="{% static 'img/wildcat-logo-dark.svg' %}"
+                                 class="sm:scale-75 hidden dark:block">
+                            <h1 class="flex justify-center text-4xl sm:text-2xl font-semibold my-auto ml-2 sm:ml-0">
+                                <p class="text-green-l dark:text-green-d">WILD</p>
+                                CAT
+                            </h1>
+                        </a>
+                    </div>
+                    <!-- search bar -->
+                    <div class="md:grid md:grid-cols-3 md:place-items-center my-auto">
+                    <div class="flex justify-center md:col-span-2 sm:hidden">
+                        <div class="grid grid-cols-12 md:grid-cols-10 gap-0 ml-3">
+                            <div class="col-span-11 md:col-span-8">
+                                <input type="text"
+                                       class="w-full h-12 px-3 bg-[#dddddd] dark:bg-[#414141] rounded-l-full placeholder:text-lg border-none focus:ring-0"
+                                       placeholder="Search..."
+                                       required>
+                            </div>
+                            <div class="col-span-1 md:col-span-2">
+                                <button class="w-full flex justify-center pt-3 pr-2 h-12 text-sm font-medium text-white bg-green-l rounded-r-full  hover:bg-green-hov focus:outline-0  dark:bg-green-d dark:hover:bg-green-hov">
+                                    <svg class="w-6 h-6 mx-2"
+                                         xmlns="http://www.w3.org/2000/svg"
+                                         fill="none"
+                                         viewBox="0 0 24 24"
+                                         stroke-width="1.5"
+                                         stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- mobile menu -->
+                    <div class="flex justify-end items-center">
+                        <div class="col-span-1 hidden sm:block md:block">
+                        <button class="my-auto">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                          </svg>
+                        </button>
+                        </div>
+                    </div>
+                    </div>
+                    <!--  -->
+                    <div class="flex space-x-4 items-center justify-self-end sm:hidden md:hidden">
+                        <div class="flex justify-end mr-2 hover:text-navhov-l dark:hover:text-navhov-d">
+                            <button class="w-7 h-7 transition-all duration-200 ease-in-out"
+                                    id="theme-toggle"></button>
+                        </div>
+                        {% if user.is_authenticated %}
+                                <a href="#"
+                                   class="flex justify-end hover:text-navhov-l dark:hover:text-navhov-d">
+                                    <svg class="w-7 h-7 mr-1"
+                                         xmlns="http://www.w3.org/2000/svg"
+                                         fill="none"
+                                         viewBox="0 0 24 24"
+                                         stroke-width="1.5"
+                                         stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 20.25c4.97 0 9-3.694 9-8.25s-4.03-8.25-9-8.25S3 7.444 3 12c0 2.104.859 4.023 2.273 5.48.432.447.74 1.04.586 1.641a4.483 4.483 0 01-.923 1.785A5.969 5.969 0 006 21c1.282 0 2.47-.402 3.445-1.087.81.22 1.668.337 2.555.337z" />
+                                    </svg>
+                                    <p class="text-xl">Messages</p>
+                                </a>
+                                <a href="#"
+                                   class="flex justify-end hover:text-navhov-l dark:hover:text-navhov-d">
+                                    <svg class="w-7 h-7 mr-1"
+                                         xmlns="http://www.w3.org/2000/svg"
+                                         fill="none"
+                                         viewBox="0 0 24 24"
+                                         stroke-width="1.5"
+                                         stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                                    </svg>
+                                    <p class="text-xl">Account</p>
+                                </a>
+                            <div class="flex justify-center">
+                            <div class="flex items-center text-white bg-green-l p-3 dark:bg-green-d rounded h-7 hover:bg-green-hov dark:hover:bg-green-hov font-bold text-lg text-center">
+                                <a class="font-bold text-lg text-center block px-3" href="#">Sell</a>
+                            </div>
+                        {% else %}
+                            <div class="grid justify-self-auto">
+                                <a class="flex items-center text-white bg-green-l p-3 dark:bg-green-d rounded h-7 hover:bg-green-hov dark:hover:bg-green-hov font-bold text-lg text-center"
+                                   href="{% url 'accounts:login' %}">Sign in</a>
+                            </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </nav>
+        {% endblock %}
+        <!-- content -->
+        {% block content %}
+            <div class="flex justify-center h-full mb-10">
+                <div class="w-4/5 sm:w-11/12 p-5 bg-con-l dark:bg-con-d rounded-lg">
+                    <h1 class="text-xl mb-6">Sell an item</h1>
+                        <div class="grid grid-rows-4 justify-center">
+                        <p class="text-[#262626] dark:text-[#cccccc] row-span-1">Add up to 1 photo</p>
+                        <div class="grid place-content-center border border-slate-900/10 dark:border-slate-300/10 rounded-xl row-span-3">
+                            <input type="file">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endblock %}
+        {% block footer %}
+            <footer class="bg-green-l dark:bg-green-d text-white bottom-0 left-0 absolute w-full">
+                <div class="w-4/5 mx-auto my-auto">
+                    <div class="grid grid-cols-2">
+                        <div class="flex justify-start">
+                            <p>
+                                2023 Project Wildcat
+                            </p>
+                        </div>
+                        <div class="flex justify-end">
+                            <svg class="w-7 h-7"
+                                 xmlns="http://www.w3.org/2000/svg"
+                                 fill="none"
+                                 viewBox="0 0 24 24"
+                                 stroke-width="1.5"
+                                 stroke="currentColor"
+                                 class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        {% endblock %}
+        <script src="{% static 'js/script.js' %}"></script>
+    </body>
+</html>
