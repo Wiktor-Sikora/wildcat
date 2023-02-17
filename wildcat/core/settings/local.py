@@ -8,7 +8,6 @@ ALLOWED_HOSTS = ['*']
 
 CSRF_TRUSTED_ORIGINS=["http://localhost:8000", "https://*.app.github.dev"]
 
-
 MEDIA_URL = 'media/'
 
 MEDIA_ROOT = BASE_DIR / 'media/'
