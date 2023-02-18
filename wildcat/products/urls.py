@@ -12,4 +12,5 @@ urlpatterns = [
     # path('articles/<int:year>/<int:month>/', views.month_archive),
     # path('articles/<int:year>/<int:month>/<slug:slug>/', views.article_detail),
     path('add-product', views.giga_test, name='product_addition'),
+    path('404', views.tera_test, name='error404'),
 ]

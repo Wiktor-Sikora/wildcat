@@ -37,8 +37,9 @@
                         <!--change theme button for mobile devices [not necessary] -->
                     </div>
                     <!--form-->
-                    <div class="text-center text-3xl my-5">
-                        <h1>Sign In</h1>
+                    <div class="text-center">
+                        <h1 class="text-3xl my-4">Sign In</h1>
+                        <p class="text-red-600 mb-2">Sorry, that login was invalid. Please try again.</p>
                     </div>
                     <form method="post">
                         {% csrf_token %}
@@ -73,12 +74,12 @@
                                     {% render_field login_form.password class="w-full pl-9 py-2 bg-form-l dark:bg-form-d autofill:bg-form-l dark:autofill:bg-form-d rounded-full focus:outline-none border-none focus:ring-0" placeholder="password" %}
                                 </div>
                             </div>
-                            <div class="grid grid-cols-2">
-                                <div class="flex justify-start lg:ml-7">
+                            <div class="grid grid-cols-2 mx-6">
+                                <div class="flex justify-start">
                                     {% render_field login_form.remember_me class="my-auto focus:checked:bg-green-l dark:focus:checked:bg-green-l checked:bg-green-l dark:checked:bg-green-d checked:hover:bg-green-hov cursor-pointer focus:checked:ring-0 focus:ring-0 focus:outline-none rounded-sm" %}
                                     <p class="ml-1">Remember me</p>
                                 </div>
-                                <div class="flex justify-end lg:mr-7">
+                                <div class="flex justify-end">
                                     <a class="text-green-l hover:text-green-hov dark:text-green-d dark:hover:text-green-hov"
                                        href="#">Forgor password?</a>
                                 </div>

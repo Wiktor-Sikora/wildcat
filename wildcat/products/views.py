@@ -7,3 +7,6 @@ def mega_test(request):
 
 def giga_test(request):
     return render(request, 'products/products_addition.html')
+
+def tera_test(request):
+    return render(request, 'errors/404.html')
