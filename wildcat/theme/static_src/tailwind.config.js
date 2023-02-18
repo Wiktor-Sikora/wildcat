@@ -66,6 +66,9 @@ module.exports = {
                 500: '#64748b',
                 900: '#0f172a',
             },
+            'gray': {
+                400: '#9ca3af',
+            }
         },
         screens: {
             'sm': {'min': '200px', 'max': '767px'},

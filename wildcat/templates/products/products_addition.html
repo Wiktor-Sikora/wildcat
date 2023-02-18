@@ -8,16 +8,26 @@
         <h1 class="text-xl mb-6">Sell an item</h1> 
         <div class="grid grid-rows-2 mb-6 w-1/2 mx-auto">
             <label for="title" class="text-[#262626] dark:text-[#cccccc] my-auto">Title</label>
-            <input type="text" id="title" class="bg-con-l dark:bg-con-d border border-slate-900/10 dark:border-slate-300/10 focus:bg-form-l focus:dark:bg-form-d rounded-xl focus:border-none focus:ring-green-hov">
+            <input type="text" id="title" class="bg-con-l dark:bg-con-d border border-slate-900/10 dark:border-slate-300/10 focus:bg-form-l focus:dark:bg-form-d rounded-xl focus:ring-green-hov">
         </div>
-        <div class="grid grid-rows-2 mb-6 w-1/2 mx-auto">
-            <label for="description" class="text-[#262626] dark:text-[#cccccc] my-auto">Description</label>
-            <input type="text" id="description" class="bg-con-l dark:bg-con-d border border-slate-900/10 dark:border-slate-300/10 focus:bg-form-l focus:dark:bg-form-d rounded-xl focus:border-none focus:ring-green-hov">
+        <div class="grid grid-rows-1 mb-6 w-1/2 mx-auto">
+            <label for="description" class="text-[#262626] dark:text-[#cccccc] mb-2">Description</label>
+            <textarea class="bg-con-l dark:bg-con-d border border-slate-900/10 dark:border-slate-300/10 focus:bg-form-l focus:dark:bg-form-d rounded-xl focus:ring-green-hov resize-none" id="description" rows="5"></textarea>
         </div>
         <div class="grid grid-rows-4 mb-6 w-1/2 mx-auto">
-            <p class="text-[#262626] dark:text-[#cccccc] row-span-1">Add up to 1 photo</p>
+            <p class="text-[#262626] dark:text-[#cccccc] row-span-1 mb-2">Add up to 1 photo</p>
             <div class="flex justify-center items-center border border-slate-900/10 dark:border-slate-300/10 rounded-xl row-span-3">
-                <input type="file" class="px-11">
+                <input class="block text-gray-400 file:rounded-2xl file:bg-green-l dark:file:bg-green-d file:hover:bg-green-hov dark:file:hover:bg-green-hov file:py-1 file:px-2 file:cursor-pointer file:text-white dark:file:text-white file:border-none focus:outline-green-hov" type="file">
+            </div>
+        </div>
+        <div class="grid grid-cols-4 mb-6 w-1/2 mx-auto">
+            <div class="flex justify-center col-start-2 col-end-2">
+                <p class="my-auto mr-2">Amount</p>
+                <input type="number" min="0" max="1000" class="bg-con-l dark:bg-con-d border border-slate-900/10 dark:border-slate-300/10 rounded-xl"/>
+            </div>
+            <div class="flex justify-center col-start-3 col-end-3">
+                <input type="number" min="0" max="1000" class="bg-con-l dark:bg-con-d border border-slate-900/10 dark:border-slate-300/10 rounded-xl"/>
+                <p class="my-auto ml-2">PLN</p>
             </div>
         </div>
     </div>
