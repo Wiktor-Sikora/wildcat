@@ -9,7 +9,6 @@ class AuthenticationBackend(ModelBackend):
     def authenticate(self, request, username, password):
         try:
             user = User.objects.get(Q(username__iexact=username)|Q(email__iexact=username))
-            print(user)
             if user.check_password(password) is True:
                 return user
         except User.DoesNotExist:

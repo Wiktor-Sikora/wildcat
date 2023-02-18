@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% block title %}Wildcat | error{% endblock %}
+{% block navbar %}{% endblock %}
+{% block content %}
+<div class="flex items-center justify-center h-screen">
+    <div class="w-1/2 sm:w-4/5 md:w-4/5 h-auto bg-con-l dark:bg-con-d rounded-lg p-5">
+        <div class="grid grid-rows-1 place-content-center">
+            <div class="grid grid-rows-1 ">
+            <h1 class="text-8xl mx-auto">400</h1>
+            <h2 class="text-4xl mx-auto">Bad request</h2>
+            </div>
+            <div>
+                <a class="flex justify-start" href="{% url 'products:index' %}">
+                <img src="{% static 'img/error-wildcat-lm.svg' %}"
+                                 class="visible dark:hidden">
+                <img src="{% static 'img/error-wildcat-dm.svg' %}" class="hidden dark:block">
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block footer %}{% endblock %}
