@@ -39,7 +39,11 @@
                     <!--form-->
                     <div class="text-center">
                         <h1 class="text-3xl my-4">Sign In</h1>
-                        <p class="text-red-600 mb-2">Sorry, that login was invalid. Please try again.</p>
+                        {% if login_form.errors %}
+                            {% for error in login_form.non_field_errors %}
+                                <p class="text-red-600 mb-2">{{ error }}</p>
+                            {% endfor %}
+                        {% endif %}
                     </div>
                     <form method="post">
                         {% csrf_token %}

@@ -25,6 +25,7 @@ class LoginPage(View):
                 if not form.cleaned_data['remember_me']:
                     request.session.set_expiry(0)
                 return redirect('products:index', permanent=True)
+            form.add_error(None, 'Sorry, that login was invalid. Please try again.')
         return render(request, self.template_name, {'login_form': form})
 
 class RegisterPage(View):

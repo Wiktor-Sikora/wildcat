@@ -25,3 +25,8 @@ urlpatterns = [
     path('infinite_scroll/', include('infinite_scroll.urls')),
     path("__reload__/", include("django_browser_reload.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+handler400 = 'core.views.bad_request'
+handler403 = 'core.views.access_forbidden'
+handler404 = 'core.views.page_not_found'
+handler500 = 'core.views.server_error'
