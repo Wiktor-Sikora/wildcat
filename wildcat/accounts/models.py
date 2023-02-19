@@ -18,7 +18,6 @@ class User(AbstractUser):
     objects = UserManager()
 
     def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = unique_slugify(self, slugify(self.username))
+        self.slug = slugify(self.username)
         modified = timezone.now()
         super(User, self).save(*args, **kwargs)
