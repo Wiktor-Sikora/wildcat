@@ -30,4 +30,4 @@ class ProductAdditionPage(LoginRequiredMixin, View):
         return render(request, self.template_name, {'form': form})
 
 def tera_test(request):
-    return render(request, 'errors/404.html')
+    return render(request, 'base.html')
