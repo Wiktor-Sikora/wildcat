@@ -25,10 +25,8 @@ class ProductAdditionPage(LoginRequiredMixin, View):
             instance.owner = request.user
             instance.save()
             for each in files:
-                print(each)
                 Image.objects.create(image=each, product=instance)
-            # return redirect('products:index')
-        print(form.errors)
+            return redirect('products:index')
         return render(request, self.template_name, {'form': form})
 
 def tera_test(request):
