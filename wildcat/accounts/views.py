@@ -56,4 +56,5 @@ class AccountPage(View):
     def get(self, request, slug):
         account = get_object_or_404(User, slug=slug)
         products = Product.objects.filter(owner=account)
+        print(products)
         return render(request, self.template_name, {'account': account, 'products': products})
