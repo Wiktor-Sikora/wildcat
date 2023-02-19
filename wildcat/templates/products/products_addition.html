@@ -1,35 +1,37 @@
 {% extends 'base.html' %}
-{% load static tailwind_tags %}
+{% load widget_tweaks %}
 {% load static %}
-{% block title %}Wildcat{% endblock %}
+{% block title %}Wildcat | Product addition{% endblock %}
 {% block content %}
-<div class="flex justify-center h-full mb-10">
-    <div class="w-4/5 sm:w-11/12 p-5 bg-con-l dark:bg-con-d rounded-lg">
-        <h1 class="text-xl mb-6">Sell an item</h1> 
-        <div class="grid grid-rows-2 mb-6 w-1/2 mx-auto">
-            <label for="title" class="text-[#262626] dark:text-[#cccccc] my-auto">Title</label>
-            <input type="text" id="title" class="bg-con-l dark:bg-con-d border border-slate-900/10 dark:border-slate-300/10 focus:bg-form-l focus:dark:bg-form-d rounded-xl focus:ring-green-hov">
-        </div>
-        <div class="grid grid-rows-1 mb-6 w-1/2 mx-auto">
-            <label for="description" class="text-[#262626] dark:text-[#cccccc] mb-2">Description</label>
-            <textarea class="bg-con-l dark:bg-con-d border border-slate-900/10 dark:border-slate-300/10 focus:bg-form-l focus:dark:bg-form-d rounded-xl focus:ring-green-hov resize-none" id="description" rows="5"></textarea>
-        </div>
-        <div class="grid grid-rows-4 mb-6 w-1/2 mx-auto">
-            <p class="text-[#262626] dark:text-[#cccccc] row-span-1 mb-2">Add up to 1 photo</p>
-            <div class="flex justify-center items-center border border-slate-900/10 dark:border-slate-300/10 rounded-xl row-span-3">
-                <input class="block text-gray-400 file:rounded-2xl file:bg-green-l dark:file:bg-green-d file:hover:bg-green-hov dark:file:hover:bg-green-hov file:py-1 file:px-2 file:cursor-pointer file:text-white dark:file:text-white file:border-none focus:outline-green-hov" type="file">
-            </div>
-        </div>
-        <div class="grid grid-cols-4 mb-6 w-1/2 mx-auto">
-            <div class="flex justify-center col-start-2 col-end-2">
-                <p class="my-auto mr-2">Amount</p>
-                <input type="number" min="0" max="1000" class="bg-con-l dark:bg-con-d border border-slate-900/10 dark:border-slate-300/10 rounded-xl"/>
-            </div>
-            <div class="flex justify-center col-start-3 col-end-3">
-                <input type="number" min="0" max="1000" class="bg-con-l dark:bg-con-d border border-slate-900/10 dark:border-slate-300/10 rounded-xl"/>
-                <p class="my-auto ml-2">PLN</p>
-            </div>
+    <div class="flex justify-center h-full mb-10">
+        <div class="w-2/5 md:w-3/5 sm:w-11/12 p-5 bg-con-l dark:bg-con-d rounded-lg">
+            <form action="" method="post" class="flex flex-col gap-5" enctype="multipart/form-data">
+                {% csrf_token %}
+                <h1 class="text-3xl font-bold mb-1">Sell an item</h1>
+                <div class="grid grid-flow-col grid-cols-7 gap-5">
+                    <div class="col-span-5 flex flex-col gap-2">
+                        <label for="{{ form.name.auto_id }}" class="text-[#262626] dark:text-[#cccccc] my-auto">Title</label>
+                        {% render_field form.name class="bg-con-l dark:bg-con-d border border-slate-900/10 dark:border-slate-300/10 focus:bg-form-l focus:dark:bg-form-d rounded-xl focus:ring-green-hov" placeholder="Name of your product" %}
+                    </div>
+                    <div class="col-span-2 flex flex-col gap-2">
+                        <label for="{{ form.price.auto_id }}" class="text-[#262626] dark:text-[#cccccc] my-auto">Price in PLN</label>
+                        {% render_field form.price min=0.01 step=0.01 class="bg-con-l dark:bg-con-d border border-slate-900/10 dark:border-slate-300/10 focus:bg-form-l focus:dark:bg-form-d rounded-xl focus:ring-green-hov" placeholder="259.99" %}
+                    </div>
+                </div>
+                <div class="flex flex-col gap-2">
+                    <label for="{{ form.description.auto_id }}" class="text-[#262626] dark:text-[#cccccc] my-auto grid-">Description</label>
+                    {% render_field form.description class="bg-con-l dark:bg-con-d border border-slate-900/10 dark:border-slate-300/10 focus:bg-form-l focus:dark:bg-form-d rounded-xl focus:ring-green-hov resize-none" placeholder="Description of your product" %}
+                </div>
+                <div class="flex flex-col gap-2">
+                    <label for="{{ form.images.auto_id }}" class="text-[#262626] dark:text-[#cccccc] row-span-1">Add up to 1 photo</label>
+                    <div class="basis-36 flex justify-center items-center border border-slate-900/10 dark:border-slate-300/10 rounded-xl ">
+                        {% render_field form.images class="block text-gray-400 file:rounded-2xl file:bg-green-l dark:file:bg-green-d file:hover:bg-green-hov dark:file:hover:bg-green-hov file:py-1 file:px-2 file:cursor-pointer file:text-white dark:file:text-white file:border-none focus:outline-green-hov" %}
+                    </div>
+                </div>
+                <div class="self-center">
+                    <button type="submit" class="lg:w-full py-2 px-10 text-white font-medium bg-green-l rounded-full  hover:bg-green-hov focus:ring-3  focus:ring-green-hov dark:bg-green-d dark:hover:bg-green-hov dark:focus:ring-[#3f284f]">Publish</button>
+                </div>
+            </form>
         </div>
     </div>
-</div>
 {% endblock %}
