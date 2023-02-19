@@ -314,7 +314,8 @@
                 </div>
             </div>
         {% endblock %}
-        {% block footer %}
+        {% comment %}
+            {% block footer %}
             <footer class="bg-green-l dark:bg-green-d text-white bottom-0 left-0 w-full absolute">
                 <div class="w-4/5 mx-auto my-auto">
                     <div class="grid grid-cols-2">
@@ -338,6 +339,7 @@
                 </div>
             </footer>
         {% endblock %}
+        {% endcomment %}
         <script src="{% static 'js/script.js' %}"></script>
     </body>
 </html>
