@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import View
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth import get_user_model
@@ -49,7 +49,10 @@ class LogOutPage(View):
         logout(request)
         return redirect('products:index', permanent=True)
     
-class UserPage(View):
+class AccountPage(View):
+    template_name = 'users/user_profile.html'
+
     def get(self, request, slug):
-        user = User.objects.filter(slug=slug)
-        pass
+        # account = User.objects.g(slug=slug)
+        account = get_object_or_404(User, slug=slug)
+        return render(request, self.template_name, {'account': account})

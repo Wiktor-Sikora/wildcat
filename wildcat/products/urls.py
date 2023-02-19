@@ -7,6 +7,7 @@ app_name = 'products'
 urlpatterns = [
     path('', views.IndexPage.as_view(), name='index'),
     path('add-product', views.ProductAdditionPage.as_view(), name='product_addition'),
+    path('404', views.tera_test, name='404'),
     
     # copied from docs
     # path('articles/2003/', views.special_case_2003),

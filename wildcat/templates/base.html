@@ -30,54 +30,65 @@
                     </div>
                     <!-- search bar -->
                     <div class="md:grid md:grid-cols-3 md:place-items-center my-auto">
-                    <div class="flex justify-center md:col-span-2 sm:hidden">
-                        <div class="grid grid-cols-12 md:grid-cols-10 gap-0 ml-3">
-                            <div class="col-span-11 md:col-span-8">
-                                <input type="search"
-                                       class="w-full h-12 px-3 bg-[#dddddd] dark:bg-[#414141] rounded-l-full placeholder:text-lg border-none focus:ring-0"
-                                       placeholder="Search..."
-                                       required>
+                        <div class="flex justify-center md:col-span-2 sm:hidden">
+                            <div class="grid grid-cols-12 md:grid-cols-10 gap-0 ml-3">
+                                <div class="col-span-11 md:col-span-8">
+                                    <input type="search"
+                                           class="w-full h-12 px-3 bg-[#dddddd] dark:bg-[#414141] rounded-l-full placeholder:text-lg border-none focus:ring-0"
+                                           placeholder="Search..."
+                                           required>
+                                </div>
+                                <div class="col-span-1 md:col-span-2">
+                                    <button class="w-full flex justify-center pt-3 pr-2 h-12 text-sm font-medium text-white bg-green-l rounded-r-full  hover:bg-green-hov focus:outline-0  dark:bg-green-d dark:hover:bg-green-hov">
+                                        <svg class="w-6 h-6 mx-2"
+                                             xmlns="http://www.w3.org/2000/svg"
+                                             fill="none"
+                                             viewBox="0 0 24 24"
+                                             stroke-width="1.5"
+                                             stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                                        </svg>
+                                    </button>
+                                </div>
                             </div>
-                            <div class="col-span-1 md:col-span-2">
-                                <button class="w-full flex justify-center pt-3 pr-2 h-12 text-sm font-medium text-white bg-green-l rounded-r-full  hover:bg-green-hov focus:outline-0  dark:bg-green-d dark:hover:bg-green-hov">
-                                    <svg class="w-6 h-6 mx-2"
-                                         xmlns="http://www.w3.org/2000/svg"
+                        </div>
+                        <!-- mobile menu -->
+                        <div class="flex justify-end items-center">
+                            <div class="col-span-1 hidden sm:block md:block">
+                                <button data-dropdown-toggle="dropdown" class="my-auto">
+                                    <svg xmlns="http://www.w3.org/2000/svg"
                                          fill="none"
                                          viewBox="0 0 24 24"
                                          stroke-width="1.5"
-                                         stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                                         stroke="currentColor"
+                                         class="w-7 h-7">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                                     </svg>
                                 </button>
+                                <div id="dropdown"
+                                     class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                                    <ul class="py-2 text-sm text-gray-700 dark:text-gray-200"
+                                        aria-labelledby="dropdownDefaultButton">
+                                        <li>
+                                            <a href="#"
+                                               class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"
+                                               class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"
+                                               class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</a>
+                                        </li>
+                                        <li>
+                                            <a href="{% url 'accounts:logout' %}"
+                                               class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Sign out</a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- mobile menu -->
-                    <div class="flex justify-end items-center">
-                        <div class="col-span-1 hidden sm:block md:block">
-                        <button data-dropdown-toggle="dropdown" class="my-auto">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-                          </svg>
-                        </button>
-                        <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-                            <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
-                              <li>
-                                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
-                              </li>
-                              <li>
-                                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
-                              </li>
-                              <li>
-                                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</a>
-                              </li>
-                              <li>
-                                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Sign out</a>
-                              </li>
-                            </ul>
-                        </div>
-                        </div>
-                    </div>
                     </div>
                     <!--  -->
                     <div class="flex space-x-4 items-center justify-self-end sm:hidden md:hidden">
@@ -86,69 +97,91 @@
                                     id="theme-toggle"></button>
                         </div>
                         {% if user.is_authenticated %}
-                                <a href="#"
-                                   class="flex justify-end hover:text-navhov-l dark:hover:text-navhov-d transition-all duration-200 ease-in-out">
-                                    <svg class="w-7 h-7 mr-1"
-                                         xmlns="http://www.w3.org/2000/svg"
-                                         fill="none"
-                                         viewBox="0 0 24 24"
-                                         stroke-width="1.5"
-                                         stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 20.25c4.97 0 9-3.694 9-8.25s-4.03-8.25-9-8.25S3 7.444 3 12c0 2.104.859 4.023 2.273 5.48.432.447.74 1.04.586 1.641a4.483 4.483 0 01-.923 1.785A5.969 5.969 0 006 21c1.282 0 2.47-.402 3.445-1.087.81.22 1.668.337 2.555.337z" />
-                                    </svg>
-                                    <p class="text-xl">Messages</p>
-                                </a>
-                                <button class="flex justify-end">
-                                    <svg class="w-7 h-7 mr-1"
-                                         xmlns="http://www.w3.org/2000/svg"
-                                         fill="none"
-                                         viewBox="0 0 24 24"
-                                         stroke-width="1.5"
-                                         stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
-                                    </svg>
-                                    <p class="text-xl">Account</p>
-                                </button>
-                                    <div class="absolute right-10 mt-60 mr-4 w-60 rounded-md bg-con-l dark:bg-con-d shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                                        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200">
-                                          <li>
-                                            <a href="#" class="block text-lg px-4 py-2 hover:bg-green-hov dark:hover:bg-green-hov transition-all duration-200 ease-in-out">
-                                                <div class="flex justify-start">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7 mr-2">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
-                                                      </svg>                                          
-                                                Profile
-                                                </div></a>
-                                          </li>
-                                          <li>
-                                            <a href="#" class="block text-lg px-4 py-2 hover:bg-green-hov dark:hover:bg-green-hov transition-all duration-200 ease-in-out">
-                                                <div class="flex justify-start">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7 mr-2">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z" />
-                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                                      </svg>                                          
-                                                Settings
-                                                </div></a>
-                                          </li>
-                                          <li>
-                                            <a href="#" class="block text-lg px-4 py-2 hover:bg-green-hov dark:hover:bg-green-hov transition-all duration-200 ease-in-out">
-                                                <div class="flex justify-start">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7 mr-2">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
+                            <a href="#"
+                               class="flex justify-end hover:text-navhov-l dark:hover:text-navhov-d transition-all duration-200 ease-in-out">
+                                <svg class="w-7 h-7 mr-1"
+                                     xmlns="http://www.w3.org/2000/svg"
+                                     fill="none"
+                                     viewBox="0 0 24 24"
+                                     stroke-width="1.5"
+                                     stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 20.25c4.97 0 9-3.694 9-8.25s-4.03-8.25-9-8.25S3 7.444 3 12c0 2.104.859 4.023 2.273 5.48.432.447.74 1.04.586 1.641a4.483 4.483 0 01-.923 1.785A5.969 5.969 0 006 21c1.282 0 2.47-.402 3.445-1.087.81.22 1.668.337 2.555.337z" />
+                                </svg>
+                                <p class="text-xl">Messages</p>
+                            </a>
+                            <button class="flex justify-end">
+                                <svg class="w-7 h-7 mr-1"
+                                     xmlns="http://www.w3.org/2000/svg"
+                                     fill="none"
+                                     viewBox="0 0 24 24"
+                                     stroke-width="1.5"
+                                     stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                                </svg>
+                                <p class="text-xl">Account</p>
+                            </button>
+                            <div class="absolute right-10 mt-60 mr-4 w-60 rounded-md bg-con-l dark:bg-con-d shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                <ul class="py-2 text-sm text-gray-700 dark:text-gray-200">
+                                    <li>
+                                        <a href="{% url 'accounts:account_page' user.slug %}"
+                                           class="block text-lg px-4 py-2 hover:bg-green-hov dark:hover:bg-green-hov transition-all duration-200 ease-in-out">
+                                            <div class="flex justify-start">
+                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                     fill="none"
+                                                     viewBox="0 0 24 24"
+                                                     stroke-width="1.5"
+                                                     stroke="currentColor"
+                                                     class="w-7 h-7 mr-2">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
                                                 </svg>
-                                                Sign out</div></a>
-                                          </li>
-                                        </ul>
-                                    </div>
+                                                Profile
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#"
+                                           class="block text-lg px-4 py-2 hover:bg-green-hov dark:hover:bg-green-hov transition-all duration-200 ease-in-out">
+                                            <div class="flex justify-start">
+                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                     fill="none"
+                                                     viewBox="0 0 24 24"
+                                                     stroke-width="1.5"
+                                                     stroke="currentColor"
+                                                     class="w-7 h-7 mr-2">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z" />
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                </svg>
+                                                Settings
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'accounts:logout' %}"
+                                           class="block text-lg px-4 py-2 hover:bg-green-hov dark:hover:bg-green-hov transition-all duration-200 ease-in-out">
+                                            <div class="flex justify-start">
+                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                     fill="none"
+                                                     viewBox="0 0 24 24"
+                                                     stroke-width="1.5"
+                                                     stroke="currentColor"
+                                                     class="w-7 h-7 mr-2">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
+                                                </svg>
+                                                Sign out
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
                             <div class="flex justify-center">
-                            <div class="flex items-center text-white bg-green-l p-3 dark:bg-green-d rounded h-7 hover:bg-green-hov dark:hover:bg-green-hov font-bold text-lg text-center transition-all duration-200 ease-in-out">
-                                <a class="font-bold text-lg text-center block px-3" href="#">Sell</a>
-                            </div>
-                        {% else %}
-                            <div class="grid justify-self-auto">
-                                <a class="flex items-center text-white bg-green-l p-3 dark:bg-green-d rounded h-7 hover:bg-green-hov dark:hover:bg-green-hov font-bold text-lg text-center transition-all duration-200 ease-in-out"
-                                   href="{% url 'accounts:login' %}">Sign in</a>
-                            </div>
+                                <div class="flex items-center text-white bg-green-l p-3 dark:bg-green-d rounded h-7 hover:bg-green-hov dark:hover:bg-green-hov font-bold text-lg text-center transition-all duration-200 ease-in-out">
+                                    <a class="font-bold text-lg text-center block px-3" href="#">Sell</a>
+                                </div>
+                            {% else %}
+                                <div class="grid justify-self-auto">
+                                    <a class="flex items-center text-white bg-green-l p-3 dark:bg-green-d rounded h-7 hover:bg-green-hov dark:hover:bg-green-hov font-bold text-lg text-center transition-all duration-200 ease-in-out"
+                                       href="{% url 'accounts:login' %}">Sign in</a>
+                                </div>
                             </div>
                         {% endif %}
                     </div>
@@ -163,14 +196,14 @@
                         <div class="grid justify-start md:col-span-2">
                             <div class="flex justify-center grid-cols-2">
                                 <div>
-                                <svg xmlns="http://www.w3.org/2000/svg"
-                                     fill="none"
-                                     viewBox="0 0 24 24"
-                                     stroke-width="1.5"
-                                     stroke="currentColor"
-                                     class="w-44 h-44 sm:w-24 sm:h-24 flex justify-start">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
-                                </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                         fill="none"
+                                         viewBox="0 0 24 24"
+                                         stroke-width="1.5"
+                                         stroke="currentColor"
+                                         class="w-44 h-44 sm:w-24 sm:h-24 flex justify-start">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    </svg>
                                 </div>
                                 <div class="grid gap-2 ml-4 sm:mr-2 mt-6">
                                     <h1 class="text-2xl text-center sm:text-base">Hello [ ]!</h1>
@@ -293,8 +326,12 @@
                                          alt="test-image"
                                          class="h-3/4 w-full p-2 rounded-2xl">
                                     <div class="grid grid-cols-8 px-2">
-                                        <h3 class="col-start-1 col-span-5 text-lg font-semibold hover:underline truncate">Lorem Ipsum</h3>
-                                        <p class="col-start-8 text-right">$$$</p>
+                                        <h3 class="col-start-1 col-span-5 text-lg font-semibold hover:underline truncate">
+                                            Lorem Ipsum
+                                        </h3>
+                                        <p class="col-start-8 text-right">
+                                            $$$
+                                        </p>
                                     </div>
                                     <p class="text-center px-2 text-[#262626] dark:text-[#cccccc] truncate">
                                         is simply dummy text of the printing and typesetting industry.
@@ -371,13 +408,7 @@
                             </p>
                         </div>
                         <div class="flex justify-end">
-                            <svg class="w-7 h-7"
-                                 xmlns="http://www.w3.org/2000/svg"
-                                 fill="none"
-                                 viewBox="0 0 24 24"
-                                 stroke-width="1.5"
-                                 stroke="currentColor"
-                                 class="w-6 h-6">
+                            <svg class="w-7 h-7" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" />
                             </svg>
                         </div>
