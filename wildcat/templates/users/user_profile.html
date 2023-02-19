@@ -56,6 +56,20 @@
         </div>
         <!-- Owned products -->
         <div class="grid grid-cols-4 sm:grid-cols-1 md:grid-cols-2 gap-5 place-content-center">
+            {% for product in products %}
+                <div class="h-80 border border-slate-900/10 dark:border-slate-300/10 bg-con-l dark:bg-con-d rounded-2xl">
+                    <a href="#">
+                        <img src="{% static 'img/test-image.png' %}"
+                            alt="test-image"
+                            class="h-3/4 w-full p-2 rounded-2xl">
+                        <div class="grid grid-cols-8 px-2">
+                            <h3 class="col-start-1 col-span-5 text-lg font-semibold hover:underline truncate">{{ product.name }}</h3>
+                            <p class="col-start-8 text-right">{{ product.price }}</p>
+                        </div>
+                        <p class="text-center px-2 text-[#262626] dark:text-[#cccccc] truncate">{{ product.description }}</p>
+                    </a>
+                </div>
+            {% endfor %}
             <div class="h-80 border border-slate-900/10 dark:border-slate-300/10 bg-con-l dark:bg-con-d rounded-2xl">
                 <a href="#">
                     <img src="{% static 'img/test-image.png' %}"

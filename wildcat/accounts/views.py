@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth import get_user_model
 from django.contrib import messages
 
+from products.models import Product, Image
 from .forms import LoginForm, RegisterForm
 
 # Create your views here.
@@ -53,6 +54,6 @@ class AccountPage(View):
     template_name = 'users/user_profile.html'
 
     def get(self, request, slug):
-        # account = User.objects.g(slug=slug)
         account = get_object_or_404(User, slug=slug)
-        return render(request, self.template_name, {'account': account})
+        products = Product.objects.filter(owner=account)
+        return render(request, self.template_name, {'account': account, 'products': products})
