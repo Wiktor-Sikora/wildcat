@@ -61,6 +61,7 @@ module.exports = {
             'green-hov': '#5b9033',
             'white': '#ffffff',
             'black': '#000000',
+            'star': '#ffcd04',
             'slate': {
                 300: '#cbd5e1',
                 500: '#64748b',
@@ -94,7 +95,10 @@ module.exports = {
             backgroundImage: {
                 'Light': "url('/static/img/topography-light.svg')",
                 'Dark': "url('/static/img/topography-dark.svg')",
-            }
+            },
+            height: {
+                '500': '32rem',
+              }
         },
     },
     plugins: [
