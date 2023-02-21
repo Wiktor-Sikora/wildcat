@@ -3,6 +3,7 @@ from django.views.generic import View
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth import get_user_model
 from django.contrib import messages
+from django.db.models import Max
 
 from products.models import Product, Image
 from .forms import LoginForm, RegisterForm
@@ -15,6 +16,7 @@ class LoginPage(View):
     template_name = 'authentication/authenticate.html'
 
     def get(self, request):
+        logout(request)
         return render(request, self.template_name, {'login_form': LoginForm()})
     
     def post(self, request):
@@ -33,6 +35,7 @@ class RegisterPage(View):
     template_name = 'authentication/register.html'
 
     def get(self, request):
+        logout(request)
         return render(request, self.template_name, {'register_form': RegisterForm()})
 
     def post(self, request):
@@ -55,6 +58,8 @@ class AccountPage(View):
 
     def get(self, request, slug):
         account = get_object_or_404(User, slug=slug)
-        products = Product.objects.filter(owner=account)
+        # finds all of user items and last image of the product
+        products = Product.objects.filter(owner=account).annotate(picture=Max('image__image'))
+        # print(products[0].picture)
         print(products)
         return render(request, self.template_name, {'account': account, 'products': products})

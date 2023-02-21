@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load widget_tweaks %}
 {% load static %}
+{% load humanize %}
 {% block title %}Wildcat | Product addition{% endblock %}
 {% block content %}
     <div class="w-4/5 sm:w-11/12 mx-auto flex flex-col gap-8 p-7 mb-10 bg-con-l dark:bg-con-d rounded-lg">
@@ -59,7 +60,8 @@
             {% for product in products %}
                 <div class="h-80 border border-slate-900/10 dark:border-slate-300/10 bg-con-l dark:bg-con-d rounded-2xl">
                     <a href="#">
-                        <img src="{% static 'img/test-image.png' %}"
+                        <!-- <img src="{% static 'img/test-image.png' %}" -->
+                        <img src="media/{{ product.picture }}"
                             alt="test-image"
                             class="h-3/4 w-full p-2 rounded-2xl">
                         <div class="grid grid-cols-8 px-2">
@@ -68,7 +70,7 @@
                         </div>
                         <p class="text-center px-2 text-[#262626] dark:text-[#cccccc] truncate">{{ product.description }}</p>
                         <div class="grid grid-cols-8 px-2">
-                            <div class="col-start-1 col-span-5 text-gray-400">Today</div>
+                            <div class="col-start-1 col-span-5 text-gray-400">{{ product.date|naturalday }}</div>
                             <div class="col-start-8">
                                 <div class="flex justify-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
