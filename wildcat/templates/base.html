@@ -30,6 +30,7 @@
                     </div>
                     <!-- search bar -->
                     <div class="md:grid md:grid-cols-3 md:place-items-center my-auto">
+                        {% block searchbar %}
                         <div class="flex justify-center md:col-span-2 sm:hidden">
                             <div class="grid grid-cols-12 md:grid-cols-10 gap-0 ml-3">
                                 <div class="col-span-11 md:col-span-8">
@@ -39,7 +40,7 @@
                                            required>
                                 </div>
                                 <div class="col-span-1 md:col-span-2">
-                                    <button class="w-full flex justify-center pt-3 pr-2 h-12 text-sm font-medium text-white bg-green-l rounded-r-full  hover:bg-green-hov focus:outline-0  dark:bg-green-d dark:hover:bg-green-hov">
+                                    <button class="w-full flex justify-center pt-3 pr-2 h-12 text-sm font-medium text-white bg-green-l rounded-r-full hover:bg-green-hov focus:outline-0  dark:bg-green-d dark:hover:bg-green-hov">
                                         <svg class="w-6 h-6 mx-2"
                                              xmlns="http://www.w3.org/2000/svg"
                                              fill="none"
@@ -52,10 +53,11 @@
                                 </div>
                             </div>
                         </div>
+                        {% endblock searchbar %}
                         <!-- mobile menu -->
                         <div class="flex justify-end items-center">
                             <div class="col-span-1 hidden sm:block md:block">
-                                <button data-dropdown-toggle="dropdown" class="my-auto">
+                                <button class="my-auto">
                                     <svg xmlns="http://www.w3.org/2000/svg"
                                          fill="none"
                                          viewBox="0 0 24 24"
@@ -91,7 +93,7 @@
                         </div>
                     </div>
                     <!--  -->
-                    <div class="flex space-x-4 items-center justify-self-end sm:hidden md:hidden">
+                    <div v-scope="{ showNavDropdown: false }" class="flex space-x-4 items-center justify-self-end sm:hidden md:hidden">
                         <div class="flex justify-end mr-2 hover:text-navhov-l dark:hover:text-navhov-d">
                             <button class="w-7 h-7 transition-all duration-200 ease-in-out"
                                     id="theme-toggle"></button>
@@ -109,7 +111,7 @@
                                 </svg>
                                 <p class="text-xl">Messages</p>
                             </a>
-                            <button class="flex justify-end">
+                            <button @click="showNavDropdown = !showNavDropdown" class="flex justify-end hover:text-navhov-l dark:hover:text-navhov-d transition-all duration-200 ease-in-out">
                                 <svg class="w-7 h-7 mr-1"
                                      xmlns="http://www.w3.org/2000/svg"
                                      fill="none"
@@ -120,7 +122,7 @@
                                 </svg>
                                 <p class="text-xl">Account</p>
                             </button>
-                            <div class="absolute right-10 mt-60 mr-4 w-60 rounded-md bg-con-l dark:bg-con-d shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none hidden">
+                            <div v-if="showNavDropdown" v-cloak class="absolute right-10 mt-52 mr-4 w-60 rounded-md bg-con-l dark:bg-con-d shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                                 <ul class="py-2 text-sm text-gray-700 dark:text-gray-200">
                                     <li>
                                         <a href="{% url 'accounts:account_page' user.slug %}"
@@ -211,6 +213,26 @@
             </footer>
         {% endblock %}
         {% endcomment %}
-        <script src="{% static 'js/script.js' %}"></script>
+        <script src="{% static 'js/themeChanger.js' %}"></script>
+        <script src="https://unpkg.com/petite-vue"></script>
+        <script>
+            function clickAwayDirective({ el, get }) {
+                const listener = (event) => {
+                if (!el.contains(event.target)) {
+                    get();
+                }
+                };
+
+                document.addEventListener("click", listener);
+
+                return () => {
+                document.removeEventListener("click", listener);
+                };
+            }
+
+            PetiteVue.createApp(
+                { $delimiters: ['${', '}$'] }
+            ).directive("click-away", clickAwayDirective).mount()
+        </script>
     </body>
 </html>

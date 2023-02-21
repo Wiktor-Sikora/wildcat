@@ -26,3 +26,5 @@ select:-webkit-autofill:focus {
     margin: 0;
   }
 }
+
+[v-cloak] { display:none; }
