@@ -9,6 +9,11 @@ User = get_user_model()
 
 # Create your models here.
 
+class ProductTag(models.Model):
+    name = models.CharField(max_length=30)
+    disabled = models.BooleanField(default=False)
+
+
 class Product(models.Model):
     name = models.CharField(max_length=30)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -18,7 +23,8 @@ class Product(models.Model):
     modified = models.DateTimeField(null=True)
     slug = models.SlugField(unique=True)
     stars = models.ManyToManyField(User, related_name='stars')
-    main_image = models.ImageField(upload_to='products/', null=True, blank=True)
+    # tags
+    main_image = models.ImageField(upload_to='products/', default='products/empty.png', null=True, blank=True)
 
     def __str__(self):
         return str(self.name)
@@ -28,7 +34,7 @@ class Product(models.Model):
             self.slug = unique_slugify(self, slugify(self.name))
         self.modified = timezone.now()
         super(Product, self).save(*args, **kwargs)
-        
+
 
 class Image(models.Model):
     product = models.ForeignKey(Product, models.CASCADE, null=False)
@@ -36,3 +42,9 @@ class Image(models.Model):
 
     def __str__(self):
         return str(self.product.name)
+
+class Comment(models.Model):
+    content = models.CharField(max_length=200, blank=False)
+    product = models.ForeignKey(Product, models.CASCADE)
+    author = models.ForeignKey(User, models.CASCADE)
+    date = models.DateTimeField(auto_now=True)

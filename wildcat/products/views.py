@@ -1,6 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import View
-from django.shortcuts import render,  redirect
+from django.shortcuts import render, redirect, get_object_or_404
 
 from products.models import Product, Image
 from products.forms import ProductAdditionForm
@@ -18,7 +18,7 @@ class ProductAdditionPage(LoginRequiredMixin, View):
         return render(request, self.template_name, {'form': ProductAdditionForm})
     
     def post(self, request):
-        form = ProductAdditionForm(request.POST)
+        form = ProductAdditionForm(request.POST, request.FILES)
         files = request.FILES.getlist('images')
         if form.is_valid():
             instance = form.save(commit=False)
@@ -26,8 +26,14 @@ class ProductAdditionPage(LoginRequiredMixin, View):
             instance.save()
             for each in files:
                 Image.objects.create(image=each, product=instance)
-            return redirect('products:index')
+            return redirect('products:index', permanent=True)
         return render(request, self.template_name, {'form': form})
+
+class ProductPage(View):
+    def get(self, request, user_slug, product_slug):
+        product = get_object_or_404(Product, slug=product_slug)
+        images = Image.objects.filter(product=product)
+        return render(request, 'products/product.html')
 
 def tera_test(request):
     return render(request, 'products/product.html')

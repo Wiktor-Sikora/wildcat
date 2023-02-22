@@ -59,28 +59,31 @@
         <div class="grid grid-cols-4 sm:grid-cols-1 md:grid-cols-2 gap-5 place-content-center">
             {% for product in products %}
                 <div class="h-80 border border-slate-900/10 dark:border-slate-300/10 bg-con-l dark:bg-con-d rounded-2xl">
-                    <a href="#">
-                        <!-- <img src="{% static 'img/test-image.png' %}" -->
-                        <img src="media/{{ product.picture }}"
-                            alt="test-image"
-                            class="h-3/4 w-full p-2 rounded-2xl">
-                        <div class="grid grid-cols-8 px-2">
-                            <h3 class="col-start-1 col-span-5 text-lg font-semibold hover:underline truncate">{{ product.name }}</h3>
-                            <div class="col-start-8"><p class="flex justify-end">{{ product.price }}</p></div>
+                    <!-- <img src="{% static 'img/test-image.png' %}" -->
+                    <a href="{% url 'products:product' account.slug product.slug %}"><img src="{{ product.main_image.url }}"
+                         alt="image"
+                         class="object-contain h-3/4 w-full p-2 rounded-2xl"></a>
+                    <div class="grid grid-cols-8 px-2">
+                        <h3 class="col-span-6 text-lg font-semibold hover:underline truncate">{{ product.name }}</h3>
+                        <div class="col-span-2">
+                            <p class="flex justify-end">{{ product.price }} zł</p>
                         </div>
-                        <p class="text-center px-2 text-[#262626] dark:text-[#cccccc] truncate">{{ product.description }}</p>
-                        <div class="grid grid-cols-8 px-2">
-                            <div class="col-start-1 col-span-5 text-gray-400">{{ product.date|naturalday }}</div>
-                            <div class="col-start-8">
-                                <div class="flex justify-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
-                                <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
-                              </svg>
-                              <p class="ml-1 text-gray-400">5,0</p>
-                            </div>
+                    </div>
+                    <p class="text-center px-2 text-[#262626] dark:text-[#cccccc] truncate">{{ product.description }}</p>
+                    <div class="grid grid-cols-8 px-2">
+                        <div class="col-start-1 col-span-5 text-gray-400">{{ product.date|naturalday }}</div>
+                        <div class="col-start-8">
+                            <div class="flex justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     viewBox="0 0 24 24"
+                                     fill="currentColor"
+                                     class="w-6 h-6">
+                                    <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
+                                </svg>
+                                <p class="ml-1 text-gray-400">{{ product.stars__count }}</p>
                             </div>
                         </div>
-                    </a>
+                    </div>
                 </div>
             {% endfor %}
         </div>
