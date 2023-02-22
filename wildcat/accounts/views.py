@@ -45,7 +45,6 @@ class RegisterPage(View):
             login(request, user)
             messages.success(request, 'Registration successful!')
             return redirect('products:index', permanent=True)
-        print(form.errors)
         return render(request, self.template_name, {'register_form': form})
 
 class LogOutPage(View):

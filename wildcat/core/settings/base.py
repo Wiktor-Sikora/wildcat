@@ -34,7 +34,8 @@ INSTALLED_APPS = [
     'django_browser_reload',
     'widget_tweaks',
     'infscroll',
-    
+    'rest_framework',
+
     # local apps
     'accounts',
     'theme',
