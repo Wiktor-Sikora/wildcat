@@ -8,7 +8,7 @@ class ProductAdditionForm(forms.ModelForm):
 
     class Meta:
         model = Product
-        fields = ['name', 'description', 'price']
+        fields = ['name', 'description', 'price', 'main_image']
         widgets = {
             'description': forms.Textarea,
         }
