@@ -13,7 +13,6 @@ class ProductTag(models.Model):
     name = models.CharField(max_length=30)
     disabled = models.BooleanField(default=False)
 
-
 class Product(models.Model):
     name = models.CharField(max_length=30)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -23,7 +22,7 @@ class Product(models.Model):
     modified = models.DateTimeField(null=True)
     slug = models.SlugField(unique=True)
     stars = models.ManyToManyField(User, related_name='stars')
-    # tags
+    tags = models.ManyToManyField(ProductTag, related_name='tags')
     main_image = models.ImageField(upload_to='products/', default='products/empty.png', null=True, blank=True)
 
     def __str__(self):
