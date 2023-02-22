@@ -4,3 +4,6 @@ django-tailwind
 django-widget-tweaks
 Pillow
 django-infinite-scroll
+djangorestframework
+markdown
+django-filter
