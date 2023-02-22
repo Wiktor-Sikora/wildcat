@@ -16,11 +16,10 @@ def testai(request):
      if request.method=='POST':
         input = request.POST["data"]
         data = tager(input=input)
-        send_email(email_receiver='grysdawid366@gmail.com', subject='Lubie placki', body=data)
+        send_email(email_receiver=' ', subject=' ', body=data)
         return render(request, 'wypelniacz.html', {"data":data})
 
 def test(request):
-    """ Just a sample page """
     list_items = Product.objects.all()
     paginated = get_pagination(request, list_items,
                                page_canonical=request.GET.get('page', None),
@@ -33,7 +32,6 @@ def test(request):
     return render(request, 'infinite_scroll/test.html', data)
 
 def more(request):
-    """ This is the view that dynamically loads more content """
     list_items = Product.objects.all()
     return more_items(request, list_items, 'infinite_scroll/more.html', forever=FOREVER)
 
