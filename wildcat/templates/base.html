@@ -11,6 +11,7 @@
             {% block title %}Wildcat{% endblock %}
         </title>
         <link rel="icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}">
+        <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     </head>
     <body class="bg-Light bg-fixed bg-auto bg-bgcol-l dark:bg-bgcol-d dark:bg-Dark text-black dark:text-white scrollbar-thin scrollbar-track-bgcol-l dark:scrollbar-track-bgcol-d scrollbar-thumb-scroll-l dark:scrollbar-thumb-scroll-d scrollbar-thumb-rounded-full scrollbar-track-rounded-full">
         {% block navbar %}
@@ -93,7 +94,7 @@
                         </div>
                     </div>
                     <!--  -->
-                    <div v-scope="{ showNavDropdown: false }" class="flex space-x-4 items-center justify-self-end sm:hidden md:hidden">
+                    <div x-data="{open: false}" class="flex space-x-4 items-center justify-self-end sm:hidden md:hidden">
                         <div class="flex justify-end mr-2 hover:text-navhov-l dark:hover:text-navhov-d">
                             <button class="w-7 h-7 transition-all duration-200 ease-in-out"
                                     id="theme-toggle"></button>
@@ -111,7 +112,7 @@
                                 </svg>
                                 <p class="text-xl">Messages</p>
                             </a>
-                            <button @click="showNavDropdown = !showNavDropdown" class="flex justify-end hover:text-navhov-l dark:hover:text-navhov-d transition-all duration-200 ease-in-out">
+                            <button @click="open = !open" class="flex justify-end hover:text-navhov-l dark:hover:text-navhov-d transition-all duration-200 ease-in-out">
                                 <svg class="w-7 h-7 mr-1"
                                      xmlns="http://www.w3.org/2000/svg"
                                      fill="none"
@@ -122,7 +123,12 @@
                                 </svg>
                                 <p class="text-xl">Account</p>
                             </button>
-                            <div v-if="showNavDropdown" v-cloak class="absolute right-10 mt-52 mr-4 w-60 rounded-md bg-con-l dark:bg-con-d shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                            <div x-show="open" @click.away="open = false" x-cloak x-transition:enter="transition ease-out origin-top duration-200"
+                            x-transition:enter-start="opacity-0 transform scale-90"
+                            x-transition:enter-end="opacity-100 transform scale-100"
+                            x-transition:leave="transition origin-top ease-in duration-100"
+                            x-transition:leave-start="opacity-100 transform scale-100"
+                            x-transition:leave-end="opacity-0 transform scale-90" class="absolute right-10 mt-52 mr-4 w-60 rounded-md bg-con-l dark:bg-con-d shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                                 <ul class="py-2 text-sm text-gray-700 dark:text-gray-200">
                                     <li>
                                         <a href="{% url 'accounts:account_page' user.slug %}"
@@ -214,25 +220,5 @@
         {% endblock %}
         {% endcomment %}
         <script src="{% static 'js/themeChanger.js' %}"></script>
-        <script src="https://unpkg.com/petite-vue"></script>
-        <script>
-            function clickAwayDirective({ el, get }) {
-                const listener = (event) => {
-                if (!el.contains(event.target)) {
-                    get();
-                }
-                };
-
-                document.addEventListener("click", listener);
-
-                return () => {
-                document.removeEventListener("click", listener);
-                };
-            }
-
-            PetiteVue.createApp(
-                { $delimiters: ['${', '}$'] }
-            ).directive("click-away", clickAwayDirective).mount()
-        </script>
     </body>
 </html>

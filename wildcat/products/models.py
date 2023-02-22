@@ -17,6 +17,8 @@ class Product(models.Model):
     date = models.DateTimeField(auto_now=True)
     modified = models.DateTimeField(null=True)
     slug = models.SlugField(unique=True)
+    stars = models.ManyToManyField(User, related_name='stars')
+    image = models.ImageField(upload_to='products/', null=True, blank=True )
 
     def __str__(self):
         return str(self.name)
