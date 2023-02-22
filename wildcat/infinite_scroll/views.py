@@ -3,11 +3,21 @@ from django.urls import reverse
 from infscroll.utils import get_pagination
 from infscroll.views import more_items
 from products.models import Product
+
+from programs.openai import tager
+from programs.mail import send_email
 # Create your views here.
 
 FOREVER = True
 
 FOREVER = True
+
+def testai(request):
+     if request.method=='POST':
+        input = request.POST["data"]
+        data = tager(input=input)
+        send_email(email_receiver='grysdawid366@gmail.com', subject='Lubie placki', body=data)
+        return render(request, 'wypelniacz.html', {"data":data})
 
 def test(request):
     """ Just a sample page """

@@ -21,7 +21,19 @@
             <button type="submit">Clear database</button>
 
         </form>
-        
+
+        </br></br></br>
+
+        <center>
+            <form action="testai" method="post">
+                {% csrf_token %}
+                <input type="text" name="data">
+                </br></br>
+                <button type="submit">Send data</button>
+            </form>
+        </center>
+
+        {{data}}
         
     </body>
 </html>
