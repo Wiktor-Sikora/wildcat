@@ -26,7 +26,7 @@ class ProductAdditionPage(LoginRequiredMixin, View):
             instance.save()
             for each in files:
                 Image.objects.create(image=each, product=instance)
-            return redirect('products:index', permanent=True)
+            return redirect('products:product', user_slug=request.user.slug, product_slug=instance.slug, permanent=True)
         return render(request, self.template_name, {'form': form})
 
 class ProductPage(View):
