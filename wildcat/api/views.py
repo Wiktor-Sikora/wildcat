@@ -3,19 +3,21 @@ from rest_framework.response import Response
 from rest_framework import permissions
 from rest_framework import status
 from rest_framework import generics
+from django_filters import rest_framework as filters
 
 from api.serializers import ProductSerializer
 from api.pagination import ProductPagination
 from api.filters import ProductFilter
 
 from products.models import Product
-
+from time import sleep
 
 class ProductListView(generics.ListAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     pagination_class = ProductPagination
-    filter_class = ProductFilter
+    filter_backends = (filters.DjangoFilterBackend,)
+    filterset_class = ProductFilter
 
 
 class AddStarApiView(APIView):
