@@ -21,7 +21,7 @@ Wildcat is project created for [Platynowy indeks contest 2023](https://tu.kielce
    python manage.py makemigrations
    python manage.py migrate
    ```
-3.1. (optional) populate database with artificial data
+   (optional) populate database with artificial data
    ```bash
    python manage.py createfakeusers
    python manage.py createfakeproducts
