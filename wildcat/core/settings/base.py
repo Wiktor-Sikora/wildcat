@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'accounts',
     'theme',
     'products',
-    'infinite_scroll',
+    
 ]
 
 MIDDLEWARE = [

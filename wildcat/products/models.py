@@ -5,6 +5,7 @@ from django.utils import timezone
 
 from common.utils.texts import unique_slugify
 
+
 User = get_user_model()
 
 # Create your models here.
@@ -33,6 +34,8 @@ class Product(models.Model):
             self.slug = unique_slugify(self, slugify(self.name))
         self.modified = timezone.now()
         super(Product, self).save(*args, **kwargs)
+        
+
 
 
 class Image(models.Model):
