@@ -4,12 +4,14 @@ from django.shortcuts import render, redirect, get_object_or_404
 
 from products.models import Product, Image
 from products.forms import ProductAdditionForm
+from api.filters import ProductFilter
 
 # Create your views here.
 
 class IndexPage(View):
     def get(self, request):
-        return render(request, 'products/index.html')
+        product_filter = ProductFilter()
+        return render(request, 'products/index.html', {'filter': ProductFilter})
 
 class ProductAdditionPage(LoginRequiredMixin, View):
     template_name = 'products/products_addition.html'

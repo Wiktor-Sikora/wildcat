@@ -2,14 +2,13 @@
 {% load static %}
 {% load widget_tweaks %}
 {% load static tailwind_tags %}
-
-{% block searchbar %}
-{% endblock %}
-
+{% block searchbar %}{% endblock %}
 {% block content %}
     <!-- search bar -->
-    <div class="w-full mb-16 flex justify-center">
-        <div class="w-1/2 grid grid-cols-12 md:grid-cols-10 gap-0">
+    <div x-data="{open: false}" @click.away="open = false"
+         class="w-1/2 mx-auto mb-16 flex flex-col gap-4 md:sm:gap-2 ">
+        <div @click="open = true"
+             class="grid grid-cols-12 md:grid-cols-10 gap-0">
             <div class="col-span-11 md:col-span-8">
                 <input type="text"
                        class="w-full h-12 px-3 bg-form-l dark:bg-form-d rounded-l-full placeholder:text-lg border-none focus:ring-0"
@@ -17,8 +16,8 @@
                        required>
             </div>
             <div class="col-span-1 md:col-span-2">
-                <button class="w-full flex justify-center pt-3 pr-2 h-12 text-sm font-medium text-white bg-green-l rounded-r-full  hover:bg-green-hov focus:outline-0  dark:bg-green-d dark:hover:bg-green-hov transition-all duration-200 ease-in-out">
-                    <svg class="w-6 h-6 mx-2"
+                <button class="w-full flex justify-center pt-3 pr-2 h-12 text-sm font-medium text-green-hov bg-form-l rounded-r-full focus:outline-0 dark:bg-form-d group">
+                    <svg class="w-6 h-6 mx-2 group-hover:scale-110 duration-200 ease-in-out"
                          xmlns="http://www.w3.org/2000/svg"
                          fill="none"
                          viewBox="0 0 24 24"
@@ -29,10 +28,46 @@
                 </button>
             </div>
         </div>
+        <div class="grid grid-cols-3 sm:grid-cols-1 md:grid-cols-1 gap-3"
+             x-show="open"
+             x-cloak
+             x-transition:enter="transition ease-out origin-top duration-200"
+             x-transition:enter-start="opacity-0 transform scale-90"
+             x-transition:enter-end="opacity-100 transform scale-100"
+             x-transition:leave="transition origin-top ease-in duration-100"
+             x-transition:leave-start="opacity-100 transform scale-100"
+             x-transition:leave-end="opacity-0 transform scale-90">
+            <div class="flex flex-col gap-2">
+                <label for="">Tags</label>
+                <input type="text"
+                       placeholder="Select..."
+                       class="w-full bg-form-l dark:bg-form-d rounded-full placeholder:text-lg border-none focus:ring-0">
+            </div>
+            <div class="flex flex-col gap-2">
+                <label for="">Account</label>
+                <input type="text"
+                       placeholder="Select..."
+                       class="w-full bg-form-l dark:bg-form-d rounded-full placeholder:text-lg border-none focus:ring-0">
+            </div>
+            <div class="flex flex-col gap-2">
+                <label for="">Category</label>
+                <input type="text"
+                       placeholder="Select..."
+                       class="w-full bg-form-l dark:bg-form-d rounded-full placeholder:text-lg border-none focus:ring-0">
+            </div>
+        </div>
     </div>
     <!-- content -->
-    <div class="flex justify-center mb-8">
+    <div class="w-4/5 flex justify-between mb-8 mx-auto">
         <h2 class="text-4xl">Promoted</h2>
+        <div class="flex justify-between">
+            <select name="" id="" class="rounded-full bg-form-l dark:bg-form-d border-none focus:ring-0"> 
+                <option value="">Today</option>
+                <option value="">This week</option>
+                <option value="">This month</option>
+                <option value="">All time</option>
+            </select>
+        </div>
     </div>
     <div class="flex justify-center mb-8">
         <div class="grid grid-cols-4 sm:grid-cols-1 md:grid-cols-2 gap-5 w-4/5 place-content-center">
@@ -130,9 +165,7 @@
                 <p class="text-center px-2 text-[#262626] dark:text-[#cccccc] truncate">
                     is simply dummy text of the printing and typesetting industry.
                 </p>
-                <p class="pr-2 text-right">
-                    $$$
-                </p>
+                <p class="pr-2 text-right">$$$</p>
             </div>
             <div class="h-80 border border-slate-900/10 dark:border-slate-300/10 bg-con-l dark:bg-con-d rounded-2xl">
                 <a href="#">
@@ -141,9 +174,7 @@
                          class="h-3/4 w-full p-2 rounded-2xl">
                 </a>
                 <a href="#">
-                    <h3 class="px-2 text-lg font-semibold hover:underline truncate">
-                        Lorem Ipsum
-                    </h3>
+                    <h3 class="px-2 text-lg font-semibold hover:underline truncate">Lorem Ipsum</h3>
                 </a>
                 <p class="text-center px-2 text-[#262626] dark:text-[#cccccc] truncate">
                     is simply dummy text of the printing and typesetting industry.

@@ -12,3 +12,5 @@ class ProductAdditionForm(forms.ModelForm):
         widgets = {
             'description': forms.Textarea,
         }
+
+# class 
