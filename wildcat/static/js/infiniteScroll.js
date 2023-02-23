@@ -18,7 +18,6 @@ function infinityScroll() {
             return response.json()
           }
         }).then(data => {
-          console.log(data.results)
           this.products = this.products.concat(data.results)
           if (data.next == null) {
             this.loader = false
