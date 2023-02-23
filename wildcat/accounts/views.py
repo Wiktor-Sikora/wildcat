@@ -3,7 +3,7 @@ from django.views.generic import View
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth import get_user_model
 from django.contrib import messages
-from django.db.models import Max
+from django.db.models import Max, Count
 
 from products.models import Product, Image
 from .forms import LoginForm, RegisterForm
@@ -45,7 +45,6 @@ class RegisterPage(View):
             login(request, user)
             messages.success(request, 'Registration successful!')
             return redirect('products:index', permanent=True)
-        print(form.errors)
         return render(request, self.template_name, {'register_form': form})
 
 class LogOutPage(View):
@@ -58,8 +57,5 @@ class AccountPage(View):
 
     def get(self, request, slug):
         account = get_object_or_404(User, slug=slug)
-        # finds all of user items and last image of the product
-        products = Product.objects.filter(owner=account).annotate(picture=Max('image__image'))
-        # print(products[0].picture)
-        print(products)
+        products = Product.objects.filter(owner=account).annotate(Count('stars'))
         return render(request, self.template_name, {'account': account, 'products': products})

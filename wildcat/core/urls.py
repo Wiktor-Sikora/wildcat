@@ -20,6 +20,7 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin', admin.site.urls),
+    path('api/', include('api.urls')),
     path('', include('products.urls')),
     path('', include('accounts.urls')),
     path('infinite_scroll/', include('infinite_scroll.urls')),

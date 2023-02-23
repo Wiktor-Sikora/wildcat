@@ -12,6 +12,7 @@ class User(AbstractUser):
     is_premium = models.BooleanField(default=False)
     slug = models.SlugField(unique=True)
     modified = models.DateTimeField(null=True)
+    follows = models.ManyToManyField('self')
     first_name = None
     last_name = None
 

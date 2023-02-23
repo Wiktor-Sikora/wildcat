@@ -10,7 +10,7 @@
                 <div class="block sm:hidden">
                     <div class="h-[90%] grid grid-rows-6 my-4 border-r border-slate-900/10 dark:border-slate-300/10 visible sm:invisible">
                         <div class="grid row-span-1 ml-3 text-2xl">
-                            <a class="flex justify-start" href="index.html">
+                            <a class="flex justify-start" href="{% url 'products:index' %}">
                                 <p class="text-green-l dark:text-green-d">WILD</p>
                             CAT</a>
                         </div>
@@ -30,7 +30,7 @@
                 <div class="my-auto mx-3">
                     <div class="grid grid-cols-2 invisible sm:visible">
                         <div class="flex justify-start text-xl mt-3">
-                            <a class="flex justify-start" href="index.html">
+                            <a class="flex justify-start" href="{% url 'products:index' %}">
                                 <p class="text-green-l dark:text-green-d">WILD</p>
                             CAT</a>
                         </div>
@@ -40,6 +40,18 @@
                         {% csrf_token %}
                         <div class="text-center text-3xl my-5">
                             <h1>Register</h1>
+                        </div>
+                        <div class="text-center">
+                            {% if register_form.errors %}
+                                {% for error in register_form.non_field_errors %}
+                                    <p class="text-red-600 mb-2">{{ error|escape }}</p>
+                                {% endfor %}
+                                {% for field in register_form %}
+                                    {% for error in field.errors %}
+                                        <p class="text-red-600 mb-2">{{ error|escape }}</p>
+                                    {% endfor %}
+                                {% endfor %}
+                            {% endif %}
                         </div>
                         <div class="grid gap-3">
                             <!-- <div class="grid grid-cols-12 ml-4 sm:ml-8 w-full">

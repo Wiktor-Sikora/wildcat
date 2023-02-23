@@ -34,7 +34,9 @@ INSTALLED_APPS = [
     'django_browser_reload',
     'widget_tweaks',
     'infscroll',
-    
+    'rest_framework',
+    'django_filters',
+
     # local apps
     'accounts',
     'theme',
@@ -52,6 +54,10 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_browser_reload.middleware.BrowserReloadMiddleware',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+}
 
 AUTHENTICATION_BACKENDS = [
     'accounts.backends.AuthenticationBackend',

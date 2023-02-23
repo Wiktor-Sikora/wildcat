@@ -27,4 +27,4 @@ select:-webkit-autofill:focus {
   }
 }
 
-[v-cloak] { display:none; }
+[x-cloak] { display:none; }
