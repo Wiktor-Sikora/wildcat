@@ -4,7 +4,8 @@ from django.contrib.auth import get_user_model
 from django.utils import timezone
 
 from common.utils.texts import unique_slugify
-from products.openai import tager
+from common.openai.openai import tager
+
 
 User = get_user_model()
 
@@ -39,14 +40,13 @@ class Product(models.Model):
         description = self.description
         producttags = tager(input=description)
         for i in producttags:
-            
             if ProductTag.objects.filter(name=i).exists():
-                print('This tag is exist')
                 tag = ProductTag.objects.filter(name=i).first()
             else:
                 tag = ProductTag.objects.create(name=i)
                 tag.save()
             self.tags.add(tag)
+        
         
             
 class Image(models.Model):

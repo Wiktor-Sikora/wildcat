@@ -6,7 +6,7 @@ from products.models import Product, Image, ProductTag
 from products.forms import ProductAdditionForm
 from api.filters import ProductFilter
 
-from products.openai import tager
+
 # Create your views here.
 
 class IndexPage(View):
@@ -27,7 +27,6 @@ class ProductAdditionPage(LoginRequiredMixin, View):
             instance = form.save(commit=False)
             instance.owner = request.user
             instance.save()
-            
             for each in files:
                 Image.objects.create(image=each, product=instance)
             return redirect('products:product', user_slug=request.user.slug, product_slug=instance.slug, permanent=True)
