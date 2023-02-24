@@ -13,7 +13,7 @@ function infinityScroll() {
       fetch(this.page)
         .then(response => {
           if (response.status === 404) {
-            this.loader = false
+            console.log('end')
           } else {
             return response.json()
           }
@@ -23,6 +23,7 @@ function infinityScroll() {
             this.loader = false
           } else {
             this.page = data.next
+            this.loader = true
           }
         })
     },

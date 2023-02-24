@@ -13,6 +13,7 @@
         <link rel="icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}">
         <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/intersect@3.x.x/dist/cdn.min.js"></script>
         <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+        
     </head>
     <body class="bg-Light bg-fixed bg-auto bg-bgcol-l dark:bg-bgcol-d dark:bg-Dark text-black dark:text-white scrollbar-thin scrollbar-track-bgcol-l dark:scrollbar-track-bgcol-d scrollbar-thumb-scroll-l dark:scrollbar-thumb-scroll-d scrollbar-thumb-rounded-full scrollbar-track-rounded-full">
         {% block navbar %}
@@ -222,6 +223,7 @@
         {% endcomment %}
         {% block scripts %}
             <script src="{% static 'js/themeChanger.js' %}"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
         {% endblock %}
     </body>
 </html>

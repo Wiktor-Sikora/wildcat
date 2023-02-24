@@ -7,7 +7,7 @@
     <!-- search bar -->
     <div x-data="infinityScroll()" x-init="getUrl()">
         <form @submit.prevent
-              @input.debounce="clearItems();getUrl();getItems()"
+              @input.debounce="getUrl();clearItems();loader=true"
               @click.away="open = false"
               class="w-1/2 mx-auto mb-16 flex flex-col gap-4 md:sm:gap-2 ">
             <div @click="open = true" class="grid grid-cols-12 md:grid-cols-10 gap-0">
@@ -58,10 +58,9 @@
         </form>
         <!-- content -->
         <div class="w-4/5 flex justify-between mb-8 mx-auto">
-            <h2 class="text-4xl">Promoted</h2>
+            <h2 class="text-4xl font-semibold">Products</h2>
             <div class="flex justify-between">
                 <select name=""
-                        id=""
                         class="rounded-full bg-form-l dark:bg-form-d border-none focus:ring-0">
                     <option value="">
                         Today
@@ -81,20 +80,26 @@
         <div class="w-4/5 flex flex-col mb-8 mx-auto">
             <div class="grid grid-cols-4 sm:grid-cols-1 md:grid-cols-2 gap-5 justify-self-end">
                 <template x-for="product in products">
-                    <div class="h-80 border border-slate-900/10 dark:border-slate-300/10 bg-con-l dark:bg-con-d rounded-2xl">
-                        <a href="#">
+                    <div class="h-80 flex flex-col overflow-hidden">
+                        <a href="#" class="shadow-md rounded-lg bg-blend-normal h-3/4">
                             <img x-bind:src="product.main_image"
                                  src=""
                                  alt="picture"
-                                 class="object-contain h-3/4 w-full p-2 rounded-2xl">
+                                 class="w-full h-full object-cover rounded-lg object-center">
                         </a>
-                        <a href="#">
-                            <h3 x-text="product.name"
-                                class="px-2 text-lg font-semibold  hover:text-green-hov truncate"></h3>
-                        </a>
-                        <p x-text="product.description"
-                           class="text-center px-2 text-[#262626] dark:text-[#cccccc] truncate">lorem</p>
-                        <p x-text="product.price + ' zł'" class="pr-2 text-right"></p>
+                        <div class="flex flex-row justify-between items-center">
+                            <a href="#"
+                               x-text="product.name"
+                               class="text-lg font-semibold hover:text-green-hov"></a>
+                            <p x-text="product.price + ' zł'" class="flex-none"></p>
+                        </div>
+                        <div class="flex flex-row justify-between items-center text-gray-700 dark:text-gray-400">
+                            <a href=""
+                               x-bind:href="product.owner_slug"
+                               x-text="product.owner"
+                               class="hover:text-green-hov duration-100 transition-all truncate"></a>
+                            <p x-text="product.date" class="flex-none"></p>
+                        </div>
                     </div>
                 </template>
             </div>
