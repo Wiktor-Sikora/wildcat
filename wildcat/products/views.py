@@ -27,11 +27,7 @@ class ProductAdditionPage(LoginRequiredMixin, View):
             instance = form.save(commit=False)
             instance.owner = request.user
             instance.save()
-            description = 'Podatki'
-            producttags = tager(input=description)
-            for i in producttags:
-                tag= ProductTag(name=i)
-                tag.save()
+            
             for each in files:
                 Image.objects.create(image=each, product=instance)
             return redirect('products:product', user_slug=request.user.slug, product_slug=instance.slug, permanent=True)
