@@ -33,7 +33,6 @@ INSTALLED_APPS = [
     'tailwind',
     'django_browser_reload',
     'widget_tweaks',
-    'infscroll',
     'rest_framework',
     'django_filters',
 
@@ -41,7 +40,6 @@ INSTALLED_APPS = [
     'accounts',
     'theme',
     'products',
-    
 ]
 
 MIDDLEWARE = [

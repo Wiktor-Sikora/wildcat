@@ -12,7 +12,7 @@ from api.filters import ProductFilter
 class IndexPage(View):
     def get(self, request):
         product_filter = ProductFilter()
-        return render(request, 'products/index.html', {'filter': ProductFilter})
+        return render(request, 'products/index.html', {'product_filter': product_filter})
 
 class ProductAdditionPage(LoginRequiredMixin, View):
     template_name = 'products/products_addition.html'
@@ -39,4 +39,4 @@ class ProductPage(View):
         return render(request, 'products/product.html')
 
 def tera_test(request):
-    return render(request, 'products/product.html')
+    return render(request, 'users/settings.html')

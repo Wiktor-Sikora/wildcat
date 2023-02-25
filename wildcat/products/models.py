@@ -24,8 +24,8 @@ class Product(models.Model):
     modified = models.DateTimeField(null=True)
     slug = models.SlugField(unique=True)
     stars = models.ManyToManyField(User, related_name='stars')
-    tags = models.ManyToManyField(ProductTag, related_name='tags')
-    main_image = models.ImageField(upload_to='products/', default='products/empty.png', null=True, blank=True)
+    # tags = models.ManyToManyField(ProductTag, related_name='tags')
+    main_image = models.ImageField(upload_to='products/', default='products/default.jpg', null=True, blank=True)
 
     def __str__(self):
         return str(self.name)

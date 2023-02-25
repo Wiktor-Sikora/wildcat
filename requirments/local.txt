@@ -7,3 +7,5 @@ django-infinite-scroll
 djangorestframework
 markdown
 django-filter
+openai
+python-dotenv
