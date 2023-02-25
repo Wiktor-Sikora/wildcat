@@ -1,7 +1,7 @@
 venv
 __pycache__
 .vscode
-media/
+media/*
 !media/products/default.jpg
 *.log
 *.pot
