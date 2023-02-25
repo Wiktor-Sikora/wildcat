@@ -58,9 +58,9 @@
                         </div>
                         {% endblock searchbar %}
                         <!-- mobile menu -->
-                        <div class="flex justify-end items-center">
-                            <div class="col-span-1 hidden sm:block md:block">
-                                <button class="my-auto">
+                        <div class="flex justify-end">
+                            <div x-data="{ open: false }" class="col-span-1 relative hidden sm:block md:block">
+                                <button @click="open = !open" class="my-auto">
                                     <svg xmlns="http://www.w3.org/2000/svg"
                                          fill="none"
                                          viewBox="0 0 24 24"
@@ -70,26 +70,120 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                                     </svg>
                                 </button>
-                                <div id="dropdown"
-                                     class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-                                    <ul class="py-2 text-sm text-gray-700 dark:text-gray-200"
-                                        aria-labelledby="dropdownDefaultButton">
+                                <div x-show="open" @click.away="open = false" x-cloak x-transition:enter="transition ease-out origin-top duration-200"
+                                x-transition:enter-start="opacity-0 transform scale-90"
+                                x-transition:enter-end="opacity-100 transform scale-100"
+                                x-transition:leave="transition origin-top ease-in duration-100"
+                                x-transition:leave-start="opacity-100 transform scale-100"
+                                x-transition:leave-end="opacity-0 transform scale-90"
+                                     class="fixed inset-0 bg-con-l rounded-lg shadow w-50 dark:bg-bgcol-d">
+                                    <ul class="py-2 text-sm md:text-lg text-gray-700 dark:text-gray-200">
                                         <li>
-                                            <a href="#"
-                                               class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
+                                            <button @click="open = !open" class="ml-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                                  </svg>                                                  
+                                            </button>
+                                        </li>
+                                        {% if user.is_authenticated %}
+                                        <li>
+                                            <a href="#" class="block text-center px-4 py-2 hover:bg-green-hov focus:hover:bg-green-hov">
+                                                <div class="flex justify-center">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 md:w-6 md:h-6 mr-1">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3z" />
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6z" />
+                                                  </svg>                                                  
+                                                Sell
+                                            </div>
+                                            </a>
                                         </li>
                                         <li>
                                             <a href="#"
-                                               class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
+                                               class="block text-center px-4 py-2 hover:bg-green-hov focus:hover:bg-green-hov">
+                                               <div class="flex justify-center">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 md:w-6 md:h-6 mr-1">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 20.25c4.97 0 9-3.694 9-8.25s-4.03-8.25-9-8.25S3 7.444 3 12c0 2.104.859 4.023 2.273 5.48.432.447.74 1.04.586 1.641a4.483 4.483 0 01-.923 1.785A5.969 5.969 0 006 21c1.282 0 2.47-.402 3.445-1.087.81.22 1.668.337 2.555.337z" />
+                                                  </svg>                                                  
+                                               Messages
+                                            </div></a>
                                         </li>
                                         <li>
-                                            <a href="#"
-                                               class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</a>
+                                            <div x-data="{ open: false }" class="flex justify-center">
+                                            <button @click="open = !open" class="flex justify-center my-2 hover:text-navhov-l dark:hover:text-navhov-d transition-all duration-200 ease-in-out">
+                                                <svg class="w-5 h-5 md:w-6 md:h-6 mr-1"
+                                                     xmlns="http://www.w3.org/2000/svg"
+                                                     fill="none"
+                                                     viewBox="0 0 24 24"
+                                                     stroke-width="1.5"
+                                                     stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                                                </svg>
+                                                <p>Account</p>
+                                            </button>
+                                            <div x-show="open" @click.away="open = false" x-cloak x-transition:enter="transition ease-out origin-top duration-200"
+                                            x-transition:enter-start="opacity-0 transform scale-90"
+                                            x-transition:enter-end="opacity-100 transform scale-100"
+                                            x-transition:leave="transition origin-top ease-in duration-100"
+                                            x-transition:leave-start="opacity-100 transform scale-100"
+                                            x-transition:leave-end="opacity-0 transform scale-90" class="fixed w-full mt-10 bg-bgcol-l dark:bg-bgcol-d shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                                <ul class="py-2 text-sm md:text-lg">
+                                                    <li>
+                                                        <a href="{% url 'accounts:account_page' user.slug %}"
+                                                           class="hover:text-green-hov dark:hover:text-green-hov transition-all duration-200 ease-in-out">
+                                                            <div class="flex justify-center mr-2">
+                                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                                     fill="none"
+                                                                     viewBox="0 0 24 24"
+                                                                     stroke-width="1.5"
+                                                                     stroke="currentColor"
+                                                                     class="w-5 h-5 md:w-6 md:h-6 mr-2 mb-2">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                                </svg>
+                                                                Profile
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#"
+                                                           class="hover:text-green-hov dark:hover:text-green-hov transition-all duration-200 ease-in-out">
+                                                            <div class="flex justify-center">
+                                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                                     fill="none"
+                                                                     viewBox="0 0 24 24"
+                                                                     stroke-width="1.5"
+                                                                     stroke="currentColor"
+                                                                     class="w-5 h-5 md:w-6 md:h-6 mr-2">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z" />
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                                </svg>
+                                                                Settings
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
                                         </li>
                                         <li>
-                                            <a href="{% url 'accounts:logout' %}"
-                                               class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Sign out</a>
+                                            <a href="{% url 'accounts:logout' %}" class="block text-center px-4 py-2 hover:bg-green-hov focus:hover:bg-green-hov">
+                                                <div class="flex justify-center">
+                                               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 md:w-6 md:h-6 mr-1">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
+                                              </svg>
+                                              Sign out
+                                            </div></a>
                                         </li>
+                                        {% else %}
+                                        <h1 class="text-center">Welcome</h1>
+                                        <div class="flex justify-center">
+                                        <img src="{% static 'img/zbik-login-lm.svg' %}" class="visible dark:hidden">
+                                        <img src="{% static 'img/zbik-login-dm.svg' %}" class="hidden dark:block">
+                                        </div>
+                                        <li>
+                                            <a href="{% url 'accounts:login' %}"
+                                               class="block text-center text-green-l dark:text-green-d px-4 py-2 hover:bg-green-hov focus:hover:bg-green-hov hover:text-white dark:hover:text-white">Log in</a>
+                                        </li>
+                                        {% endif %}
                                     </ul>
                                 </div>
                             </div>

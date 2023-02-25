@@ -10,11 +10,11 @@
               @input.debounce="getUrl();clearItems();loader=true"
               @click.away="open = false"
               class="w-1/2 mx-auto mb-16 flex flex-col gap-4 md:sm:gap-2 ">
-            <div @click="open = true" class="grid grid-cols-12 md:grid-cols-10 gap-0">
-                <div class="col-span-11 md:col-span-8">
+            <div @click="open = true" class="grid grid-cols-12 md:grid-cols-10 sm:grid-cols-10 gap-0">
+                <div class="col-span-11 md:col-span-8 sm:col-span-8">
                     {% render_field product_filter.form.name x-model="product_name" type="search" class="w-full h-12 px-3 bg-form-l dark:bg-form-d rounded-l-full placeholder:text-lg border-none focus:ring-0" placeholder="Search..." %}
                 </div>
-                <div class="col-span-1 md:col-span-2">
+                <div class="col-span-1 md:col-span-2 sm:col-span-2">
                     <button class="w-full flex justify-center pt-3 pr-2 h-12 text-sm font-medium text-green-hov bg-form-l rounded-r-full focus:outline-0 dark:bg-form-d group">
                         <svg class="w-6 h-6 mx-2 group-hover:scale-110 duration-200 ease-in-out"
                              xmlns="http://www.w3.org/2000/svg"
