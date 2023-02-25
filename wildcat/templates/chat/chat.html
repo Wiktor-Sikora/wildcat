@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% block title %}Wildcat | Messages{% endblock %}
+{% block content %}
+    <div class="w-4/5 sm:w-11/12 h-80v mx-auto flex flex-col gap-8 p-5 sm:p-4 mb-10 bg-con-l dark:bg-con-d rounded-lg">
+        <div class="grid grid-cols-10 gap-2 h-full">
+            <div class="col-span-4 space-y-2">
+                <h1 class="text-2xl mb-5">Chat</h1>
+                <div class="border border-slate-900/10 dark:border-slate-300/10 rounded-lg px-3 sm:text-sm p-2">
+                    <div class="flex justify-start">
+                        <div>
+                            <img src="./media/products/user.jpg" alt="user" width="50" height="25" class="rounded-full">
+                        </div>
+                        <div class="grid grid-rows-2 ml-3">
+                            <div>User</div>
+                            <div class="flex justify-start w-72 md:w-40 sm:w-10">
+                                <p class="truncate">message message message message message message message</p>
+                                <div class="ml-2 text-gray-400">Today</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="border border-slate-900/10 dark:border-slate-300/10 rounded-lg px-3 sm:text-sm p-2">
+                    <div class="flex justify-start">
+                        <div>
+                            <img src="./media/products/user.jpg" alt="user" width="50" height="25" class="rounded-full">
+                        </div>
+                        <div class="grid grid-rows-2 ml-3">
+                            <div>User</div>
+                            <div class="flex justify-start w-72 md:w-40 sm:w-10">
+                                <p class="truncate">message message message message message message message</p>
+                                <div class="ml-2 text-gray-400">Today</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="border border-slate-900/10 dark:border-slate-300/10 rounded-lg px-3 sm:text-sm p-2">
+                    <div class="flex justify-start">
+                        <div>
+                            <img src="./media/products/user.jpg" alt="user" width="50" height="25" class="rounded-full">
+                        </div>
+                        <div class="grid grid-rows-2 ml-3">
+                            <div>User</div>
+                            <div class="flex justify-start w-72 md:w-40 sm:w-10">
+                                <p class="truncate">message message message message message message message</p>
+                                <div class="ml-2 text-gray-400">Today</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-span-6 h-full">
+                <div class="border border-slate-900/10 dark:border-slate-300/10 rounded-lg px-3 sm:text-sm h-full relative">
+                    <div class="absolute inset-x-0 top-0 border-b border-slate-900/10 dark:border-slate-300/10 px-2">
+                        <div class="flex justify-start py-2">
+                        <img src="./media/products/user.jpg" alt="user" width="50" height="25" class="rounded-full">
+                        <p class="my-auto ml-2 font-semibold">user</p>
+                        </div>
+                    </div>
+
+                    <div class="absolute inset-x-0 bottom-0 border-t border-slate-900/10 dark:border-slate-300/10 p-2">
+                        <div class="flex justify-center">
+                        <input type="text" class="w-11/12 bg-form-l dark:bg-form-d autofill:bg-form-l dark:autofill:bg-form-d rounded-full border-none focus:ring-0" placeholder="Type message">
+                        <button class="ml-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 hover:text-green-hov hover:scale-125 duration-100 transition-all">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
+                              </svg>                          
+                        </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
