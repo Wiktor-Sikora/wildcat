@@ -2,9 +2,10 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import View
 from django.shortcuts import render, redirect, get_object_or_404
 
-from products.models import Product, Image
+from products.models import Product, Image, ProductTag
 from products.forms import ProductAdditionForm
 from api.filters import ProductFilter
+
 
 # Create your views here.
 

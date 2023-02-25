@@ -4,6 +4,8 @@ from django.contrib.auth import get_user_model
 from django.utils import timezone
 
 from common.utils.texts import unique_slugify
+from common.openai.openai import tager
+
 
 User = get_user_model()
 
@@ -29,12 +31,24 @@ class Product(models.Model):
         return str(self.name)
 
     def save(self, *args, **kwargs):
+        
         if not self.slug:
             self.slug = unique_slugify(self, slugify(self.name))
         self.modified = timezone.now()
         super(Product, self).save(*args, **kwargs)
 
-
+        description = self.description
+        producttags = tager(input=description)
+        for i in producttags:
+            if ProductTag.objects.filter(name=i).exists():
+                tag = ProductTag.objects.filter(name=i).first()
+            else:
+                tag = ProductTag.objects.create(name=i)
+                tag.save()
+            self.tags.add(tag)
+        
+        
+            
 class Image(models.Model):
     product = models.ForeignKey(Product, models.CASCADE, null=False)
     image = models.ImageField(upload_to='products/', null=False, blank=False)
