@@ -29,27 +29,27 @@ class AddStarApiView(APIView):
         except Product.DoesNotExist:
             return None
 
-    def put(self, request, product_id, *args, **kwargs):
+    def put(self, request, pk=None, *args, **kwargs):
         '''adds star to item'''
-        product_instance = self.get_object(product_id)
+        product_instance = self.get_object(pk)
         
         if not product_instance:
             return Response({'res': 'object does not exist'}, status=status.HTTP_404_NOT_FOUND)
 
-        if product_instance.stars_set.filter(user=request.user.id).exists():
+        if product_instance.stars.filter(pk=request.user.id).exists():
             return Response({'res': 'You have already starred this product'}, status=status.HTTP_400_BAD_REQUEST)
 
         product_instance.stars.add(request.user)
         return Response(status=status.HTTP_200_OK)
 
-    def delete(self, request, product_id, *args, **kwargs):
+    def delete(self, request, pk=None, *args, **kwargs):
         '''delete star from item'''
-        product_instance = self.get_object(product_id)
-        
+        product_instance = self.get_object(pk)
+
         if not product_instance:
             return Response({'res': 'object does not exist'}, status=status.HTTP_404_NOT_FOUND)
 
-        if not product_instance.stars_set.filter(user=request.user.id).exists():
+        if not product_instance.stars.filter(pk=request.user.pk).exists():
             return Response({'res': 'you do not have a star on this product'}, status=status.HTTP_400_BAD_REQUEST)
 
         product_instance.stars.remove(request.user)
