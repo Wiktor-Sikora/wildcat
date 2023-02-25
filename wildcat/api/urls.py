@@ -5,5 +5,5 @@ app_name = 'api'
 
 urlpatterns = [
     path('products', ProductListView.as_view(), name='products_api'),
-    path('products/star', AddStarApiView.as_view(), name='product_star')
+    path('products/star/<int:pk>', AddStarApiView.as_view(), name='product_star')
 ]

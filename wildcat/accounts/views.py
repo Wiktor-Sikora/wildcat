@@ -57,5 +57,6 @@ class AccountPage(View):
 
     def get(self, request, slug):
         account = get_object_or_404(User, slug=slug)
-        products = Product.objects.filter(owner=account).annotate(Count('stars'))
-        return render(request, self.template_name, {'account': account, 'products': products})
+        account_followers = User.follows.through.objects.filter(from_user_id=account).count()
+        products = Product.objects.filter(owner=account).annotate(Count('stars')).order_by('-date')
+        return render(request, self.template_name, {'account': account, 'account_followers': account_followers, 'products': products})
