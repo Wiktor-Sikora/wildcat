@@ -13,5 +13,5 @@ MEDIA_URL = 'media/'
 
 MEDIA_ROOT = BASE_DIR / 'media/'
 
-if sys.platform == 'windows':
+if sys.platform == 'win32':
     NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd"

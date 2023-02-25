@@ -38,4 +38,4 @@ class ProductPage(View):
         return render(request, 'products/product.html')
 
 def tera_test(request):
-    return render(request, 'products/product.html')
+    return render(request, 'users/settings.html')
