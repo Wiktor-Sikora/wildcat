@@ -2,6 +2,8 @@ from django.db import models
 from django.template.defaultfilters import slugify
 from django.contrib.auth import get_user_model
 from django.utils import timezone
+from django.contrib.contenttypes.fields import GenericRelation
+from hitcount.models import HitCountMixin, HitCount
 
 from common.utils.texts import unique_slugify
 from common.openai.openai import tager
@@ -15,7 +17,10 @@ class ProductTag(models.Model):
     name = models.CharField(max_length=30)
     disabled = models.BooleanField(default=False)
 
-class Product(models.Model):
+    def __str__(self):
+        return self.name
+
+class Product(models.Model, HitCountMixin):
     name = models.CharField(max_length=30)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     description = models.TextField(blank=True, null=True)
@@ -24,8 +29,13 @@ class Product(models.Model):
     modified = models.DateTimeField(null=True)
     slug = models.SlugField(unique=True)
     stars = models.ManyToManyField(User, related_name='stars')
-    # tags = models.ManyToManyField(ProductTag, related_name='tags')
+    tags = models.ManyToManyField(ProductTag, related_name='tags')
     main_image = models.ImageField(upload_to='products/', default='products/default.jpg', null=True, blank=True)
+    
+    hit_count_generic = GenericRelation(
+        HitCount, object_id_field='object_pk',
+        related_query_name='hit_count_generic_relation'
+    )
 
     def __str__(self):
         return str(self.name)

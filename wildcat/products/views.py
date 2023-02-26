@@ -1,9 +1,13 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import View
+from django.core.exceptions import PermissionDenied
 from django.shortcuts import render, redirect, get_object_or_404
+from hitcount.views import HitCountMixin
+from hitcount.models import HitCount
+from django.views.generic import View
+
 
 from products.models import Product, Image, ProductTag
-from products.forms import ProductAdditionForm
+from products.forms import ProductAdditionForm, ProductEditForm
 from api.filters import ProductFilter
 
 
@@ -32,11 +36,31 @@ class ProductAdditionPage(LoginRequiredMixin, View):
             return redirect('products:product', user_slug=request.user.slug, product_slug=instance.slug, permanent=True)
         return render(request, self.template_name, {'form': form})
 
-class ProductPage(View):
+class EditProductPage(LoginRequiredMixin, View):
+    template_name = 'products/products_addition.html'
+
     def get(self, request, user_slug, product_slug):
         product = get_object_or_404(Product, slug=product_slug)
+
+        if product.owner != request.user:
+            return PermissionDenied()
+        
+        form = ProductEditForm(instance=product)
+        return render(request, self.template_name, {'form': form})
+
+    def post(self, request, pk):
+        pass
+
+class ProductPage(View):
+    count_hit = True
+
+    def get(self, request, user_slug, product_slug):
+        product = get_object_or_404(Product, slug=product_slug)
+        hit_count = HitCount.objects.get_for_object(product)
+        hit_count_response = HitCountMixin.hit_count(request, hit_count)
         images = Image.objects.filter(product=product)
-        return render(request, 'products/product.html')
+        return render(request, 'products/product.html', {'product': product, 'images': images})
+
 
 def tera_test(request):
     return render(request, 'users/settings.html')

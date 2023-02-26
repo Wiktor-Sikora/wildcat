@@ -12,7 +12,7 @@ class User(AbstractUser):
     is_premium = models.BooleanField(default=False)
     slug = models.SlugField(unique=True)
     modified = models.DateTimeField(null=True)
-    follows = models.ManyToManyField('self')
+    follows = models.ManyToManyField('self', symmetrical=False)
     image = models.ImageField(upload_to='accounts/', default='accounts/default.jpg')
     first_name = None
     last_name = None

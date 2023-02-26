@@ -35,7 +35,7 @@
                         </div>
                         <div>
                             <p class="text-slate-500 dark:text-gray-400">
-                                Following: <span class="font-bold text-black dark:text-white">{{ account_followers }}</span>
+                                Following: <span class="font-bold text-black dark:text-white">{{ account_following }}</span>
                             </p>
                         </div>
                     </div>
@@ -62,15 +62,7 @@
                     </svg>
                 </a>
                 {% else %}
-                <button class="w-10 h-10 hover:text-green-hov hover:scale-110 duration-200 transition-all">
-                    <svg xmlns="http://www.w3.org/2000/svg"
-                         fill="none"
-                         viewBox="0 0 24 24"
-                         stroke-width="2"
-                         stroke="currentColor"
-                         class="w-full h-full">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
-                    </svg>
+                <button x-data="followHandler({% if user in account.follows.all %}true{% else %}false{% endif %},{{ account.follows.count }},{{ account.pk }})" x-html="currentSvg" @click="changeFollow()" class="w-10 h-10 hover:text-green-hov hover:scale-110 duration-200 transition-all">
                 </button>
                 <a class="w-10 h-10 hover:text-green-hov hover:scale-110 duration-200 transition-all">
                     <svg xmlns="http://www.w3.org/2000/svg"
@@ -116,10 +108,10 @@
                         <div class="flex justify-center">
                             <div class="flex justify-center"
                                  x-data="starHandler({% if user in product.stars.all %}true{% else %}false{% endif %},{{ product.stars__count }},{{ product.pk }})">
-                                <button x-html="currentStar"
+                                <button x-html="currentSvg"
                                         @click="changeStar()"
-                                        class="hover:scale-110 transition-all duration-200"
-                                        {% if not user.is_authenticated %}disabled{% endif %}>
+                                        class="hover:scale-110 transition-all duration-200 w-6 h-6"
+                                        {% if not user.is_authenticated or user == product.owner %}disabled{% endif %}>
                                 </button>
                                 <p x-text="count" class="ml-1 text-gray-400"></p>
                             </div>
@@ -132,5 +124,5 @@
 {% endblock %}
 {% block scripts %}
     {{ block.super }}
-    <script src="{% static 'js/starHandler.js' %}"></script>
+    <script src="{% static 'js/apiHandler.js' %}"></script>
 {% endblock scripts %}
