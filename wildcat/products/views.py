@@ -61,6 +61,13 @@ class ProductPage(View):
         images = Image.objects.filter(product=product)
         return render(request, 'products/product.html', {'product': product, 'images': images})
 
+class DeleteProduct(View):
+    def get(self, request, user_slug, product_slug):
+        product = get_object_or_404(Product, slug=product_slug)
+        if request.user != product.owner:
+            return PermissionDenied()
+        product.delete()
+        return redirect('accounts:account_page', slug=request.user.slug, permanent=True)
 
 def tera_test(request):
     return render(request, 'chat/chat.html')
