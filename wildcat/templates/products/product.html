@@ -179,11 +179,24 @@
     <h1 class="text-2xl font-semibold mb-3">
       Comments
     </h1>
+    <div class="grid grid-cols-12 justify-center mb-3">
+      <img src="{{ product.owner.image.url }}"
+                 alt="user"
+                 width="40"
+                 height="40"
+                 class="mx-auto rounded-full col-span-1">
+        <textarea x-data="{ resize: () => { $el.style.height = '5px'; $el.style.height = $el.scrollHeight + 'px' } }"
+          x-init="resize()"
+          @input="resize()" cols="30" maxlength="1000" class="overflow-hidden	col-span-11 rounded-lg w-full resize-none bg-con-l dark:bg-con-d hover:border-green-hov focus:border-green-hov focus:ring-green-hov" placeholder="Add comment (Max 1000 characters)"></textarea>
+    </div>
+    <div class="flex justify-end">
+    <button class="py-1 px-2 bg-green-l dark:bg-green-d hover:bg-green-hov dark:hover:bg-green-hov text-white rounded-xl">Comment</button>
+    </div>
     <div class="w-4/5 grid grid-rows-1">
       <div class="grid grid-cols-1 my-1">
         <div class="flex justify-start">
           <a href=""class="flex justify-start">
-            <img src="./media/products/user.jpg"
+            <img src="{{ product.owner.image.url }}"
                  alt="user"
                  width="30"
                  height="15"
