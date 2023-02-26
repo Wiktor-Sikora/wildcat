@@ -13,4 +13,7 @@ class ProductAdditionForm(forms.ModelForm):
             'description': forms.Textarea,
         }
 
+class ProductEditForm(ProductAdditionForm):
+    pass
+
 # class 

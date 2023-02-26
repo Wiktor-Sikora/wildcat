@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'rest_framework',
     'django_filters',
+    'hitcount',
 
     # local apps
     'accounts',
@@ -137,3 +138,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'accounts.User'
 
 TAILWIND_APP_NAME = 'theme'
+
+HITCOUNT_HITS_PER_IP_LIMIT = 200
