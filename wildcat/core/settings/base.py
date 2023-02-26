@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.humanize',
+    'django.forms',
     
     # non django default packages
     'tailwind',
@@ -79,6 +80,8 @@ TEMPLATES = [
         },
     },
 ]
+
+FORM_RENDERER = 'django.forms.renderers.TemplatesSetting'
 
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
