@@ -70,4 +70,4 @@ class DeleteProduct(View):
         return redirect('accounts:account_page', slug=request.user.slug, permanent=True)
 
 def tera_test(request):
-    return render(request, 'chat/chat.html')
+    return render(request, 'products/product.html')
