@@ -63,4 +63,4 @@ class ProductPage(View):
 
 
 def tera_test(request):
-    return render(request, 'products/product.html')
+    return render(request, 'mails/reset-password.html')

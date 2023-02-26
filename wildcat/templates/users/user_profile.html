@@ -4,7 +4,7 @@
 {% load humanize %}
 {% block title %}Wildcat | Product addition{% endblock %}
 {% block content %}
-    <div class="w-4/5 sm:w-11/12 mx-auto flex flex-col gap-7 p-7 mb-10 bg-con-l dark:bg-con-d rounded-lg">
+    <div class="w-4/5 sm:w-11/12 mx-auto flex flex-col gap-7 p-7 sm:p-0 mb-10 bg-con-l dark:bg-con-d rounded-lg">
         <!-- Profile -->
         <div class="flex flex-row">
             <div class="flex flex-row basis-3/4">
@@ -22,7 +22,7 @@
                     <div class="flex flex-row gap-4 items-center">
                         <h2 class="text-4xl font-bold">{{ account.username }}</h2>
                     </div>
-                    <div class="flex flex-row gap-10">
+                    <div class="flex flex-row gap-10 sm:hidden">
                         <div>
                             <p class="text-slate-500 dark:text-gray-400">
                                 Products: <span class="font-bold text-black dark:text-white">{{ products.count }}</span>
@@ -39,13 +39,17 @@
                             </p>
                         </div>
                     </div>
-                    <div class="flex flex-col">
+                    <div class="flex flex-col sm:hidden">
                         <p class="text-slate-500 dark:text-slate-300/60">About:</p>
                         <p class="text-justify">
                             Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur obcaecati praesentium necessitatibus, quam, ut commodi eius facilis quisquam voluptatibus sit nam quia laborum laboriosam labore nostrum fugit illum quas. Architecto.
                         </p>
                     </div>
                 </div>
+            </div>
+            <!--mobile-->
+            <div class="hidden sm:block">
+                
             </div>
             <!-- Buttons -->
             <div class="basis-1/4 flex flex-col items-end gap-2">
