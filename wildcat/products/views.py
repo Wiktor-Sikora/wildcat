@@ -6,8 +6,8 @@ from hitcount.models import HitCount
 from django.views.generic import View
 
 
-from products.models import Product, Image, ProductTag
-from products.forms import ProductAdditionForm, ProductEditForm
+from products.models import Product, Image, ProductTag, Comment
+from products.forms import ProductAdditionForm, ProductEditForm, CommentForm
 from api.filters import ProductFilter
 
 
@@ -58,9 +58,28 @@ class ProductPage(View):
         product = get_object_or_404(Product, slug=product_slug)
         hit_count = HitCount.objects.get_for_object(product)
         hit_count_response = HitCountMixin.hit_count(request, hit_count)
+        comments = Comment.objects.filter(product=product).order_by('likes', '-dislikes')
         images = Image.objects.filter(product=product)
-        return render(request, 'products/product.html', {'product': product, 'images': images})
+        return render(request, 'products/product.html', {'product': product, 'images': images, 'comments': comments, 'comment_form': CommentForm})
+    
+    def post(self, request, user_slug, product_slug):
+        product = get_object_or_404(Product, slug=product_slug)
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            instance = form.save(commit=False)
+            instance.product = product
+            instance.author = request.user
+            instance.save()
+        return redirect('products:product', user_slug=product.owner.slug, product_slug=product.slug, permanent=True)
 
+
+class DeleteProduct(View):
+    def get(self, request, user_slug, product_slug):
+        product = get_object_or_404(Product, slug=product_slug)
+        if request.user != product.owner:
+            return PermissionDenied()
+        product.delete()
+        return redirect('accounts:account_page', slug=request.user.slug, permanent=True)
 
 def tera_test(request):
     return render(request, 'mails/reset-password.html')

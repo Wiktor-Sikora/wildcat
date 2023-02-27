@@ -7,6 +7,8 @@ from hitcount.models import HitCountMixin, HitCount
 
 from common.utils.texts import unique_slugify
 from common.openai.openai import tager
+from common.tagfinder import find
+from common.low import m
 
 
 User = get_user_model()
@@ -15,6 +17,7 @@ User = get_user_model()
 
 class ProductTag(models.Model):
     name = models.CharField(max_length=30)
+    number = models.IntegerField(null=True)
     disabled = models.BooleanField(default=False)
 
     def __str__(self):
@@ -52,9 +55,10 @@ class Product(models.Model, HitCountMixin):
         for i in producttags:
             if ProductTag.objects.filter(name=i).exists():
                 tag = ProductTag.objects.filter(name=i).first()
+                tag.number = tag.number+1
             else:
-                tag = ProductTag.objects.create(name=i)
-                tag.save()
+                tag = ProductTag.objects.create(name=i, number=1)
+            tag.save()
             self.tags.add(tag)
         
         
@@ -67,7 +71,9 @@ class Image(models.Model):
         return str(self.product.name)
 
 class Comment(models.Model):
-    content = models.CharField(max_length=200, blank=False)
+    content = models.TextField(max_length=1000, blank=False)
     product = models.ForeignKey(Product, models.CASCADE)
     author = models.ForeignKey(User, models.CASCADE)
     date = models.DateTimeField(auto_now=True)
+    likes = models.ManyToManyField(User, related_name='likes')
+    dislikes = models.ManyToManyField(User, related_name='dislikes')
