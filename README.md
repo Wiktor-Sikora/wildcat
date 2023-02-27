@@ -29,7 +29,6 @@ Wildcat is project created for [Platynowy indeks contest 2023](https://tu.kielce
 4. start css develop server.
    ```bash
    python manage.py tailwind install
-   python manage.py tailwind build
    python manage.py tailwind start
    ```
 5. lunch dev server
