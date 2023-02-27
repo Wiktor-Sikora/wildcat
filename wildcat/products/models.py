@@ -40,6 +40,9 @@ class Product(models.Model, HitCountMixin):
         related_query_name='hit_count_generic_relation'
     )
 
+    class Meta:
+        ordering = ['-date']
+
     def __str__(self):
         return str(self.name)
 

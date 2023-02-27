@@ -35,14 +35,14 @@
                         <label for="{{ form.main_image.auto_id }}"
                                class="text-[#262626] dark:text-[#cccccc] row-span-1">Main image</label>
                         <div class="basis-36 flex justify-center items-center border border-slate-900/10 dark:border-slate-300/10 rounded-xl ">
-                            {% render_field form.main_image class="" %}
+                            {% render_field form.main_image class="block text-gray-400 file:rounded-2xl file:bg-green-l dark:file:bg-green-d file:hover:bg-green-hov dark:file:hover:bg-green-hov file:py-1 file:px-2 file:cursor-pointer file:text-white dark:file:text-white file:border-none focus:outline-green-hov" %}
                         </div>
                     </div>
                     <div class="col-span-5 flex flex-col gap-2">
                         <label for="{{ form.images.auto_id }}"
                                class="text-[#262626] dark:text-[#cccccc] row-span-1">Add up to 20 photos</label>
                         <div class="basis-36 flex justify-center items-center border border-slate-900/10 dark:border-slate-300/10 rounded-xl ">
-                            {% render_field form.images class="" %}
+                            {% render_field form.images class="block text-gray-400 file:rounded-2xl file:bg-green-l dark:file:bg-green-d file:hover:bg-green-hov dark:file:hover:bg-green-hov file:py-1 file:px-2 file:cursor-pointer file:text-white dark:file:text-white file:border-none focus:outline-green-hov" %}
                         </div>
                     </div>
                 </div>
