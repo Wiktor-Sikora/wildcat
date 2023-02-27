@@ -10,3 +10,5 @@ django-filter
 openai
 python-dotenv
 django-hitcount
+
+nltk
