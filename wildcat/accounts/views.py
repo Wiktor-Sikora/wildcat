@@ -1,12 +1,13 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import View
+from django.views.generic.edit import DeleteView
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth import get_user_model
 from django.contrib import messages
 from django.db.models import Max, Count
 
 from products.models import Product, Image
-from .forms import LoginForm, RegisterForm
+from accounts.forms import LoginForm, RegisterForm, UpdateProfileForm
 
 # Create your views here.
 
@@ -53,10 +54,27 @@ class LogOutPage(View):
         return redirect('products:index', permanent=True)
     
 class AccountPage(View):
-    template_name = 'users/user_profile.html'
+    template_name = 'users/profile.html'
 
     def get(self, request, slug):
         account = get_object_or_404(User, slug=slug)
         account_following = User.follows.through.objects.filter(from_user=account).count()
         products = Product.objects.filter(owner=account).annotate(Count('stars')).order_by('-date')
         return render(request, self.template_name, {'account': account, 'account_following': account_following, 'products': products})
+
+class AccountSettingsPage(View):
+    def get(self, request):
+        return render(request, 'users/settings.html', {'form': UpdateProfileForm(instance=request.user)})
+
+    def post(self, request):
+        form = UpdateProfileForm(request.POST or None, request.FILES or None, instance=request.user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Account updated successfully')
+            return redirect('accounts:settings', permanent=True)
+        return render(request, 'users/settings.html', {'form': form})
+
+class AccountDelete(DeleteView):
+    model = User
+    success_url = ''
+    
