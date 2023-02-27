@@ -81,7 +81,7 @@
             <div class="grid grid-cols-4 sm:grid-cols-1 md:grid-cols-2 gap-5">
                 <template x-for="product in products">
                     <div class="h-80 flex flex-col overflow-hidden">
-                        <a x-bind:href="`${product.owner_slug}/${product.slug}`" href="" class="shadow-md rounded-lg bg-blend-normal h-3/4">
+                        <a x-bind:href="`@${product.owner_slug}/${product.slug}`" href="" class="shadow-md rounded-lg bg-blend-normal h-3/4">
                             <img x-bind:src="product.main_image"
                                  src=""
                                  alt="picture"
@@ -89,14 +89,14 @@
                         </a>
                         <div class="flex flex-row justify-between items-center">
                             <a href=""
-                               x-bind:href="`${product.owner_slug}/${product.slug}`"
+                               x-bind:href="`@${product.owner_slug}/${product.slug}`"
                                x-text="product.name"
                                class="text-lg font-semibold hover:text-green-hov"></a>
                             <p x-text="product.price + ' zł'" class="flex-none"></p>
                         </div>
                         <div class="flex flex-row justify-between items-center text-gray-700 dark:text-gray-400">
                             <a href=""
-                               x-bind:href="product.owner_slug"
+                               x-bind:href="@product.owner_slug"
                                x-text="product.owner"
                                class="hover:text-green-hov duration-100 transition-all truncate"></a>
                             <p x-text="product.date" class="flex-none"></p>

@@ -10,7 +10,7 @@ from api.serializers import ProductSerializer
 from api.pagination import ProductPagination
 from api.filters import ProductFilter
 
-from products.models import Product
+from products.models import Product, Comment
 from time import sleep
 
 User = get_user_model()
@@ -95,3 +95,72 @@ class FollowUserApiView(APIView):
         user_instance.follows.remove(request.user)
         return Response(status=status.HTTP_200_OK)
 
+class ChangeCommentlikeApiView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_object(self, id):
+        try:
+            return Comment.objects.get(id=id)
+        except Comment.DoesNotExist:
+            return None
+        
+    def put(self, request, pk=None, *args, **kwargs):
+        '''adds like to comment'''
+        comment_instance = self.get_object(pk)
+        
+        if not comment_instance:
+            return Response({'res': 'object does not exist'}, status=status.HTTP_404_NOT_FOUND)
+
+        if comment_instance.likes.filter(pk=request.user.id).exists():
+            comment_instance.likes.remove(request.user)
+        else:
+            comment_instance.likes.add(request.user)
+            comment_instance.dislikes.remove(request.user)
+
+        return Response(status=status.HTTP_200_OK)
+
+
+class ChangeCommentDislikeApiView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_object(self, id):
+        try:
+            return Comment.objects.get(id=id)
+        except Comment.DoesNotExist:
+            return None
+        
+    def put(self, request, pk=None, *args, **kwargs):
+        '''adds dislike to comment'''
+        comment_instance = self.get_object(pk)
+        
+        if not comment_instance:
+            return Response({'res': 'object does not exist'}, status=status.HTTP_404_NOT_FOUND)
+
+        if comment_instance.dislikes.filter(pk=request.user.id).exists():
+            comment_instance.dislikes.remove(request.user)
+        else:
+            comment_instance.dislikes.add(request.user)
+            comment_instance.likes.remove(request.user)
+
+        return Response(status=status.HTTP_200_OK)
+
+class DeleteComment(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_object(self, id):
+        try:
+            return Comment.objects.get(id=id)
+        except Comment.DoesNotExist:
+            return None
+
+    def delete(self, request, pk=None):
+        comment_instance = self.get_object(pk)
+        
+        if not comment_instance:
+            return Response({'res': 'object does not exist'}, status=status.HTTP_404_NOT_FOUND)
+
+        if comment_instance.author != request.user:
+            return Response({'res': 'You are not the author of this comment'}, status=status.HTTP_400_BAD_REQUEST)
+
+        comment_instance.delete()
+        return Response(status=status.HTTP_200_OK)        

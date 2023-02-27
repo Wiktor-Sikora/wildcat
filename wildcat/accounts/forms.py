@@ -8,8 +8,6 @@ from django import forms
 
 User = get_user_model()
 
-disallowed_usernames = ['login', 'register', 'logout', 'admin', 'add-product']
-
 class LoginForm(forms.Form):
     username = forms.CharField(widget=forms.TextInput(attrs={"autofocus": True}))
     password = forms.CharField(
@@ -35,5 +33,3 @@ class RegisterForm(UserCreationForm):
     def clean(self):
         super().clean()
         username = self.cleaned_data.get('username')
-        if username in disallowed_usernames:
-            raise ValidationError("Don't use forbidden usernames")

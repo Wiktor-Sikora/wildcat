@@ -1,4 +1,5 @@
 from collections import Counter
+
 def find(product, a):
     products = a.objects.all()
     tags_name = product.tags.all()
