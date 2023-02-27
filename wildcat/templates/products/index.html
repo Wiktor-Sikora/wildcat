@@ -9,7 +9,7 @@
         <form @submit.prevent
               @input.debounce="getUrl();clearItems();loader=true"
               @click.away="open = false"
-              class="w-1/2 mx-auto mb-16 flex flex-col gap-4 md:sm:gap-2 ">
+              class="w-1/2 sm:w-11/12 mx-auto mb-16 flex flex-col gap-4 md:sm:gap-2">
             <div @click="open = true" class="grid grid-cols-12 md:grid-cols-10 sm:grid-cols-10 gap-0">
                 <div class="col-span-11 md:col-span-8 sm:col-span-8">
                     {% render_field product_filter.form.name x-model="product_name" type="search" class="w-full h-12 px-3 bg-form-l dark:bg-form-d rounded-l-full placeholder:text-lg border-none focus:ring-0" placeholder="Search..." %}
