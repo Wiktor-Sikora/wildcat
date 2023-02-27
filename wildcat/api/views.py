@@ -63,6 +63,21 @@ class AddStarApiView(APIView):
 class FollowUserApiView(APIView):
     permission_classes = [permissions.IsAuthenticated]
     
+    
+    '''
+    tags = Tu wprowadzony tag
+    owner = User.objects.get(username=Tu wprowadzony user)
+    products = Product
+    if owner:
+        products = products.objects.filter(owner=owner)
+    if tags:
+        products = products.filter(tags__name=tags)
+    print(products)
+        
+    return
+    '''
+    
+    
     def get_object(self, id):
         try:
             return User.objects.get(id=id)
