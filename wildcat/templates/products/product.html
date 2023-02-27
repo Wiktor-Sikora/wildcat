@@ -5,18 +5,18 @@
 {% load hitcount_tags %}
 {% block title %}Wildcat | Product addition{% endblock %}
 {% block content %}
-  <div class="w-4/5 sm:w-11/12 mx-auto flex flex-col p-7 mb-10">
-    <div class="bg-con-l dark:bg-con-d rounded-xl p-7">
+  <div class="w-4/5 sm:w-11/12 mx-auto flex flex-col p-7 sm:p-0 mb-10">
+    <div class="bg-con-l dark:bg-con-d rounded-xl p-7 sm:p-5 sm:mx-auto">
       <div class="grid grid-cols-10 gap-7 h-auto">
         <div class="col-span-7 sm:col-span-full">
-          <div class="border border-slate-900/10 dark:border-slate-300/10 bg-con-l dark:bg-con-d rounded-2xl h-500">
+          <div class="border border-slate-900/10 dark:border-slate-300/10 bg-con-l dark:bg-con-d rounded-2xl h-500 sm:h-48">
             <img src="{{ product.main_image.url }}"
                  alt="product picture"
                  class="h-full mx-auto object-cover object-center rounded-lg">
           </div>
         </div>
         <div x-data="starHandler({% if user in product.stars.all %}true{% else %}false{% endif %},{{ product.stars.count }},{{ product.pk }})"
-             class="col-span-3 sm:col-span-full flex flex-col justify-between">
+             class="col-span-3 sm:col-span-full  flex flex-col justify-between">
           <div class="flex flex-col gap-2">
             <h1 class="text-3xl font-semibold">{{ product.name }}</h1>
             <div class="flex flex-row self-start items-center gap-3 text-xl sm:text-base sm:justify-between">
