@@ -65,16 +65,22 @@ class FollowUserApiView(APIView):
     
     
     '''
-    tags = Tu wprowadzony tag
-    owner = User.objects.get(username=Tu wprowadzony user)
-    products = Product
-    if owner:
-        products = products.objects.filter(owner=owner)
-    if tags:
-        products = products.filter(tags__name=tags)
-    print(products)
+        tags = Tu wchodzi tag
+        name = Tu wchodzi username
+        if name: 
+            owner = User.objects.get(username=name)
+        else:
+            owner = False
         
-    return
+            
+        products = Product
+        if owner:
+            products = products.objects.filter(owner=owner)
+        if tags:
+            products = products.objects.filter(tags__name=tags)
+        print(products)
+            
+        return
     '''
     
     
