@@ -90,7 +90,7 @@
                         </div>
                         <div class="flex flex-row justify-between items-center text-gray-700 dark:text-gray-400">
                             <a href=""
-                               x-bind:href="@product.owner_slug"
+                               x-bind:href="`@${product.owner_slug}`"
                                x-text="product.owner"
                                class="hover:text-green-hov duration-100 transition-all truncate"></a>
                             <p x-text="product.date" class="flex-none"></p>
