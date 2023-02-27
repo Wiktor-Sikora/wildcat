@@ -61,7 +61,6 @@ class Product(models.Model, HitCountMixin):
             tag.save()
             self.tags.add(tag)
         
-        
             
 class Image(models.Model):
     product = models.ForeignKey(Product, models.CASCADE, null=False)
