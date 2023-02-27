@@ -10,7 +10,7 @@ def tager(input):
     prompt = input
     response = openai.Completion.create(
         engine = 'text-davinci-003',
-        prompt = prompt + ' (Return json, example:{"tags":["category", "things"],"need":["things"})',
+        prompt = '(Return json, example:{"tags":["category", "things"],"need":["things"})' + prompt,
         stop='.',
         max_tokens = 150,
         temperature=0.5
