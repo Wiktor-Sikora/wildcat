@@ -1,5 +1,5 @@
 from django.shortcuts import render
-import openai, os
+import openai, os, json
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -10,12 +10,13 @@ def tager(input):
     prompt = input
     response = openai.Completion.create(
         engine = 'text-davinci-003',
-        prompt = prompt + '. (Polecenie: Napisz przetlumaczone na angielski tagi malymi literami, na podstawie tekstu dodaj tagi kategori itp. Masz napisac tylko tagi. Przyklad: car, silicon wafer. Nie podawaj podanych tagów: sell, for sale)',
+        prompt = prompt + ' (Return json, example:{"tags":["category", "things"],"need":["things"})',
         stop='.',
         max_tokens = 150,
         temperature=0.5
     )
     print(response)
-    data = response["choices"][0]["text"].strip().split(', ')
+    data = json.loads(response["choices"][0]["text"])
+    print(data)
+    
     return data
-# (Polecenie: Napisz po angielsku listę produktów z małą dostępnością na świecie, wypisz produkty według przykładu: cobalt, printer, graphic card )
