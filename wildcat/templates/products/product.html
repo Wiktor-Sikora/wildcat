@@ -40,6 +40,7 @@
               <p class="inline-flex gap-2 items-center">
                 <button x-html="currentSvg"
                         @click="changeStar()"
+                        @click-star.window="changeStar()"
                         class="w-8 h-8 hover:text-green-hov hover:scale-110 duration-200 transition-all"
                         {% if not user.is_authenticated or user == product.owner %}disabled{% endif %}>
                 </button>
@@ -49,10 +50,6 @@
           </div>
           <div class="block">
             {% for tag in product.tags.all %}
-              <a href="javascript:void(0)"
-                 class="px-1 py-1 rounded-full text-green-l hover:text-green-hov transition-all duration-200 scale-105">#{{ tag }}</a>
-              <a href="javascript:void(0)"
-                 class="px-1 py-1 rounded-full text-green-l hover:text-green-hov transition-all duration-200 scale-105">#{{ tag }}</a>
               <a href="javascript:void(0)"
                  class="px-1 py-1 rounded-full text-green-l hover:text-green-hov transition-all duration-200 scale-105">#{{ tag }}</a>
             {% endfor %}
@@ -72,7 +69,7 @@
               <p class="text-gray-700 dark:text-gray-400">Poland · Warsaw</p>
             </div>
           </div>
-          <div class="flex flex-row justify-start gap-5 text-white">
+          <div class="flex flex-wrap justify-start gap-3 text-white">
             {% if product.owner == user %}
               <a href="{% url 'products:edit_product' product.owner product.slug %}"
                  class="flex justify-center gap-2 bg-green-l hover:bg-green-hov rounded-xl px-4 py-2 duration-200 hover:scale-105 ease-in-out transition-all cursor-pointer">
@@ -81,21 +78,63 @@
                      viewBox="0 0 24 24"
                      stroke-width="1.5"
                      stroke="currentColor"
-                     class="w-6 h-6">
+                     class="w-6 h-6 group-hover:fill-bgcol-l">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
                 </svg>
                 <p>Edit</p>
               </a>
-              <button x-data @click="$dispatch('open-delete-modal')" class="flex justify-center gap-2 bg-green-l hover:bg-green-hov rounded-xl px-4 py-2">
+              <button x-data
+                      @click="$dispatch('open-delete-modal')"
+                      class="flex justify-center gap-2 bg-green-l hover:bg-green-hov rounded-xl px-4 py-2 duration-200 hover:scale-105 ease-in-out transition-all cursor-pointer">
                 <svg xmlns="http://www.w3.org/2000/svg"
                      fill="none"
                      viewBox="0 0 24 24"
                      stroke-width="1.5"
                      stroke="currentColor"
-                     class="w-6 h-6">
+                     class="w-6 h-6 group-hover:fill-bgcol-l">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
                 </svg>
                 <p class="">Delete</p>
+              </button>
+            {% else %}
+              <button x-data
+                      @click="$dispatch('click-star')"
+                      class="flex justify-center gap-2 bg-green-l hover:bg-green-hov rounded-xl px-4 py-2 duration-200 hover:scale-105 ease-in-out transition-all cursor-pointer">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     fill="none"
+                     viewBox="0 0 24 24"
+                     stroke-width="1.5"
+                     stroke="currentColor"
+                     class="w-6 h-6 group-hover:fill-bgcol-l">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
+                </svg>
+                <p class="">Like</p>
+              </button>
+              <button x-data
+                      @click="$dispatch('focus-comment')"
+                      class="flex justify-center gap-2 bg-green-l hover:bg-green-hov rounded-xl px-4 py-2 duration-200 hover:scale-105 ease-in-out transition-all cursor-pointer">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     fill="none"
+                     viewBox="0 0 24 24"
+                     stroke-width="1.5"
+                     stroke="currentColor"
+                     class="w-6 h-6 group-hover:fill-bgcol-l">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z" />
+                </svg>
+                <p class="">Comment</p>
+              </button>
+              <button x-data
+                      @click="$dispatch('open-delete-modal')"
+                      class="flex justify-center gap-2 bg-green-l hover:bg-green-hov rounded-xl px-4 py-2 duration-200 hover:scale-105 ease-in-out transition-all cursor-pointer">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     fill="none"
+                     viewBox="0 0 24 24"
+                     stroke-width="1.5"
+                     stroke="currentColor"
+                     class="w-6 h-6 group-hover:fill-bgcol-l">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 20.25c4.97 0 9-3.694 9-8.25s-4.03-8.25-9-8.25S3 7.444 3 12c0 2.104.859 4.023 2.273 5.48.432.447.74 1.04.586 1.641a4.483 4.483 0 01-.923 1.785A5.969 5.969 0 006 21c1.282 0 2.47-.402 3.445-1.087.81.22 1.668.337 2.555.337z" />
+                </svg>
+                <p class="">Message</p>
               </button>
             {% endif %}
           </div>
@@ -104,7 +143,7 @@
     </div>
   </div>
   <!-- mobile -->
-  <div class="hidden sm:block md:block bg-con-l dark:bg-con-d rounded-xl p-7">
+  <!-- <div class="hidden sm:block md:block bg-con-l dark:bg-con-d rounded-xl p-7">
     <div class="grid grid-rows-1 gap-2">
       <div class="border border-slate-900/10 dark:border-slate-300/10 bg-con-l dark:bg-con-d rounded-2xl h-80"></div>
       <div>
@@ -112,10 +151,7 @@
           <div class="grid grid-rows-1">
             <h1 class="text-2xl">Title</h1>
             <div class="flex justify-start">
-              <svg xmlns="http://www.w3.org/2000/svg"
-                   viewBox="0 0 24 24"
-                   fill="currentColor"
-                   class="w-3 h-3">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-3 h-3">
                 <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
               </svg>
             </div>
@@ -131,24 +167,14 @@
           <div class="flex justify-center items-center">
             <div class="grid grid-cols-3">
               <div class="flex justify-center">
-                <svg xmlns="http://www.w3.org/2000/svg"
-                     fill="none"
-                     viewBox="0 0 24 24"
-                     stroke-width="1.5"
-                     stroke="currentColor"
-                     class="w-12 h-12">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-12 h-12">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
               </div>
               <a href="" class="my-auto">Account_name</a>
               <div class="my-auto">
                 <button class="flex justify-center hover:text-green-hov hover:scale-110 duration-100 transition-all ml-5">
-                  <svg xmlns="http://www.w3.org/2000/svg"
-                       fill="none"
-                       viewBox="0 0 24 24"
-                       stroke-width="1.5"
-                       stroke="currentColor"
-                       class="w-7 h-7">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z" />
                   </svg>
                 </button>
@@ -164,83 +190,107 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
   <!--description-->
   <div class="my-6 bg-con-l dark:bg-con-d rounded-xl p-7">
     <h1 class="text-2xl font-semibold mb-3">Description</h1>
-    <p class="font-bold mb-3">
+    <!-- <p class="font-bold mb-3">
       Category: <a href="#" class="font-normal">test</a>
+    </p> -->
+    <p>
+      {{ product.description }}
     </p>
-    <p>{{ product.description }}</p>
   </div>
   <!--comments-->
-  <div class="bg-con-l dark:bg-con-d rounded-xl p-7">
+  <div class="bg-con-l dark:bg-con-d rounded-xl p-7" x-data="commentInput()">
     <h1 class="text-2xl font-semibold mb-3">
       Comments
     </h1>
-    <div class="grid grid-cols-12 justify-center mb-3">
-      <img src="{{ product.owner.image.url }}"
-                 alt="user"
-                 width="40"
-                 height="40"
-                 class="mx-auto rounded-full col-span-1">
-        <textarea x-data="{ resize: () => { $el.style.height = '5px'; $el.style.height = $el.scrollHeight + 'px' } }"
-          x-init="resize()"
-          @input="resize()" cols="30" maxlength="1000" class="overflow-hidden	col-span-11 rounded-lg w-full resize-none bg-con-l dark:bg-con-d hover:border-green-hov focus:border-green-hov focus:ring-green-hov" placeholder="Add comment (Max 1000 characters)"></textarea>
-    </div>
-    <div class="flex justify-end">
-    <button class="py-1 px-2 bg-green-l dark:bg-green-d hover:bg-green-hov dark:hover:bg-green-hov text-white rounded-xl">Comment</button>
-    </div>
-    <div class="w-4/5 grid grid-rows-1">
-      <div class="grid grid-cols-1 my-1">
-        <div class="flex justify-start">
-          <a href=""class="flex justify-start">
-            <img src="{{ product.owner.image.url }}"
-                 alt="user"
-                 width="30"
-                 height="15"
-                 class="rounded-full">
-            <p class="my-auto ml-2">Guest</p>
-          </a>
-        </div>
+    <form action="" method="post">
+      {% csrf_token %}
+      <div class="justify-center mb-3">
+        {% render_field comment_form.content x-init="resize()" @input="resize()" x-model="commentText" x-trap="_focus" @focus-comment.window="_focus = true" class="overflow-hidden rounded-lg w-full resize-none bg-con-l dark:bg-con-d hover:border-green-hov focus:border-green-hov focus:ring-green-hov" placeholder="Add comment (max 1000 characters)" cols="1" rows="1" maxlength="1000" %}
       </div>
-      <p class="py-1">
-        fucking piece of shit
-      </p>
-      <div class="grid grid-cols-1 my-1">
-        <div class="flex justify-start">
-          <svg xmlns="http://www.w3.org/2000/svg"
-               fill="none"
-               viewBox="0 0 24 24"
-               stroke-width="1.5"
-               stroke="currentColor"
-               class="w-6 h-6">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M6.633 10.5c.806 0 1.533-.446 2.031-1.08a9.041 9.041 0 012.861-2.4c.723-.384 1.35-.956 1.653-1.715a4.498 4.498 0 00.322-1.672V3a.75.75 0 01.75-.75A2.25 2.25 0 0116.5 4.5c0 1.152-.26 2.243-.723 3.218-.266.558.107 1.282.725 1.282h3.126c1.026 0 1.945.694 2.054 1.715.045.422.068.85.068 1.285a11.95 11.95 0 01-2.649 7.521c-.388.482-.987.729-1.605.729H13.48c-.483 0-.964-.078-1.423-.23l-3.114-1.04a4.501 4.501 0 00-1.423-.23H5.904M14.25 9h2.25M5.904 18.75c.083.205.173.405.27.602.197.4-.078.898-.523.898h-.908c-.889 0-1.713-.518-1.972-1.368a12 12 0 01-.521-3.507c0-1.553.295-3.036.831-4.398C3.387 10.203 4.167 9.75 5 9.75h1.053c.472 0 .745.556.5.96a8.958 8.958 0 00-1.302 4.665c0 1.194.232 2.333.654 3.375z" />
-          </svg>
-          <p class="mr-2 ml-1">
-            200
-          </p>
-          <svg xmlns="http://www.w3.org/2000/svg"
-               fill="none"
-               viewBox="0 0 24 24"
-               stroke-width="1.5"
-               stroke="currentColor"
-               class="w-6 h-6">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 15h2.25m8.024-9.75c.011.05.028.1.052.148.591 1.2.924 2.55.924 3.977a8.96 8.96 0 01-.999 4.125m.023-8.25c-.076-.365.183-.75.575-.75h.908c.889 0 1.713.518 1.972 1.368.339 1.11.521 2.287.521 3.507 0 1.553-.295 3.036-.831 4.398C20.613 14.547 19.833 15 19 15h-1.053c-.472 0-.745-.556-.5-.96a8.95 8.95 0 00.303-.54m.023-8.25H16.48a4.5 4.5 0 01-1.423-.23l-3.114-1.04a4.5 4.5 0 00-1.423-.23H6.504c-.618 0-1.217.247-1.605.729A11.95 11.95 0 002.25 12c0 .434.023.863.068 1.285C2.427 14.306 3.346 15 4.372 15h3.126c.618 0 .991.724.725 1.282A7.471 7.471 0 007.5 19.5a2.25 2.25 0 002.25 2.25.75.75 0 00.75-.75v-.633c0-.573.11-1.14.322-1.672.304-.76.93-1.33 1.653-1.715a9.04 9.04 0 002.86-2.4c.498-.634 1.226-1.08 2.032-1.08h.384" />
-          </svg>
-          <p class="mr-2 ml-1">
-            0
-          </p>
-        </div>
+      <div class="flex justify-end gap-2 mb-3">
+        <button @click="commentText.value = ''" type="reset" class="py-2 px-3 font-semibold bg-green-l dark:bg-green-d hover:bg-green-hov dark:hover:bg-green-hov text-white rounded-xl">
+          Cancel
+        </button>
+        <button type="submit"
+                class="py-2 px-3 font-semibold bg-green-l dark:bg-green-d hover:bg-green-hov dark:hover:bg-green-hov text-white rounded-xl">
+          Comment
+        </button>
       </div>
+    </form>
+    <div class="flex flex-col gap-6">
+      {% for comment in comments %}
+        <div class="flex flex-col gap-1.5 group" x-data="comment({{ comment.pk }}, {{ comment.likes.count }}, {{ comment.dislikes.count }})">
+          <div class="flex flex-row gap-2 items-center">
+            <a href="{% url 'accounts:account_page' comment.author.slug %}">
+              <img src="{{ comment.author.image.url }}"
+                   alt="user"
+                   width="30"
+                   height="15"
+                   class="rounded-full">
+            </a>
+            <a class="text-lg">
+              {{ comment.author }}
+            </a>
+            <p class="text-gray-700 dark:text-gray-400">
+              {{ comment.date }}
+            </p>
+            {% if comment.author == request.user %}
+            <button @click="deleteComment();$root.remove()" class="group-hover:block text-red-600 hidden hover:scale-110 duration-150 transition-all">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+              </svg>
+            </button>
+            {% endif %}
+          </div>
+          <p>
+            {{ comment.content }}
+          </p>
+          <div class="flex flex-row gap-2 items-center">
+            <div class="inline-flex gap-1">
+              <button>
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     fill="none"
+                     viewBox="0 0 24 24"
+                     stroke-width="1.5"
+                     stroke="currentColor"
+                     class="w-6 h-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M6.633 10.5c.806 0 1.533-.446 2.031-1.08a9.041 9.041 0 012.861-2.4c.723-.384 1.35-.956 1.653-1.715a4.498 4.498 0 00.322-1.672V3a.75.75 0 01.75-.75A2.25 2.25 0 0116.5 4.5c0 1.152-.26 2.243-.723 3.218-.266.558.107 1.282.725 1.282h3.126c1.026 0 1.945.694 2.054 1.715.045.422.068.85.068 1.285a11.95 11.95 0 01-2.649 7.521c-.388.482-.987.729-1.605.729H13.48c-.483 0-.964-.078-1.423-.23l-3.114-1.04a4.501 4.501 0 00-1.423-.23H5.904M14.25 9h2.25M5.904 18.75c.083.205.173.405.27.602.197.4-.078.898-.523.898h-.908c-.889 0-1.713-.518-1.972-1.368a12 12 0 01-.521-3.507c0-1.553.295-3.036.831-4.398C3.387 10.203 4.167 9.75 5 9.75h1.053c.472 0 .745.556.5.96a8.958 8.958 0 00-1.302 4.665c0 1.194.232 2.333.654 3.375z" />
+                </svg>
+              </button>
+              <p x-text="likesCount">
+              </p>
+            </div>
+            <div class="inline-flex gap-1">
+              <button>
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     fill="none"
+                     viewBox="0 0 24 24"
+                     stroke-width="1.5"
+                     stroke="currentColor"
+                     class="w-6 h-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 15h2.25m8.024-9.75c.011.05.028.1.052.148.591 1.2.924 2.55.924 3.977a8.96 8.96 0 01-.999 4.125m.023-8.25c-.076-.365.183-.75.575-.75h.908c.889 0 1.713.518 1.972 1.368.339 1.11.521 2.287.521 3.507 0 1.553-.295 3.036-.831 4.398C20.613 14.547 19.833 15 19 15h-1.053c-.472 0-.745-.556-.5-.96a8.95 8.95 0 00.303-.54m.023-8.25H16.48a4.5 4.5 0 01-1.423-.23l-3.114-1.04a4.5 4.5 0 00-1.423-.23H6.504c-.618 0-1.217.247-1.605.729A11.95 11.95 0 002.25 12c0 .434.023.863.068 1.285C2.427 14.306 3.346 15 4.372 15h3.126c.618 0 .991.724.725 1.282A7.471 7.471 0 007.5 19.5a2.25 2.25 0 002.25 2.25.75.75 0 00.75-.75v-.633c0-.573.11-1.14.322-1.672.304-.76.93-1.33 1.653-1.715a9.04 9.04 0 002.86-2.4c.498-.634 1.226-1.08 2.032-1.08h.384" />
+                </svg>
+              </button>
+              <p x-text="dislikesCount">
+              </p>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
     </div>
   </div>
 </div>
 <div x-data="{ open: false }"
      x-show="open"
+     x-cloak
      @open-delete-modal.window="open = true"
-     class="absolute top-0 left-0 flex items-center justify-center w-full h-full backdrop-blur">
-  <div @click.away="open = false" class="p-7 flex flex-col gap-4 bg-bgcol-d rounded-2xl">
+     class="absolute top-0 left-0 flex items-center justify-center w-screen h-screen backdrop-blur">
+  <div @click.away="open = false"
+       class="p-7 flex flex-col gap-4 bg-bgcol-d rounded-2xl">
     <p class="font-bold text-xl">
       Are you sure you want to delete this product?
     </p>
@@ -249,7 +299,8 @@
               class="bg-green-l hover:bg-green-hov rounded-xl px-3 py-1">
         Cancel
       </button>
-      <a href="{% url 'products:delete_product' product.owner.slug product.slug %}" class="bg-green-d hover:bg-green-hov rounded-xl px-3 py-1">Delete</a>
+      <a href="{% url 'products:delete_product' product.owner.slug product.slug %}"
+         class="bg-green-d hover:bg-green-hov rounded-xl px-3 py-1">Delete</a>
     </div>
   </div>
 </div>
@@ -257,4 +308,5 @@
 {% block scripts %}
   {{ block.super }}
   <script src="{% static 'js/apiHandler.js' %}"></script>
+  <script src="{% static 'js/comments.js' %}"></script>
 {% endblock scripts %}

@@ -71,7 +71,9 @@ class Image(models.Model):
         return str(self.product.name)
 
 class Comment(models.Model):
-    content = models.CharField(max_length=200, blank=False)
+    content = models.TextField(max_length=1000, blank=False)
     product = models.ForeignKey(Product, models.CASCADE)
     author = models.ForeignKey(User, models.CASCADE)
     date = models.DateTimeField(auto_now=True)
+    likes = models.ManyToManyField(User, related_name='likes')
+    dislikes = models.ManyToManyField(User, related_name='dislikes')

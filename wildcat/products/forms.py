@@ -1,6 +1,6 @@
 from django import forms
 
-from products.models import Product, Image
+from products.models import Product, Image, Comment
 
 class ProductFileUploadClearableInput(forms.ClearableFileInput):
     template_name = 'form_widgets/clearable_image_input_product.html'
@@ -20,5 +20,11 @@ class ProductAdditionForm(forms.ModelForm):
 
 class ProductEditForm(ProductAdditionForm):
     pass
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['content']
+
 
 # class 
