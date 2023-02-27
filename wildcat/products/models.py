@@ -7,9 +7,7 @@ from hitcount.models import HitCountMixin, HitCount
 
 from common.utils.texts import unique_slugify
 from common.openai.openai import tager
-from common.tagfinder import find
-from common.low import m
-
+from common.synonyms import findsynonyms
 
 User = get_user_model()
 
@@ -40,6 +38,9 @@ class Product(models.Model, HitCountMixin):
         related_query_name='hit_count_generic_relation'
     )
 
+    class Meta:
+        ordering = ['-date']
+
     def __str__(self):
         return str(self.name)
 
@@ -51,7 +52,11 @@ class Product(models.Model, HitCountMixin):
         super(Product, self).save(*args, **kwargs)
 
         description = self.description
-        producttags = tager(input=description)
+        dictionary = tager(input=description)
+        dictionary = findsynonyms(input=dictionary)
+        producttags = dictionary["tags"]
+        producttags.append(dictionary["need"])
+
         for i in producttags:
             if ProductTag.objects.filter(name=i).exists():
                 tag = ProductTag.objects.filter(name=i).first()
