@@ -1,7 +1,9 @@
 venv
 __pycache__
 .vscode
-media/*
+wildcat/media/accounts/*
+wildcat/media/products/*
+!wildcat/accounts/default.jpg
 !media/products/default.jpg
 *.log
 *.pot
