@@ -33,3 +33,8 @@ class RegisterForm(UserCreationForm):
     def clean(self):
         super().clean()
         username = self.cleaned_data.get('username')
+
+class UpdateProfileForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['bio', 'image']

@@ -2,7 +2,7 @@ import nltk
 from nltk.corpus import wordnet
 nltk.download('wordnet')
 
-def  find_synonyms(word):
+def find_synonyms(word):
         synonyms=[]
         for syn in wordnet.synsets(word):
             for l in syn.lemmas():

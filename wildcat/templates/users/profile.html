@@ -39,7 +39,7 @@
                     <div class="flex flex-col sm:hidden">
                         <p class="text-slate-500 dark:text-slate-300/60">About:</p>
                         <p class="text-justify">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur obcaecati praesentium necessitatibus, quam, ut commodi eius facilis quisquam voluptatibus sit nam quia laborum laboriosam labore nostrum fugit illum quas. Architecto.
+                            {{ account.bio }}
                         </p>
                     </div>
                 </div>
@@ -51,7 +51,7 @@
             <!-- Buttons -->
             <div class="basis-1/4 flex flex-col items-end gap-2">
                 {% if user == account %}
-                <a class="w-10 h-10 hover:text-green-hov hover:scale-110 duration-200 transition-all">
+                <a href="{% url 'accounts:settings' %}" class="w-10 h-10 hover:text-green-hov hover:scale-110 duration-200 transition-all">
                     <svg xmlns="http://www.w3.org/2000/svg"
                          fill="none"
                          viewBox="0 0 24 24"
