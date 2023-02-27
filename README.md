@@ -26,17 +26,10 @@ Wildcat is project created for [Platynowy indeks contest 2023](https://tu.kielce
    python manage.py createfakeusers
    python manage.py createfakeproducts
    ```
-4. build css file. **If you are on windows** add the following line to `wildcat/core/settings/local.py`
-   ```python
-   NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd"
-   ```
-   then
+4. start css develop server.
    ```bash
    python manage.py tailwind install
    python manage.py tailwind build
-   ```
-   if you want to make changes to the css, start tailwind dev server
-   ```bash
    python manage.py tailwind start
    ```
 5. lunch dev server
