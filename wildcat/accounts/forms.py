@@ -8,6 +8,7 @@ from django import forms
 
 User = get_user_model()
 
+
 class LoginForm(forms.Form):
     username = forms.CharField(widget=forms.TextInput(attrs={"autofocus": True}))
     password = forms.CharField(
@@ -25,14 +26,12 @@ class LoginForm(forms.Form):
             return self.cleaned_data
         # add custom errors
 
+
 class RegisterForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ['username', 'email'] # + fields from password1, password2, username
+        fields = ['username', 'email']
 
-    def clean(self):
-        super().clean()
-        username = self.cleaned_data.get('username')
 
 class UpdateProfileForm(forms.ModelForm):
     class Meta:

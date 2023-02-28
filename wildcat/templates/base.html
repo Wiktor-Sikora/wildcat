@@ -76,7 +76,8 @@
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
                                         </svg>
                                     </button>
-                                    <div x-show="notificationsOpen"
+                                    <div x-data="notifications()"
+                                         x-show="notificationsOpen"
                                          @click.away="notificationsOpen = false"
                                          x-cloak
                                          x-transition:enter="transition ease-out origin-top duration-200"
@@ -87,27 +88,44 @@
                                          x-transition:leave-end="opacity-0 transform scale-90"
                                          class="absolute right-4 top-20 w-72 rounded-md bg-con-l dark:bg-con-d shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                                         <ul class="py-2 text-sm text-gray-700 dark:text-gray-200">
-                                            <li>
-                                                <a href="#"
-                                                   class="block text-lg px-4 py-2 hover:bg-green-hov dark:hover:bg-green-hov transition-all duration-200 ease-in-out">
-                                                    <div class="flex justify-start">
-                                                        <div class="flex justify-end">
-                                                            <span class="relative inline-flex rounded-full h-3 w-3 bg-green-d"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-d opacity-75"></span></span>
-                                                        </div>
-                                                        <div class="grid grid-cols-10">
-                                                            <img src="{{ user.image.url }}"
-                                                                 alt="user"
-                                                                 class="col-span-2 my-auto w-10 h-10 rounded-full">
-                                                            <div class="grid col-span-8 grid-rows-1 truncate">
-                                                                <div class="my-auto">
-                                                                    <h1>Title</h1>
-                                                                    <p class="text-sm">description description description description description</p>
-                                                                    <p class="text-gray-400 text-sm">Feb. 26, 2023, 11:05 p.m.</p>
+                                            <template x-for="notification in notifications">
+                                                <li>
+                                                    <a href="#"
+                                                       class="block text-lg px-4 py-2 hover:bg-green-hov dark:hover:bg-green-hov transition-all duration-200 ease-in-out">
+                                                        <div class="flex justify-start">
+                                                            <div class="flex justify-end">
+                                                                <span class="relative inline-flex rounded-full h-3 w-3 bg-green-d"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-d opacity-75"></span></span>
+                                                            </div>
+                                                            <div class="grid grid-cols-10">
+                                                                <img src="{{ user.image.url }}"
+                                                                     alt="user"
+                                                                     class="col-span-2 my-auto w-10 h-10 rounded-full">
+                                                                <div class="grid col-span-8 grid-rows-1 truncate">
+                                                                    <div class="my-auto">
+                                                                        <p class="text-sm">description description description description description</p>
+                                                                        <p class="text-gray-400 text-sm">Feb. 26, 2023, 11:05 p.m.</p>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </a>
+                                                    </a>
+                                                </li>
+                                            </template>
+                                            <!-- loader -->
+                                            <li>
+                                                <div x-show="loader"
+                                                     x-intersect.half="getItems()"
+                                                     class="flex self-center gap-3 font-bold text-3xl my-auto">
+                                                    <h1>Loading</h1>
+                                                    <svg class="animate-spin h-7 w-7 text-white"
+                                                         xmlns="http://www.w3.org/2000/svg"
+                                                         fill="none"
+                                                         viewBox="0 0 24 24">
+                                                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+                                                        </path>
+                                                    </svg>
+                                                </div>
                                             </li>
                                         </ul>
                                     </div>
@@ -264,7 +282,8 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
                                 </svg>
                             </button>
-                            <div x-show="notificationsOpen"
+                            <div x-data="notifications()" x-init="getUrl()"
+                                 x-show="notificationsOpen"
                                  @click.away="notificationsOpen = false"
                                  x-cloak
                                  x-transition:enter="transition ease-out origin-top duration-200"
@@ -275,27 +294,45 @@
                                  x-transition:leave-end="opacity-0 transform scale-90"
                                  class="absolute right-25 top-20 mr-10 w-96 rounded-md bg-con-l dark:bg-con-d shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                                 <ul class="py-2 text-sm text-gray-700 dark:text-gray-200">
-                                    <li>
-                                        <a href="#"
-                                           class="block text-lg px-4 py-2 hover:bg-green-hov dark:hover:bg-green-hov transition-all duration-200 ease-in-out">
-                                            <div class="flex justify-start">
-                                                <div class="flex justify-end">
-                                                    <span class="relative inline-flex rounded-full h-3 w-3 bg-green-d"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-d opacity-75"></span></span>
-                                                </div>
-                                                <div class="grid grid-cols-10">
-                                                    <img src="{{ user.image.url }}"
-                                                         alt="user"
-                                                         class="col-span-2 my-auto w-10 h-10 rounded-full">
-                                                    <div class="grid col-span-8 grid-rows-1 truncate">
-                                                        <div class="my-auto">
-                                                            <h1>Title</h1>
-                                                            <p class="text-sm">description description description description description</p>
-                                                            <p class="text-gray-400 text-sm">Feb. 26, 2023, 11:05 p.m.</p>
+                                    <template x-for="notification in notifications">
+                                        <li>
+                                            <a :href="/`@${notification.product_owner}/${notification.product_slug
+                                            }`" href=""
+                                               class="block text-lg px-4 py-2 hover:bg-green-hov dark:hover:bg-green-hov transition-all duration-200 ease-in-out">
+                                                <div class="flex justify-start">
+                                                    <div class="flex justify-end">
+                                                        <span class="relative inline-flex rounded-full h-3 w-3 bg-green-d"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-d opacity-75"></span></span>
+                                                    </div>
+                                                    <div class="grid grid-cols-10 gap-3">
+                                                        <img src=""
+                                                             :src="notification.image"
+                                                             alt="user"
+                                                             class="col-span-2 my-auto w-10 h-10 rounded-full">
+                                                        <div class="grid col-span-8 grid-rows-1 truncate">
+                                                            <div class="my-auto">
+                                                                <p x-text="notification.message" class="text-sm">description description description description description</p>
+                                                                <p x-text="notification.date" class="text-gray-400 text-sm">Feb. 26, 2023, 11:05 p.m.</p>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </a>
+                                            </a>
+                                        </li>
+                                    </template>
+                                    <li>
+                                        <div x-show="loader"
+                                             x-intersect.half="getItems()"
+                                             class="flex gap-3 font-bold text-3xl my-auto">
+                                            <h1>Loading</h1>
+                                            <svg class="animate-spin h-7 w-7 text-white"
+                                                 xmlns="http://www.w3.org/2000/svg"
+                                                 fill="none"
+                                                 viewBox="0 0 24 24">
+                                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+                                                </path>
+                                            </svg>
+                                        </div>
                                     </li>
                                 </ul>
                             </div>
@@ -406,6 +443,7 @@
         {% include "messages.html" %}
         {% block scripts %}
             <script src="{% static 'js/themeChanger.js' %}"></script>
+            <script src="{% static 'js/infiniteScroll.js' %}"></script>
         {% endblock %}
     </body>
 </html>

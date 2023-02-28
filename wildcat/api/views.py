@@ -6,11 +6,11 @@ from rest_framework import status
 from rest_framework import generics
 from django_filters import rest_framework as filters
 
-from api.serializers import ProductSerializer
-from api.pagination import ProductPagination
+from api.serializers import ProductSerializer, NotificationSerializer
+from api.pagination import ProductPagination, NotificationPagination
 from api.filters import ProductFilter
 
-from products.models import Product, Comment
+from products.models import Product, Comment, Notification
 from time import sleep
 
 User = get_user_model()
@@ -62,27 +62,6 @@ class AddStarApiView(APIView):
 
 class FollowUserApiView(APIView):
     permission_classes = [permissions.IsAuthenticated]
-    
-    
-    '''
-        tags = Tu wchodzi tag
-        name = Tu wchodzi username
-        if name: 
-            owner = User.objects.get(username=name)
-        else:
-            owner = False
-        
-            
-        products = Product
-        if owner:
-            products = products.objects.filter(owner=owner)
-        if tags:
-            products = products.objects.filter(tags__name=tags)
-        print(products)
-            
-        return
-    '''
-    
     
     def get_object(self, id):
         try:
@@ -185,3 +164,10 @@ class DeleteComment(APIView):
 
         comment_instance.delete()
         return Response(status=status.HTTP_200_OK)        
+
+class GetNotifications(generics.ListAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    queryset = Notification.objects.filter().order_by('-date')
+    pagination_class = NotificationPagination
+    serializer_class = NotificationSerializer

@@ -32,3 +32,36 @@ function infinityScroll() {
     }
   }
 }
+
+function notifications() {
+  return {
+    product_name: '',
+    product_owner: '',
+    open: false,
+    loader: true,
+    page: '',
+    notifications: [],
+    getUrl() {
+      this.page = `/api/notifications`
+    },
+    getItems() {
+      fetch(this.page)
+        .then(response => {
+          if (response.status === 404) {
+            console.log('end')
+          } else {
+            return response.json()
+          }
+        }).then(data => {
+          console.log(data)
+          this.notifications = this.notifications.concat(data.results)
+          if (data.next == null) {
+            this.loader = false
+          } else {
+            this.page = data.next
+            this.loader = true
+          }
+        })
+    },
+  }
+}

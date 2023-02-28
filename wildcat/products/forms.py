@@ -7,12 +7,12 @@ from products.models import Product, Image, Comment
 
 
 class ProductAdditionForm(forms.ModelForm):
-    main_image = forms.ImageField(widget=forms.FileInput(), required=False)
-    images = forms.ImageField(widget=forms.FileInput(attrs={'multiple': True}), required=False)
+    # images = forms.ImageField(widget=forms.FileInput(attrs={'multiple': True}), required=False)
+    # images = forms.ImageField(widget=forms.FileInput(), required=False)
 
     class Meta:
         model = Product
-        fields = ['name', 'description', 'price', 'main_image', 'images']
+        fields = ['name', 'description', 'price', 'main_image', 'tags']
         widgets = {
             'description': forms.Textarea,
         }
