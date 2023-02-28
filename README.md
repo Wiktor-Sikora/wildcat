@@ -7,7 +7,11 @@ Wildcat is project created for [Platynowy indeks contest 2023](https://tu.kielce
 
 1. clone the repository
    `git clone https://github.com/Wiktor-Sikora/wildcat.git`
-2. create python virtual enviroment and install dependencies
+2. copy and fill .env file
+   ```bash
+   cp copy.env .env
+   ```
+3. create python virtual enviroment and install dependencies
    ```bash
    python -m venv venv
    venv\Scripts\activate.bat # windows
@@ -15,7 +19,7 @@ Wildcat is project created for [Platynowy indeks contest 2023](https://tu.kielce
 
    pip install -r requirments/local.txt
    ```
-3. make migrations
+4. make migrations
    ```bash
    cd wildcat
    python manage.py makemigrations
@@ -26,12 +30,12 @@ Wildcat is project created for [Platynowy indeks contest 2023](https://tu.kielce
    python manage.py createfakeusers
    python manage.py createfakeproducts
    ```
-4. start css develop server.
+5. start css develop server.
    ```bash
    python manage.py tailwind install
    python manage.py tailwind start
    ```
-5. lunch dev server
+6. lunch dev server
    ```bash
    python manage.py runserver
    ```
