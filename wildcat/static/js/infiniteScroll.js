@@ -34,7 +34,7 @@ function infinityScroll() {
   }
 }
 
-function notifications() {
+function notificationsf() {
   return {
     product_name: '',
     product_owner: '',
@@ -54,7 +54,6 @@ function notifications() {
             return response.json()
           }
         }).then(data => {
-          console.log(data)
           this.notifications = this.notifications.concat(data.results)
           if (data.next == null) {
             this.loader = false
