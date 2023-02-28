@@ -51,6 +51,7 @@ class EditProductPage(LoginRequiredMixin, View):
     def post(self, request, pk):
         pass
 
+
 class ProductPage(View):
     count_hit = True
 
