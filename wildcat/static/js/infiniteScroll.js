@@ -2,12 +2,13 @@ function infinityScroll() {
   return {
     product_name: '',
     product_owner: '',
+    product_tags: '',
     open: false,
     loader: true,
     page: '',
     products: [],
     getUrl() {
-      this.page = `/api/products?format=json&name=${this.product_name}&owner=${this.product_owner}&tags=`
+      this.page = `/api/products?format=json&name=${this.product_name}&owner=${this.product_owner}&tags=${this.product_tags}`
     },
     getItems() {
       fetch(this.page)
