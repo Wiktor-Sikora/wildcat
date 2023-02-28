@@ -5,14 +5,14 @@
 {% block searchbar %}{% endblock %}
 {% block content %}
     <!-- search bar -->
-    <div x-data="infinityScroll()" x-init="getUrl()">
+    <div x-data="infinityScroll()" x-init="product_name='{{product_filter.form.name.value|default:''}}';getUrl();">
         <form @submit.prevent
               @input.debounce="getUrl();clearItems();loader=true"
               @click.away="open = false"
               class="w-1/2 sm:w-11/12 mx-auto mb-16 flex flex-col gap-4 md:sm:gap-2">
             <div @click="open = true" class="grid grid-cols-12 md:grid-cols-10 sm:grid-cols-10 gap-0">
                 <div class="col-span-11 md:col-span-8 sm:col-span-8">
-                    {% render_field product_filter.form.name x-model="product_name" type="search" class="w-full h-12 px-3 bg-form-l dark:bg-form-d rounded-l-full placeholder:text-lg border-none focus:ring-0" placeholder="Search..." %}
+                    {% render_field product_filter.form.name x-model="product_name" type="text" class="w-full h-12 px-3 bg-form-l dark:bg-form-d rounded-l-full placeholder:text-lg border-none focus:ring-0" placeholder="Search..." %}
                 </div>
                 <div class="col-span-1 md:col-span-2 sm:col-span-2">
                     <button class="w-full flex justify-center pt-3 pr-2 h-12 text-sm font-medium text-green-hov bg-form-l rounded-r-full focus:outline-0 dark:bg-form-d group">
@@ -38,13 +38,13 @@
                  x-transition:leave-end="opacity-0 transform scale-90">
                 <div class="flex flex-col gap-2">
                     <label for="">Tags</label>
-                    <input type="text"
+                    <input x-model="product_tags" type="text"
                            placeholder="Select..."
                            class="w-full bg-form-l dark:bg-form-d rounded-full placeholder:text-lg border-none focus:ring-0">
                 </div>
                 <div class="flex flex-col gap-2">
                     <label for="">Account</label>
-                    <input type="text"
+                    <input x-model="product_owner" type="text"
                            placeholder="Select..."
                            class="w-full bg-form-l dark:bg-form-d rounded-full placeholder:text-lg border-none focus:ring-0">
                 </div>
@@ -54,7 +54,7 @@
         <div class="w-4/5 flex justify-between mb-8 mx-auto">
             <h2 class="text-4xl font-semibold">Products</h2>
             <div class="flex justify-between">
-                <select name=""
+                <!-- <select name=""
                         class="rounded-full bg-form-l dark:bg-form-d border-none focus:ring-0 space-y-2">
                     <option value="">
                         Today
@@ -68,7 +68,7 @@
                     <option selected value="">
                         All time
                     </option>
-                </select>
+                </select> -->
             </div>
         </div>
         <div class="w-4/5 flex flex-col mb-8 mx-auto">
