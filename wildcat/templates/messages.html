@@ -1,0 +1,112 @@
+{% if messages %}
+    <div class="flex flex-col gap-3 fixed bottom-2 right-2 h-16 w-72">
+        {% for message in messages %}
+            {% if message.tags == 'warning' or message.tags == 'error' %}
+                <div x-data
+                     class="h-16 w-72 bg-form-l dark:bg-form-d rounded-xl">
+                    <div class="grid grid-cols-10 justify-center">
+                        <div class="col-span-1 my-auto pl-2">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                 fill="none"
+                                 viewBox="0 0 24 24"
+                                 stroke-width="1.5"
+                                 stroke="currentColor"
+                                 class="w-6 h-6 text-red-600">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+                            </svg>
+                        </div>
+                        <div class="col-span-8 grid grid-rows-2 py-1 px-3">
+                            <div>
+                                <h1 class="text-red-600 font-semibold">{{ message.tag }}</h1>
+                            </div>
+                            <div class="w-60">
+                                <p class="text-sm">{{ message }}</p>
+                            </div>
+                        </div>
+                        <button @click="$root.remove()">
+                            <div class="col-span-1 content-center pt-1">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     fill="none"
+                                     viewBox="0 0 24 24"
+                                     stroke-width="1.5"
+                                     stroke="currentColor"
+                                     class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            {% elif message.tags == 'success' %}
+                <div x-data class="h-16 w-72 bg-form-l dark:bg-form-d rounded-xl">
+                    <div class="grid grid-cols-10">
+                        <div class="col-span-1 my-auto pl-2">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                 fill="none"
+                                 viewBox="0 0 24 24"
+                                 stroke-width="1.5"
+                                 stroke="currentColor"
+                                 class="w-6 h-6 text-green-l">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <div class="col-span-8 grid grid-rows-2 py-1 px-3">
+                            <div>
+                                <h1 class="text-green-l font-semibold">{{ message.tags }}</h1>
+                            </div>
+                            <div class="w-60">
+                                <p class="text-sm ">{{ message }}</p>
+                            </div>
+                        </div>
+                        <button @click="$root.remove()">
+                            <div class="col-span-1 content-center pt-1">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     fill="none"
+                                     viewBox="0 0 24 24"
+                                     stroke-width="1.5"
+                                     stroke="currentColor"
+                                     class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            {% else %}
+                <div x-data
+                     class="h-16 w-72 bg-form-l dark:bg-form-d rounded-xl">
+                    <div class="grid grid-cols-10">
+                        <div class="col-span-1 my-auto pl-2">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                 fill="none"
+                                 viewBox="0 0 24 24"
+                                 stroke-width="1.5"
+                                 stroke="currentColor"
+                                 class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
+                            </svg>
+                        </div>
+                        <div class="col-span-8 grid grid-rows-2 py-1 px-3">
+                            <div>
+                                <h1 class="font-semibold">{{ message.tags }}</h1>
+                            </div>
+                            <div class="w-60">
+                                <p class="text-sm">{{ message }}</p>
+                            </div>
+                        </div>
+                        <button @click="$root.remove() class="col-span-1 content-center pt-1">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                 fill="none"
+                                 viewBox="0 0 24 24"
+                                 stroke-width="1.5"
+                                 stroke="currentColor"
+                                 class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endif %}

@@ -72,6 +72,7 @@ class AccountSettingsPage(View):
             form.save()
             messages.success(request, 'Account updated successfully')
             return redirect('accounts:settings', permanent=True)
+        messages.error(request, 'Something went wrong while updating an account')
         return render(request, 'users/settings.html', {'form': form})
 
 class AccountDelete(DeleteView):

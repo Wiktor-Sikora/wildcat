@@ -37,4 +37,4 @@ class RegisterForm(UserCreationForm):
 class UpdateProfileForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ['bio', 'image']
+        fields = ['bio', 'image', 'country', 'city']
