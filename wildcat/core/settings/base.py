@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_filters',
     'hitcount',
+    'taggit',
 
     # local apps
     'accounts',
@@ -143,3 +144,5 @@ AUTH_USER_MODEL = 'accounts.User'
 TAILWIND_APP_NAME = 'theme'
 
 HITCOUNT_HITS_PER_IP_LIMIT = 200
+
+TAGGIT_CASE_INSENSITIVE = True

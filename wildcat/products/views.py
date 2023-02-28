@@ -4,9 +4,9 @@ from django.shortcuts import render, redirect, get_object_or_404
 from hitcount.views import HitCountMixin
 from hitcount.models import HitCount
 from django.views.generic import View
+from django.contrib import messages
 
-
-from products.models import Product, Image, ProductTag, Comment
+from products.models import Product, Image, Comment
 from products.forms import ProductAdditionForm, ProductEditForm, CommentForm
 from api.filters import ProductFilter
 
@@ -31,6 +31,7 @@ class ProductAdditionPage(LoginRequiredMixin, View):
             instance = form.save(commit=False)
             instance.owner = request.user
             instance.save()
+            form.save_m2m()
             for each in files:
                 Image.objects.create(image=each, product=instance)
             return redirect('products:product', user_slug=request.user.slug, product_slug=instance.slug, permanent=True)
@@ -48,8 +49,20 @@ class EditProductPage(LoginRequiredMixin, View):
         form = ProductEditForm(instance=product)
         return render(request, self.template_name, {'form': form})
 
-    def post(self, request, pk):
-        pass
+    def post(self, request, user_slug, product_slug):
+        product = get_object_or_404(Product, slug=product_slug)
+
+        if product.owner != request.user:
+            return PermissionDenied()
+        form = ProductEditForm(request.POST or None, request.FILES or None, instance=product)
+        if form.is_valid():
+            instance = form.save(commit=False)
+            instance.save()
+            form.save_m2m()
+            messages.success(request, 'Product updated successfully')
+            return redirect('products:product', user_slug=request.user.slug, product_slug=instance.slug, permanent=True)
+        messages.error(request, 'Something went wrong while updating a product')
+        return render(request, self.template_name, {'form': form})
 
 
 class ProductPage(View):
