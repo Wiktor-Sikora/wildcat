@@ -8,7 +8,7 @@ load_dotenv(dotenv_path=BASE_DIR.parent / '.env')
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv("SECRET_KEY", None),
+        'NAME': os.getenv("DB_PRODUCTION_NAME", None),
         'USER': os.getenv("DB_PRODUCTION_USER", None),
         'PASSWORD': os.getenv("DB_PRODUCTION_PASSWORD", None),
         'HOST': os.getenv("DB_PRODUCTION_HOST", None),
