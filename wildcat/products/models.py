@@ -9,7 +9,7 @@ from taggit.managers import TaggableManager
 
 from common.utils.texts import unique_slugify
 from common.openai.openai_completion import open_ai_completion
-from common.synonyms import findsynonyms
+#from common.synonyms import findsynonyms
 
 
 User = get_user_model()
