@@ -20,7 +20,7 @@ SECRET_KEY = os.getenv("SECRET_KEY", None)
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['127.0.0.1', 'wildcat.host1.eu']
 
 STATIC_URL='/static/'
 
