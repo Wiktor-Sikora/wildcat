@@ -23,7 +23,7 @@
             <nav class="sticky top-0 w-full bg-bgcol-l dark:bg-bgcol-d max-w-8xl mx-auto mb-10">
                 <div class="py-1 border-b border-slate-900/10 dark:border-slate-300/10 px-10 grid grid-cols-3 md:grid-cols-2 sm:grid-cols-2">
                     <div class="flex justify-start md:col-span-1">
-                        <a class="flex justify-center ml-3" href="{% url 'products:index' %}">
+                        <a class="flex justify-center ml-3 sm:mr-10" href="{% url 'products:index' %}">
                             <img src="{% static 'img/wildcat-logo-light.svg' %}"
                                  class="sm:scale-75 visible dark:hidden">
                             <img src="{% static 'img/wildcat-logo-dark.svg' %}"
@@ -35,18 +35,18 @@
                         </a>
                     </div>
                     <!-- search bar -->
-                    <div class="md:grid md:grid-cols-3 md:place-items-center my-auto">
+                    <div class="my-auto">
                         {% block searchbar %}
-                            <form action="/" method="GET" class="flex justify-center md:col-span-2 sm:hidden">
-                                <div class="grid grid-cols-12 md:grid-cols-10 gap-0 ml-3">
-                                    <div class="col-span-11 md:col-span-8">
+                            <form action="/" method="GET" class="flex justify-center md:hidden sm:hidden">
+                                <div class="grid grid-cols-12 gap-0 ml-3">
+                                    <div class="col-span-11">
                                         <input type="search"
                                                name="name"
                                                class="w-full h-12 px-3 bg-[#dddddd] dark:bg-[#414141] rounded-l-full placeholder:text-lg border-none focus:ring-0"
                                                placeholder="Search..."
                                                required>
                                     </div>
-                                    <div class="col-span-1 md:col-span-2">
+                                    <div class="col-span-1">
                                         <button class="w-full flex justify-center pt-3 pr-2 h-12 text-sm font-medium text-green-hov bg-form-l rounded-r-full focus:outline-0  dark:bg-form-d group">
                                             <svg class="w-6 h-6 mx-2 group-hover:scale-110 duration-200 ease-in-out"
                                                  xmlns="http://www.w3.org/2000/svg"
@@ -66,6 +66,45 @@
                             <div x-data="{ notificationsOpen: false, profileOpen: false }"
                                  class="col-span-1 relative hidden sm:block md:block">
                                 <div class="flex justify-center">
+                                    <div
+                                        x-data="{
+                                              mode: '',
+                                              setColorMode: m => {
+                                                  if (m === 'dark') {
+                                                      document.documentElement.classList.add('dark')
+                                                      localStorage.setItem('colorMode', 'dark')
+                                                  } else {
+                                                      document.documentElement.classList.remove('dark')
+                                                      localStorage.setItem('colorMode', 'light')
+                                                  }
+                                              }
+                                          }"
+                                      
+                                          x-init="() => {
+                                              const m = localStorage.getItem('colorMode');
+                                              if (m !== 'dark' && m !== 'light') return;
+                                              mode = m;
+                                          }"
+                                        class="flex justify-center space-x-1">
+                                          <button
+                                            @click="mode='light'; setColorMode('light');"
+                                            :class="{'text-green-l': mode === 'light', 'font-thin': mode !== 'light' }"
+                                            class=""
+                                            >
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
+                                              </svg>                                              
+                                          </button>
+                                          <button
+                                            @click="mode = 'dark'; setColorMode('dark');"
+                                            :class="{'text-green-d': mode === 'dark', 'font-thin': mode !== 'dark' }"
+                                            class=""
+                                            >
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 mr-2">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
+                                              </svg>                                              
+                                          </button>
+                                        </div>
                                     <button @click="notificationsOpen = !notificationsOpen"
                                             class="flex justify-end hover:text-navhov-l dark:hover:text-navhov-d transition-all duration-200 ease-in-out">
                                         <svg xmlns="http://www.w3.org/2000/svg"
@@ -87,7 +126,7 @@
                                          x-transition:leave="transition origin-top ease-in duration-100"
                                          x-transition:leave-start="opacity-100 transform scale-100"
                                          x-transition:leave-end="opacity-0 transform scale-90"
-                                         class="absolute right-5 top-20 w-72 rounded-md bg-con-l dark:bg-con-d shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                         class="absolute right-5 top-16 w-72 rounded-md bg-con-l dark:bg-con-d shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                                         <ul class="py-2 text-sm text-gray-700 dark:text-gray-200">
                                             <template x-for="notification in notifications">
                                                 <li>
@@ -162,6 +201,31 @@
                                                         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                                                     </svg>
                                                 </button>
+                                            </li>
+                                            <li>
+                                                <form action="/" method="GET" class="flex justify-center mb-5">
+                                                    <div class="grid grid-cols-12 gap-0">
+                                                        <div class="col-span-10">
+                                                            <input type="search"
+                                                                   name="name"
+                                                                   class="w-full h-10 px-3 bg-[#dddddd] dark:bg-[#414141] rounded-l-full placeholder:text-lg border-none focus:ring-0"
+                                                                   placeholder="Search..."
+                                                                   required>
+                                                        </div>
+                                                        <div class="col-span-2">
+                                                            <button class="w-full flex justify-center pt-2 pr-2 h-10 text-sm font-medium text-green-hov bg-form-l rounded-r-full focus:outline-0  dark:bg-form-d group">
+                                                                <svg class="w-6 h-6 mx-2 group-hover:scale-110 duration-200 ease-in-out"
+                                                                     xmlns="http://www.w3.org/2000/svg"
+                                                                     fill="none"
+                                                                     viewBox="0 0 24 24"
+                                                                     stroke-width="1.5"
+                                                                     stroke="currentColor">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                                                                </svg>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </form>
                                             </li>
                                             {% if user.is_authenticated %}
                                                 <li>
@@ -293,7 +357,7 @@
                                  x-transition:leave="transition origin-top ease-in duration-100"
                                  x-transition:leave-start="opacity-100 transform scale-100"
                                  x-transition:leave-end="opacity-0 transform scale-90"
-                                 class="absolute right-25 top-20 mr-10 w-96 rounded-md bg-con-l dark:bg-con-d shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                 class="absolute right-20 top-24 mr-10 w-96 rounded-md bg-con-l dark:bg-con-d shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                                 <ul class="py-2 text-sm text-gray-700 dark:text-gray-200">
                                     <template x-for="notification in notifications">
                                         <li>
