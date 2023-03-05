@@ -245,17 +245,17 @@
      @open-delete-modal.window="open = true"
      class="absolute top-0 left-0 flex items-center justify-center w-screen h-screen backdrop-blur">
   <div @click.away="open = false"
-       class="p-7 flex flex-col gap-4 bg-bgcol-d rounded-2xl">
+       class="p-7 flex flex-col gap-4 bg-bgcol-l dark:bg-bgcol-d rounded-2xl">
     <p class="font-bold text-xl">
       Are you sure you want to delete this product?
     </p>
     <div class="inline-flex gap-3 self-end">
       <button @click="open = false"
-              class="bg-green-l hover:bg-green-hov rounded-xl px-3 py-1">
+              class="bg-green-l hover:bg-green-hov text-white rounded-xl px-3 py-1">
         Cancel
       </button>
       <a href="{% url 'products:delete_product' product.owner.slug product.slug %}"
-         class="bg-green-d hover:bg-green-hov rounded-xl px-3 py-1">Delete</a>
+         class="bg-red-600 hover:bg-red-700 text-white rounded-xl px-3 py-1">Delete</a>
     </div>
   </div>
 </div>

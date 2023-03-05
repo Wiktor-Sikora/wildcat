@@ -115,6 +115,7 @@ module.exports = {
          * comment the line below to disable '@tailwindcss/forms'.
          */
         require('tailwind-scrollbar')({ nocompatible: true }),
+        require('autoprefixer'),
         require('@tailwindcss/forms'),
         require('@tailwindcss/typography'),
         require('@tailwindcss/line-clamp'),
