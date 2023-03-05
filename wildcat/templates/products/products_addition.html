@@ -51,9 +51,9 @@
                 <div class="flex flex-col gap-2">
                     <label for="{{ form.tags.auto_id }}"
                            class="text-[#262626] dark:text-[#cccccc] my-auto grid-">
-                        Tags
+                        Tags seprated by a comma
                     </label>
-                    {% render_field form.tags class="bg-con-l dark:bg-con-d border border-slate-900/10 dark:border-slate-300/10 focus:bg-form-l focus:dark:bg-form-d rounded-xl focus:ring-green-hov resize-none" placeholder="Description of your product" %}
+                    {% render_field form.tags class="bg-con-l dark:bg-con-d border border-slate-900/10 dark:border-slate-300/10 focus:bg-form-l focus:dark:bg-form-d rounded-xl focus:ring-green-hov resize-none" placeholder="tag1, tag2, tag3" %}
                 </div>
                 <div class="self-center">
                     <button type="submit"

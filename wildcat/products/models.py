@@ -9,7 +9,7 @@ from taggit.managers import TaggableManager
 
 from common.utils.texts import unique_slugify
 from common.openai.openai_completion import open_ai_completion
-#from common.synonyms import findsynonyms
+# from common.synonyms import findsynonyms
 
 
 User = get_user_model()
@@ -63,7 +63,7 @@ class Product(models.Model, HitCountMixin):
         '''Searches for products that need this product'''
         needs = Needs.objects.filter(text__icontains=self.name)
         for need in needs:
-            Notification.objects.create(message='Product that you need has been found', product=self.pk, user=need.product.owner)
+            Notification.objects.create(message='Product that you need has been found', product=self, user=need.product.owner)
 
     def check_if_needs_available(self):
         '''looking for products that have needs'''
