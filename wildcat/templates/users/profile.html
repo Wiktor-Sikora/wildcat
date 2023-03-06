@@ -2,7 +2,7 @@
 {% load widget_tweaks %}
 {% load static %}
 {% load humanize %}
-{% block title %}Wildcat | Product addition{% endblock %}
+{% block title %}Wildcat | {{ account.username }}{% endblock %}
 {% block content %}
     <div class="w-4/5 sm:w-11/12 md:w-11/12 mx-auto flex flex-col gap-7 p-7 sm:p-4 mb-10 bg-con-l dark:bg-con-d rounded-lg">
         <!-- Profile -->
@@ -26,11 +26,6 @@
                         <div>
                             <p class="text-slate-500 dark:text-gray-400">
                                 Followers: <span class="font-bold text-black dark:text-white">{{ account.follows.count }}</span>
-                            </p>
-                        </div>
-                        <div>
-                            <p class="text-slate-500 dark:text-gray-400">
-                                Following: <span class="font-bold text-black dark:text-white">{{ account_following }}</span>
                             </p>
                         </div>
                     </div>
