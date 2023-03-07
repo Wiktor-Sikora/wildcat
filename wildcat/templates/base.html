@@ -17,7 +17,6 @@
                 src="https://cdn.jsdelivr.net/npm/@alpinejs/focus@3.x.x/dist/cdn.min.js"></script>
         <script defer
                 src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-        <script src="detect-mode.js"></script>
     </head>
     <body class="bg-Light bg-fixed bg-auto bg-bgcol-l dark:bg-bgcol-d dark:bg-Dark text-black dark:text-white scrollbar-thin scrollbar-track-bgcol-l dark:scrollbar-track-bgcol-d scrollbar-thumb-scroll-l dark:scrollbar-thumb-scroll-d scrollbar-thumb-rounded-full scrollbar-track-rounded-full">
         {% block navbar %}
@@ -67,44 +66,11 @@
                             <div x-data="{ notificationsOpen: false, profileOpen: false }"
                                  class="col-span-1 relative hidden sm:block md:block">
                                 <div class="flex justify-center">
-                                    <div
-                                        x-data="{
-                                              mode: '',
-                                              setColorMode: m => {
-                                                  if (m === 'dark') {
-                                                      document.documentElement.classList.add('dark')
-                                                      localStorage.setItem('colorMode', 'dark')
-                                                  } else {
-                                                      document.documentElement.classList.remove('dark')
-                                                      localStorage.setItem('colorMode', 'light')
-                                                  }
-                                              }
-                                          }"
-                                      
-                                          x-init="() => {
-                                              const m = localStorage.getItem('colorMode');
-                                              if (m !== 'dark' && m !== 'light') return;
-                                              mode = m;
-                                          }"
-                                        class="flex justify-center space-x-1">
-                                          <button
-                                            @click="mode='light'; setColorMode('light');"
-                                            :class="{'text-green-l': mode === 'light', 'font-thin': mode !== 'light' }"
-                                            class=""
-                                            >
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
-                                              </svg>                                              
-                                          </button>
-                                          <button
-                                            @click="mode = 'dark'; setColorMode('dark');"
-                                            :class="{'text-green-d': mode === 'dark', 'font-thin': mode !== 'dark' }"
-                                            class=""
-                                            >
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 mr-2">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
-                                              </svg>                                              
-                                          </button>
+                                    <div class="flex justify-center space-x-1">
+                                        <div class="flex justify-end mr-2 hover:text-navhov-l dark:hover:text-navhov-d">
+                                            <button class="w-7 h-7 transition-all duration-200 ease-in-out"></button>
+                                        </div>
+                                          
                                         </div>
                                     <button @click="notificationsOpen = !notificationsOpen"
                                             class="flex justify-end hover:text-navhov-l dark:hover:text-navhov-d transition-all duration-200 ease-in-out">

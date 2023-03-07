@@ -50,6 +50,7 @@ class Product(models.Model, HitCountMixin):
             tags, needs = open_ai_completion(self.description)
             for tag in tags:
                 self.tags.add(tag)
+            # self.tags.sa
             for need in needs:
                 Needs.objects.create(text=need, product=self)
 
