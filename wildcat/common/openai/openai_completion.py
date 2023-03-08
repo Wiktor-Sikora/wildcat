@@ -16,7 +16,6 @@ def open_ai_completion(description):
         max_tokens=200,
         temperature=0.2
     )
-
     tags = json.loads(response['choices'][0]['message']['content']).get('tags', [])
     needs = json.loads(response['choices'][0]['message']['content']).get('missing_parts', [])
     
