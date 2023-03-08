@@ -19,6 +19,7 @@ User = get_user_model()
 class Product(models.Model, HitCountMixin):
     name = models.CharField(max_length=30)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    promoted = models.BooleanField(default=False)
     description = models.TextField(blank=True, null=True)
     _original_description = models.TextField(blank=True, null=True)
     price = models.FloatField(null=True)
@@ -35,7 +36,7 @@ class Product(models.Model, HitCountMixin):
     )
 
     class Meta:
-        ordering = ['-date']
+        ordering = ['-promoted', '-date']
 
     def __str__(self):
         return str(self.name)
