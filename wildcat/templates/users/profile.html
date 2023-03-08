@@ -4,7 +4,7 @@
 {% load humanize %}
 {% block title %}Wildcat | {{ account.username }}{% endblock %}
 {% block content %}
-    <div class="w-4/5 sm:w-11/12 md:w-11/12 mx-auto flex flex-col gap-7 p-7 sm:p-4 mb-10 bg-con-l dark:bg-con-d rounded-lg">
+    <div x-data="tabHandler()" class="w-4/5 sm:w-11/12 md:w-11/12 mx-auto flex flex-col gap-7 p-7 sm:p-4 mb-10 bg-con-l dark:bg-con-d rounded-lg">
         <!-- Profile -->
         <div class="flex flex-row">
             <div class="flex flex-row w-5/6 gap-7 sm:gap-3">
@@ -55,17 +55,6 @@
                 </a>
                 {% else %}
                 <button x-data="followHandler({% if user in account.follows.all %}true{% else %}false{% endif %},{{ account.follows.count }},{{ account.pk }})" x-html="currentSvg" @click="changeFollow()" class="w-10 h-10 hover:text-green-hov hover:scale-110 duration-200 transition-all">
-                </button>
-                <a class="w-10 h-10 hover:text-green-hov hover:scale-110 duration-200 transition-all">
-                    <svg xmlns="http://www.w3.org/2000/svg"
-                         fill="none"
-                         viewBox="0 0 24 24"
-                         stroke-width="2"
-                         stroke="currentColor"
-                         class="w-full h-full">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 20.25c4.97 0 9-3.694 9-8.25s-4.03-8.25-9-8.25S3 7.444 3 12c0 2.104.859 4.023 2.273 5.48.432.447.74 1.04.586 1.641a4.483 4.483 0 01-.923 1.785A5.969 5.969 0 006 21c1.282 0 2.47-.402 3.445-1.087.81.22 1.668.337 2.555.337z" />
-                    </svg>
-                </a>
                 {% endif %}
             </div>
         </div>
@@ -93,17 +82,49 @@
         <!-- tabs changer -->
         <div class="flex justify-start border-b border-slate-900/10 dark:border-slate-300/10">
             <div class="grid grid-cols-2">
-                <div class="flex justify-center cursor-pointer hover:bg-[#c6c6c6] dark:hover:bg-[#595959] border-b-4 border-[#6aa93b] dark:border-[#649d39] px-2 transition-all duration-200 ease-in-out">
+                <button @click="changeTab('itemsTab')" :class="openTab['itemsTab'] && 'text-green-l dark:text-green-d font-bold border-b-4 border-[#6aa93b] dark:border-[#649d39]'" class="flex justify-center cursor-pointer hover:bg-[#c6c6c6] dark:hover:bg-[#595959] px-2 transition-all duration-100 ease-in-out rounded-t-sm">
                     <p>Items</p>
-                </div>
-                <div class="flex justify-center cursor-pointer hover:bg-[#c6c6c6] dark:hover:bg-[#595959] px-2 transition-all duration-200 ease-in-out">
+                </button>
+                <button @click="changeTab('favoriteTab')" :class="openTab['favoriteTab'] && 'text-green-l dark:text-green-d font-bold border-b-4 border-[#6aa93b] dark:border-[#649d39]'" class="flex justify-center cursor-pointer hover:bg-[#c6c6c6] dark:hover:bg-[#595959] px-2 transition-all duration-100 ease-in-out rounded-t-sm">
                     <p>Favourite</p>
-                </div>
+                </button>
             </div>
         </div>
         <!-- Owned products -->
-        <div class="grid grid-cols-4 sm:grid-cols-1 md:grid-cols-2 gap-5">
+        <div x-show="openTab['itemsTab']" class="grid grid-cols-4 sm:grid-cols-1 md:grid-cols-2 gap-5">
             {% for product in products %}
+                <div class="h-80 flex flex-col overflow-hidden">
+                    <a href="{% url 'products:product' account.slug product.slug %}"
+                       class="shadow-md rounded-lg bg-blend-normal h-3/4">
+                        <img src="{{ product.main_image.url }}"
+                             alt="image"
+                             class="w-full h-full object-cover rounded-lg object-center">
+                    </a>
+                    <div class="flex flex-row justify-between items-center">
+                        <a href="{% url 'products:product' account.slug product.slug %}"
+                           class="text-lg font-semibold hover:text-green-hov">{{ product.name }}</a>
+                        <p class="flex-none">{{ product.price }} zł</p>
+                    </div>
+                    <div class="flex flex-row justify-between items-center">
+                        <p class="text-gray-700 dark:text-gray-400">{{ product.date|naturalday }}</p>
+                        <div class="flex justify-center">
+                            <div class="flex justify-center"
+                                 x-data="starHandler({% if user in product.stars.all %}true{% else %}false{% endif %},{{ product.stars__count }},{{ product.pk }})">
+                                <button x-html="currentSvg"
+                                        @click="changeStar()"
+                                        class="hover:scale-110 transition-all duration-200 w-6 h-6"
+                                        {% if not user.is_authenticated or user == product.owner %}disabled{% endif %}>
+                                </button>
+                                <p x-text="count" class="ml-1 text-gray-400"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <!-- Favourite products -->
+        <div x-show="openTab['favoriteTab']" class="grid grid-cols-4 sm:grid-cols-1 md:grid-cols-2 gap-5">
+            {% for product in favorite %}
                 <div class="h-80 flex flex-col overflow-hidden">
                     <a href="{% url 'products:product' account.slug product.slug %}"
                        class="shadow-md rounded-lg bg-blend-normal h-3/4">
@@ -138,4 +159,20 @@
 {% block scripts %}
     {{ block.super }}
     <script src="{% static 'js/apiHandler.js' %}"></script>
+    <script>
+        function tabHandler() {
+            return {
+                openTab: {
+                    itemsTab: true, 
+                    favoriteTab: false
+                }, 
+                changeTab(setting) {
+                    for (let [key, value] of Object.entries(this.openTab)) {
+                        this.openTab[key] = false
+                    }
+                    this.openTab[setting] = true
+                }
+            }
+        }
+    </script>
 {% endblock scripts %}
