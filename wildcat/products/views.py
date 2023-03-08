@@ -32,8 +32,10 @@ class ProductAdditionPage(LoginRequiredMixin, View):
             instance.owner = request.user
             instance.save()
             form.save_m2m()
+            instance.save(run_open_ai=True)
             for each in files:
                 Image.objects.create(image=each, product=instance)
+            messages.success(request, 'Product added successfully')
             return redirect('products:product', user_slug=request.user.slug, product_slug=instance.slug, permanent=True)
         return render(request, self.template_name, {'form': form})
 
@@ -57,8 +59,8 @@ class EditProductPage(LoginRequiredMixin, View):
         form = ProductEditForm(request.POST or None, request.FILES or None, instance=product)
         if form.is_valid():
             instance = form.save(commit=False)
-            instance.save()
             form.save_m2m()
+            instance.save(run_open_ai=True)
             messages.success(request, 'Product updated successfully')
             return redirect('products:product', user_slug=request.user.slug, product_slug=instance.slug, permanent=True)
         messages.error(request, 'Something went wrong while updating a product')

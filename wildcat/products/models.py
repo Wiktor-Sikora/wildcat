@@ -40,25 +40,25 @@ class Product(models.Model, HitCountMixin):
     def __str__(self):
         return str(self.name)
 
-    def save(self, *args, **kwargs):    
+    def save(self, *args, run_open_ai=False, **kwargs):    
         if not self.slug:
             self.slug = unique_slugify(self, slugify(self.name))
         self.modified = timezone.now()
         super(Product, self).save(*args, **kwargs)
 
-        if self.description != self._original_description:
-            tags, needs = open_ai_completion(self.description)
-            for tag in tags:
-                self.tags.add(tag)
-            # self.tags.sa
-            for need in needs:
-                Needs.objects.create(text=need, product=self)
+        if run_open_ai:
+            if self.description != self._original_description:
+                tags, needs = open_ai_completion(self.description)
+                for tag in tags:
+                    self.tags.add(tag)
+                for need in needs:
+                    Needs.objects.create(text=need, product=self)
+                
+            self._original_description = self.description
+            super(Product, self).save(*args, **kwargs)
 
-        self._original_description = self.description
-        super(Product, self).save(*args, **kwargs)
-
-        self.check_if_needs_available()
-        self.check_for_product_needs()
+            self.check_if_needs_available()
+            self.check_for_product_needs()
 
     def check_for_product_needs(self):
         '''Searches for products that need this product'''
