@@ -64,15 +64,15 @@ class Product(models.Model, HitCountMixin):
         '''Searches for products that need this product'''
         needs = Needs.objects.filter(text__icontains=self.name)
         for need in needs:
-            Notification.objects.create(message='Product that you need has been found', product=self, user=need.product.owner)
+            Notification.objects.create(message=f'Product that you need for {need.product.name} has been found', product=self, user=need.product.owner)
 
     def check_if_needs_available(self):
         '''looking for products that have needs'''
         needs = Needs.objects.filter(product=self.pk)
         for need in needs:
-            available_products = Product.objects.filter(name__icontains=need)
+            available_products = Product.objects.filter(name__icontains=need.text)
             for product in available_products:
-                Notification.objects.create(message='Product that you need has been found', product=product.pk, user=self.owner.pk)
+                Notification.objects.create(message=f'Product that you need for {self.name} has been found', product=product, user=self.owner)
 
 class Needs(models.Model):
     text = models.CharField(max_length=30)
