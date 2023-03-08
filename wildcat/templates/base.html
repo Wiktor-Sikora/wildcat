@@ -67,8 +67,8 @@
                                  class="col-span-1 relative hidden sm:block md:block">
                                 <div class="flex justify-center">
                                     <div class="flex justify-center space-x-1">
-                                        <div class="flex justify-end mr-2 hover:text-navhov-l dark:hover:text-navhov-d">
-                                            <button class="w-7 h-7 transition-all duration-200 ease-in-out"></button>
+                                        <div x-data="thameChanger()" class="flex justify-end mr-2 hover:text-navhov-l dark:hover:text-navhov-d">
+                                            <button x-html="theme === 'light' ? sunSvg : moonSvg" @click="changeTheme()" class="w-7 h-7 transition-all duration-200 ease-in-out"></button>
                                         </div>
                                           
                                         </div>
@@ -298,9 +298,8 @@
                     <!-- desktop -->
                     <div x-data="{notificationsOpen: false, profileOpen: false}"
                          class="flex space-x-4 items-center justify-self-end sm:hidden md:hidden">
-                        <div class="flex justify-end mr-2 hover:text-navhov-l dark:hover:text-navhov-d">
-                            <button class="w-7 h-7 transition-all duration-200 ease-in-out"
-                                    id="theme-toggle"></button>
+                        <div x-data="thameChanger()" x-init="console.log(theme)" class="flex justify-end mr-2 hover:text-navhov-l dark:hover:text-navhov-d">
+                            <button @click="changeTheme()" x-html="theme === 'light' ? sunSvg : moonSvg" class="w-7 h-7 transition-all duration-200 ease-in-out"></button>
                         </div>
                         {% if user.is_authenticated %}
                             <button @click="notificationsOpen = !notificationsOpen"
@@ -484,6 +483,10 @@
         {% block content %}{% endblock %}
         {% include "messages.html" %}
         {% block scripts %}
+            <script defer>
+                let theme = localStorage.getItem('theme') || 'light';
+                document.documentElement.classList.add(theme);
+            </script>
             <script src="{% static 'js/themeChanger.js' %}"></script>
             <script src="{% static 'js/infiniteScroll.js' %}"></script>
         {% endblock %}
