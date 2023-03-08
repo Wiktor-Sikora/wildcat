@@ -93,6 +93,9 @@ class Comment(models.Model):
     likes = models.ManyToManyField(User, related_name='likes')
     dislikes = models.ManyToManyField(User, related_name='dislikes')
 
+    def __str__(self):
+        return self.content
+
 class Notification(models.Model):
     message = models.TextField()
     date = models.DateTimeField(auto_now_add=True)
